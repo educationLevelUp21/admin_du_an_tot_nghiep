@@ -7,9 +7,15 @@ import useResponsive from '../hooks/useResponsive';
 // components
 import Page from '../components/Page';
 import Logo from '../components/Logo';
+
 // sections
 import { LoginForm } from '../sections/auth/login';
 import AuthSocial from '../sections/auth/AuthSocial';
+
+import hinhanh from '../assets/Img_login.png';
+
+// css
+import '../css/register_login_form.css';
 
 // ----------------------------------------------------------------------
 
@@ -82,7 +88,9 @@ export default function Login() {
             <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
               Hi, Welcome Back
             </Typography>
-            <img src="/static/illustrations/illustration_login.png" alt="login" />
+            <div className='frames_img_login'>
+              <img className='img' src={hinhanh} alt="login" width={'70%'} />
+            </div>
           </SectionStyle>
         )}
 

@@ -11,6 +11,10 @@ import Logo from '../components/Logo';
 import { RegisterForm } from '../sections/auth/register';
 import AuthSocial from '../sections/auth/AuthSocial';
 
+import imgSignUp from '../assets/Img_Signup.png'
+
+// css
+import '../css/register_login_form.css';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
@@ -81,7 +85,10 @@ export default function Register() {
             <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
               Manage the job more effectively with Minimal
             </Typography>
-            <img alt="register" src="/static/illustrations/illustration_register.png" />
+            <div className='frames_img_register'>
+              <img alt="register" src={imgSignUp} width={'70%'} />
+            </div>
+
           </SectionStyle>
         )}
 
