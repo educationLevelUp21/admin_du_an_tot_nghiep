@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const UserDetailsScehma = new mongoose.Schema(
     {
         uname: String,
-        email: String,
+        taikhoan: {type: String, unique: true },
         pass: String,
     },
     {
-        collection: "UserInfo",
+        collection: "UserInfoAdmin",
     }
 );
 
-mongoose.model("UserInfo", UserDetailsScehma);
+mongoose.model("UserInfoAdmin", UserDetailsScehma);

@@ -11,17 +11,52 @@ import Register from './pages/Register';
 import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
 import DoanhThu from './pages/DoanhThu';
+import { useEffect, useState } from 'react';
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
+  
+  const [pathLogin, setPathLogin] = useState("/login");
+  const [pathRegister, setPathRegister] = useState("/register");
+  const [pathUser, setPathUser] = useState("aaa");
+  const [pathProducts, setPathProducts] = useState("aaa");
+  const [pathBlog, setPathBlog] = useState("aaa");
+  const [pathDanhThu, setPathDoanhThu] = useState("aaa");
+
+
+
+    useEffect(()=>{
+      var getUser = localStorage.getItem("User")
+      var data = JSON.parse(getUser)
+      if(getUser == null ){
+        setPathLogin("/login")
+        setPathRegister("/register")
+        setPathUser("aaa")
+        setPathProducts("aaa")
+        setPathBlog("aaa")
+        setPathDoanhThu("aaa")
+        return
+      }
+      
+      if(getUser != null ){
+        setPathLogin("aaa")
+        setPathRegister("aaa")
+        setPathUser("user")
+        setPathProducts("products")
+        setPathBlog("blog")
+        setPathDoanhThu("doanhthu")
+        return
+      }
+    },)
+
   return useRoutes([
     {
-      path: '/login',
+      path: pathLogin,
       element: <Login />,
     },
     {
-      path: '/register',
+      path: pathRegister,
       element: <Register />,
     },
     {
@@ -29,10 +64,10 @@ export default function Router() {
       element: <DashboardLayout />,
       children: [
         { path: 'app', element: <DashboardApp /> },
-        { path: 'user', element: <User /> },
-        { path: 'products', element: <Products /> },
-        { path: 'blog', element: <Blog /> },
-        { path: 'doanhthu', element: <DoanhThu /> },
+        { path: pathUser, element: <User/> },
+        { path: pathProducts, element: <Products /> },
+        { path: pathBlog, element: <Blog /> },
+        { path: pathDanhThu, element: <DoanhThu /> },
       ],
     },
 

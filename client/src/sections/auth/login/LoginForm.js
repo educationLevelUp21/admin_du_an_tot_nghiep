@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 
 
@@ -7,145 +7,201 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
+function useKey(key, cb) {
+
+  const callbackRef = useRef(cb);
+
+  useEffect(()=> {
+    callbackRef.current = cb;
+  })
+
+  useEffect(()=>{
+
+    function handle(event){
+      if(event.code === key){
+        callbackRef.current(event);
+      }
+    }
+
+    document.addEventListener("keypress", handle);
+    return()=> document.removeEventListener("keypress", handle);
+  }, [key])
+}
 
 export default function LoginForm() {
+
+  
+  useEffect(()=>{
+    console.log(test);
+  },)
   const navigate = useNavigate();
+  const [test, setTest] = useState("");
 
-  // const [showPassword, setShowPassword] = useState(false);
+  const [taikhoan, setTK] = useState("");
+  const [pass, setPass] = useState("");
 
-  // const LoginSchema = Yup.object().shape({
-  //   email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-  //   password: Yup.string().required('Password is required'),
-  // });
+  const [chxSave, setChxSave] = useState(false);
 
-  // const defaultValues = {
-  //   email: '',
-  //   password: '',
-  //   remember: true,
-  // };
+  const btnLogin = async () => {
+    
 
-  // const methods = useForm({
-  //   resolver: yupResolver(LoginSchema),
-  //   defaultValues,
-  // });
+    console.log(taikhoan,pass,chxSave);
 
-  // const {
-  //   handleSubmit,
-  //   formState: { isSubmitting },
-  // } = methods;
+    fetch("http://localhost:8080/login-admin",{
+      method:"POST",
+      crossDomain: true,
+      headers:{
+        "Content-Type":"application/json",
+        Accept:"application/json",
+        "Access-Control-Allow-Origin":"*",
+      },
+      body: JSON.stringify({
+        taikhoan: taikhoan,
+        pass: pass,
+      }),
+    })
+    .then((res) => res.json())
+    .then((data) =>{
+      console.log(data,"userLogin");
+      if(data.error == "Tài khoản không tồn tại"){
+        setTKCheck(false);
+        setColor2("red");
+        setErrorTK("Tài khoản không tồn tại");
+      }
+      if(data.error == "Mật khẩu sai"){
+        setPasswordCheck(false);
+        setColor3("red");
+        setErrorPassword("Mật khẩu sai");
+      }
+      if(data.status == "oke"){
+        // alert("login thanh cong");
+        window.localStorage.setItem("token", data.data);
+        window.location.href = "/dashboard/app"
+          var user = {
+            TKLocal: taikhoan,
+            PassLocal: pass,
+            // chxSave: chxSave,
+          }
+          localStorage.setItem('User', JSON.stringify(user));
 
-  const onClick = async () => {
-    navigate('/dashboard', { replace: true });
+      }
+    })
   };
-  const [Value, setValue] = useState("");
+
+
   // ten dang nhap
   const [color2, setColor2] = useState("#d8dde1");
-  const [emaill, setEmail] = useState(true);
-  const [errorEmaill, setErrorEmaill] = useState("");
-  const validateEmaill = (se) => {
+  const [TKCheck, setTKCheck] = useState(true);
+  const [errorTK, setErrorTK] = useState("");
+  const validateTK = (se) => {
     const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
     if (format.test(se) == false) {
-      setEmail(true);
+      setTKCheck(true);
       setColor2("#d8dde1");
-      setErrorEmaill("");
+      setErrorTK("");
+
     } else {
-      setEmail(false);
+      setTKCheck(false);
       setColor2("red");
-      setErrorEmaill("Vui lòng không điền kí tự đặt biệt");
+      setErrorTK("Vui lòng không điền kí tự đặt biệt");
     }
+
+    if(se.length > 50){ 
+      setTKCheck(false);
+      setColor2("red");
+      setErrorTK("Tài khoản dài quá 50 kí tự");
+    } 
+    if(se.length < 5 && se.length > 0){ 
+      setTKCheck(false);
+      setColor2("red");
+      setErrorTK("Độ dài tài khoản lớn hơn 5 kí tự");
+    } 
+    if(se.length == 0){ 
+      setTKCheck(false);
+      setColor2("red");
+      setErrorTK("Tài khoản không được để trống");
+    } 
   }
-  function ErrorEmail(props) {
+  function ErrorTK(props) {
     if (props.isHidden) { return null; }
     return (
       <div className="form_warning">
-        {props.errorEmaill}
+        {props.errorTK}
       </div>
     )
   }
 
 
-  // mat khau
-  const [color3, setColor3] = useState("#d8dde1");
-  const [password, setPassword] = useState(true);
-  const [errorPassword, setErrorPassword] = useState("");
-  const validatePass = (se) => {
-    const pass1 = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    if (pass1.test(se) == false) {
-      setPassword(true);
-      setColor3("#d8dde1");
-      setErrorPassword("");
-    } else {
-      setPassword(false);
-      setColor3("red");
-      setErrorPassword("Vui lòng không điền kí tự đặt biệt");
+    // mat khau
+    const [color3, setColor3] = useState("#d8dde1");
+    const [passwordCheck, setPasswordCheck] = useState(true);
+    const [errorPassword, setErrorPassword] = useState("");
+    const validatePass = (se) => {
+      const pass = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+      if (pass.test(se) == false) {
+        setPasswordCheck(true);
+        setColor3("#d8dde1");
+        setErrorPassword("");
+      } else {
+        setPasswordCheck(false);
+        setColor3("red");
+        setErrorPassword("Vui lòng không điền kí tự đặt biệt");
+      }
+
+      if(se.length > 50){ 
+        setPasswordCheck(false);
+        setColor3("red");
+        setErrorPassword("Mật khẩu dài quá 50 kí tự");
+      } 
+      if(se.length < 5 && se.length > 0){ 
+        setPasswordCheck(false);
+        setColor3("red");
+        setErrorPassword("Độ dài Mật khẩu lớn hơn 5 kí tự");
+      } 
+      if(se.length == 0){ 
+        setPasswordCheck(false);
+        setColor3("red");
+        setErrorPassword("Mật khẩu không được để trống");
+      } 
     }
-  }
-  function ErrolPassword(props) {
-    if (props.isHidden) { return null; }
-    return (
-      <div className="form_warning">
-        {props.errorPassword}
-      </div>
-    )
-  }
+    function ErrolPassword(props) {
+      if (props.isHidden) { return null; }
+      return (
+        <div className="form_warning">
+          {props.errorPassword}
+        </div>
+      )
+    }
   return (
-    // <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-    //   <Stack spacing={3}>
-    //     <RHFTextField name="email" label="Email address" />
-
-    //     <RHFTextField
-    //       name="password"
-    //       label="Password"
-    //       type={showPassword ? 'text' : 'password'}
-    //       InputProps={{
-    //         endAdornment: (
-    //           <InputAdornment position="end">
-    //             <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-    //               <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
-    //             </IconButton>
-    //           </InputAdornment>
-    //         ),
-    //       }}
-    //     />
-    //   </Stack>
-
-    //   <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-    //     <RHFCheckbox name="remember" label="Remember me" />
-    //     <Link variant="subtitle2" underline="hover">
-    //       Forgot password?
-    //     </Link>
-    //   </Stack>
-
-    //   <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
-    //     Login
-    //   </LoadingButton>
-    // </FormProvider>
     <div className="container">
 
       <div className="user" >
         <input type="text" className="form__input" style={{ borderColor: color2 }} placeholder=" " name="Tên đăng nhập"
-          onChange={(e) => setValue(e.target.value)}
-          onBlur={(e) => validateEmaill(e.target.value)}
+          onChange={(e) => setTK(e.target.value)}
+          onClick={useKey("Enter", btnLogin)}
+          onBlur={(e) => validateTK(e.target.value)}
           required />
         <label htmlFor="text" className="form__label">Tên đăng nhập</label>
-        <ErrorEmail
-          isHidden={emaill}
-          errorEmaill={errorEmaill} />
+        <ErrorTK
+          isHidden={TKCheck}
+          errorTK={errorTK} />
 
       </div>
       <div className="user">
         <input type="password" className="form__input" style={{ borderColor: color3 }} placeholder=" " name="Tên đăng nhập"
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => setPass(e.target.value)}
+          onClick={useKey("Enter", btnLogin)}
           onBlur={(e) => validatePass(e.target.value)}
           required /><label htmlFor="email" className="form__label">Mật khẩu</label>
         <ErrolPassword
-          isHidden={password}
+          isHidden={passwordCheck}
           errorPassword={errorPassword} />
 
       </div>
       <div className="cbx">
         <div className='cbx_1'>
-          <input className='cbx_ipt' name="rememberme" type="checkbox" value="forever" />
+          <input className='cbx_ipt' name="rememberme" type="checkbox"  onChange={(e) => setChxSave(!chxSave)} defaultChecked={chxSave} />
           <p> Lưu mật khẩu</p>
         </div>
         <a className='cbx_2' href='/login'>
@@ -153,10 +209,7 @@ export default function LoginForm() {
         </a>
       </div>
 
-      <Button className='btn' variant="contained" onClick={onClick}>Đăng nhập</Button>
-
-
-
+      <Button className='btn' variant="contained" onClick={btnLogin} onChange={useKey("Enter", btnLogin)}>Đăng nhập</Button>
 
 
     </div >

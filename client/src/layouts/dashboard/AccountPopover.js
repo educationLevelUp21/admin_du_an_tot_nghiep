@@ -37,10 +37,13 @@ export default function AccountPopover() {
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
+    
   };
 
   const handleClose = () => {
     setOpen(null);
+    localStorage.removeItem("User");
+    window.location.href = "/dashboard/app";
   };
 
   return (
