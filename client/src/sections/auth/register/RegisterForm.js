@@ -15,6 +15,7 @@ export default function RegisterForm() {
   const [pass, setPassword] = useState("");
   
   const [vldTrung, setVldTrung] = useState("");
+  const [vldTrung2, setVldTrung2] = useState("");
 
    const btnRegister = async () => {
     
