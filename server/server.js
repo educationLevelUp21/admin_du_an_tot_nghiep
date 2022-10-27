@@ -28,9 +28,6 @@ const PORT = process.env.PORT || 8080;
 app.post("/post", async (req, res) => {
     console.log(req.body);
     const { data } = req.body;
-
-
-
     try {
         if (data == "adarsh") {
             res.send({ status: "ok" });
@@ -120,6 +117,43 @@ app.post("/UserAdmin-data", async (req, res) => {
     } catch (error) {
         res.send({ status: "error", data: error })
     }
+})
+
+
+// --------------------------add procduct sp--------------------------------------
+
+
+const Add_product_sp = mongoose.model("Product_SP");
+
+app.post("/add_Product", async (req, res) => {
+
+    const { NameSP, GiaGocSP, GiaBanSP,SoLuongSP
+        ,DateNhapSP,SaleSP,TrangThaiSP,LoaiSP,ChiTietSP } = req.body;
+
+    try {
+        await Add_product_sp.create({
+            NameSP: NameSP,
+            GiaGocSP: GiaGocSP,
+            GiaBanSP: GiaBanSP,
+            SoLuongSP: SoLuongSP,
+            DateNhapSP: DateNhapSP,
+            SaleSP: SaleSP,
+            TrangThaiSP: TrangThaiSP,
+            LoaiSP: LoaiSP,
+            ChiTietSP: ChiTietSP,
+        });
+        res.send({ status: "Ok" });
+    } catch (error) {
+        res.send({ status: "error" });
+    }
+});
+
+
+app.get("/getData", async(req,resp) =>{
+    Add_product_sp.find((err,result)=>{
+        if(err) throw err
+        resp.send(result)
+    })
 })
 
 app.listen(PORT, console.log(`server run with port ${PORT}`))

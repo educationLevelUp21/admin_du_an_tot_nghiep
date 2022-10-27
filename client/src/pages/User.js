@@ -1,6 +1,7 @@
+
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
@@ -26,7 +27,9 @@ import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
 // mock
-import USERLIST from '../_mock/user';
+// import USERLIST from '../_mock/user';
+
+import axios from "axios";
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +39,8 @@ const TABLE_HEAD = [
   { id: 'role', label: 'Role', alignRight: false },
   { id: 'isVerified', label: 'Verified', alignRight: false },
   { id: 'status', label: 'Status', alignRight: false },
+  { id: 'dsad', label: 'test', alignRight: false },
+  { id: 'dsad', label: 'test', alignRight: false },
   { id: '' },
 ];
 
@@ -71,6 +76,11 @@ function applySortFilter(array, comparator, query) {
 }
 
 export default function User() {
+
+  const ip = "http://localhost:8080"
+
+  const [danhsachSP, setdanhsachSP] = useState([]);
+
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -83,6 +93,16 @@ export default function User() {
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+
+  useEffect(() => {
+    axios.get(ip + '/getData')
+      .then((response) => {
+        setdanhsachSP(response.data);
+      })
+
+  },)
+
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -91,7 +111,7 @@ export default function User() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = USERLIST.map((n) => n.name);
+      const newSelecteds = danhsachSP.map((n) => n.NameSP);
       setSelected(newSelecteds);
       return;
     }
@@ -126,9 +146,9 @@ export default function User() {
     setFilterName(event.target.value);
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - danhsachSP.length) : 0;
 
-  const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
+  const filteredUsers = applySortFilter(danhsachSP, getComparator(order, orderBy), filterName);
 
   const isUserNotFound = filteredUsers.length === 0;
 
@@ -154,43 +174,55 @@ export default function User() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={USERLIST.length}
+                  rowCount={danhsachSP.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                  {/* {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     const { id, name, role, status, company, avatarUrl, isVerified } = row;
-                    const isItemSelected = selected.indexOf(name) !== -1;
+                    const isItemSelected = selected.indexOf(name) !== -1; */}
+
+                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((vl) => {
+                    const { _id, NameSP, GiaGocSP, GiaBanSP, SoLuongSP
+                      , DateNhapSP, SaleSP, TrangThaiSP, LoaiSP, ChiTietSP } = vl;
+                    const isItemSelected = selected.indexOf(NameSP) !== -1;
+
 
                     return (
                       <TableRow
                         hover
-                        key={id}
+                        key={_id}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
                         <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, name)} />
+                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, NameSP)} />
                         </TableCell>
                         <TableCell component="th" scope="row" padding="none">
-                          <Stack direction="row" alignItems="center" spacing={2}>
-                            <Avatar alt={name} src={avatarUrl} />
-                            <Typography variant="subtitle2" noWrap>
-                              {name}
-                            </Typography>
-                          </Stack>
+                          {/* <Stack direction="row" alignItems="center" spacing={2}> */}
+                          {/* <Avatar alt={name} src={avatarUrl} /> */}
+                          <Typography variant="subtitle2" noWrap>
+                            {NameSP}
+                          </Typography>
+                          {/* </Stack> */}
                         </TableCell>
-                        <TableCell align="left">{company}</TableCell>
-                        <TableCell align="left">{role}</TableCell>
-                        <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
                         <TableCell align="left">
-                          <Label variant="ghost" color={(status === 'banned' && 'error') || 'success'}>
-                            {sentenceCase(status)}
-                          </Label>
+                          <Typography variant="subtitle2" noWrap>
+                            Giá gốc: {GiaGocSP}
+                          </Typography>
+                          <Typography variant="subtitle2" noWrap>
+                            Giá bán: {GiaBanSP}
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="left">{GiaBanSP}</TableCell>
+                        <TableCell align="left">
+                          {/* <Label variant="ghost" >
+                            {sentenceCase(TrangThaiSP)}
+                          </Label> */}
                         </TableCell>
 
                         <TableCell align="right">
@@ -222,7 +254,7 @@ export default function User() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={USERLIST.length}
+            count={danhsachSP.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

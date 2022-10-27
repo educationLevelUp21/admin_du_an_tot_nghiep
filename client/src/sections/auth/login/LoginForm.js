@@ -30,12 +30,7 @@ function useKey(key, cb) {
 
 export default function LoginForm() {
 
-  
-  useEffect(()=>{
-    console.log(test);
-  },)
   const navigate = useNavigate();
-  const [test, setTest] = useState("");
 
   const [taikhoan, setTK] = useState("");
   const [pass, setPass] = useState("");
@@ -74,17 +69,30 @@ export default function LoginForm() {
         setErrorPassword("Mật khẩu sai");
       }
       if(data.status == "oke"){
-        // alert("login thanh cong");
-        window.localStorage.setItem("token", data.data);
-        window.location.href = "/dashboard/app"
-          var user = {
-            TKLocal: taikhoan,
-            PassLocal: pass,
-            // chxSave: chxSave,
-          }
-          localStorage.setItem('User', JSON.stringify(user));
-
-      }
+        if(chxSave == true){
+          window.localStorage.setItem("token", data.data);
+          window.location.href = "/dashboard/app"
+            var user = {
+              TKLocal: taikhoan,
+              PassLocal: pass,
+              chxSave:chxSave
+            }
+            localStorage.setItem('User', JSON.stringify(user));
+            window.localStorage.setItem("token", data.data);
+            window.location.href = "/dashboard/app"
+  
+        }else if(chxSave == false){
+          window.localStorage.setItem("token", data.data);
+          window.location.href = "/dashboard/app"
+            var user = {
+              TKLocal: taikhoan,
+              PassLocal: pass,
+              chxSave:chxSave
+            }
+            localStorage.setItem('User2', JSON.stringify(user));
+        }
+        } 
+      
     })
   };
 

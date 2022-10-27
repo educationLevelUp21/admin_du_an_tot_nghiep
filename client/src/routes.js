@@ -1,4 +1,4 @@
-import { Navigate, useRoutes } from 'react-router-dom';
+import { Navigate, useNavigate, useRoutes } from 'react-router-dom';
 // layouts
 import DashboardLayout from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
@@ -15,48 +15,16 @@ import { useEffect, useState } from 'react';
 
 // ----------------------------------------------------------------------
 
-export default function Router() {
-  
-  const [pathLogin, setPathLogin] = useState("/login");
-  const [pathRegister, setPathRegister] = useState("/register");
-  const [pathUser, setPathUser] = useState("aaa");
-  const [pathProducts, setPathProducts] = useState("aaa");
-  const [pathBlog, setPathBlog] = useState("aaa");
-  const [pathDanhThu, setPathDoanhThu] = useState("aaa");
+export default function Router(props) {
 
-
-
-    useEffect(()=>{
-      var getUser = localStorage.getItem("User")
-      var data = JSON.parse(getUser)
-      if(getUser == null ){
-        setPathLogin("/login")
-        setPathRegister("/register")
-        setPathUser("aaa")
-        setPathProducts("aaa")
-        setPathBlog("aaa")
-        setPathDoanhThu("aaa")
-        return
-      }
-      
-      if(getUser != null ){
-        setPathLogin("aaa")
-        setPathRegister("aaa")
-        setPathUser("user")
-        setPathProducts("products")
-        setPathBlog("blog")
-        setPathDoanhThu("doanhthu")
-        return
-      }
-    },)
 
   return useRoutes([
     {
-      path: pathLogin,
+      path: props.pathLogin,
       element: <Login />,
     },
     {
-      path: pathRegister,
+      path: props.pathRegister,
       element: <Register />,
     },
     {
@@ -64,10 +32,10 @@ export default function Router() {
       element: <DashboardLayout />,
       children: [
         { path: 'app', element: <DashboardApp /> },
-        { path: pathUser, element: <User/> },
-        { path: pathProducts, element: <Products /> },
-        { path: pathBlog, element: <Blog /> },
-        { path: pathDanhThu, element: <DoanhThu /> },
+        { path: props.pathUser, element: <User/> },
+        { path: props.pathProducts, element: <Products /> },
+        { path: props.pathBlog, element: <Blog /> },
+        { path: props.pathDanhThu, element: <DoanhThu /> },
       ],
     },
 

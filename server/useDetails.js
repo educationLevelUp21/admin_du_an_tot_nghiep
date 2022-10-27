@@ -12,3 +12,22 @@ const UserDetailsScehma = new mongoose.Schema(
 );
 
 mongoose.model("UserInfoAdmin", UserDetailsScehma);
+
+const Add_product_sp = new mongoose.Schema(
+    {
+        NameSP: String,
+        GiaGocSP: Number,
+        GiaBanSP: Number,
+        SoLuongSP: Number,
+        DateNhapSP: Date,
+        SaleSP: Number,
+        TrangThaiSP: String,
+        LoaiSP: String,
+        ChiTietSP: String,
+    },
+    {
+        collection: "Product_SP",
+    }
+);
+
+mongoose.model("Product_SP", Add_product_sp);

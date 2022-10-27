@@ -1,24 +1,12 @@
-/* #root{
-    width: 100%;
-    margin: 0 auto;
-    background: red;
-} */
 
 /* -------------------------------------------------- */
 .container-up {
-    height: 520px;
     width: 100%;
     margin: 0 auto;
   }
   /*-------- left --------*/
-  .form-text-input {
-    padding-left: 10%;
-    width: 40%;
-    float: left;
-    height: 450px;
-  }
   .form-text-input-up {
-    padding-left: 8%;
+    /* padding-left: 8%; */
     width: 40%;
     float: left;
   }
@@ -31,68 +19,30 @@
   
   .form-date {
     width: 100%;
-    justify-content: left;
     display: flex;
-  }
-  
-  .form-cbx {
-    float: left;
-    display: flex;
-    background: rgba(0, 0, 255, 0.385) violet;
-    width: 30%;
-    margin: 5px 0;
-    position: absolute;
-    border-radius: 5px;
-    font-family: inherit;
-    font-size: inherit;
-  }
-  .form-cbx-left {
-    padding: 0 20px;
-    border: 2px solid black;
-    border-radius: 5px;
-    display: flex;
-    justify-content: left;
-    width: 37%;
-  }
-  
-  .form-cbx-up {
-    margin: 10px 0;
-    display: flex;
-    width: 70%;
-    height: 23px;
-    border: 2px solid black;
-    border-radius: 5px;
-    font-family: inherit;
-    font-size: inherit;
-    padding: 10px 20px;
-  }
-  .form-cbx-up p {
-    margin: 0;
-  }
-  .form-size {
-    width: 25%;
-    float: left;
-    margin: 10px 0;
-  }
-  .form-size-up {
-    width: 25%;
-    height: 20px;
-    padding: 2px 0;
-  }
-  .form-cbx p {
-    margin: 0;
-    margin-left: -14px;
-  }
-  .form-cbx-right {
-    width: 40%;
-    border: 2px solid black;
-    padding: 5px;
-    border-radius: 5px;
-    margin-left: 18px;
+    flex-direction: row;
+    justify-content: space-between;
   }
   
   .form input {
-    width: 70%;
+    width: 100%;
+    
+    position: absolute;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: inherit;
+    color: black;
+    outline: none;
+    padding: 12px 20px;
+    background: none;
+  }
+  .form_nhap {
+    position: relative;
+    width: 35%;
+  }
+  .form_nhap input {
+    width: 100%;
     position: absolute;
     border: 2px solid black;
     border-radius: 5px;
@@ -101,77 +51,61 @@
     color: black;
     outline: none;
     padding: 10px 20px;
-    background: none;
-  }
-  .form-moi {
-    position: relative;
-    width: 40%;
-  }
-  .form-moi input {
-    margin-left: 10px;
-    width: 70%;
-    position: absolute;
-    border: 2px solid black;
-    border-radius: 5px;
-    font-family: inherit;
-    font-size: inherit;
-    color: black;
-    outline: none;
-    padding: 10px 20px;
-    background: none;
-  }
-  .form-cu {
-    justify-content: left;
-    position: relative;
-    width: 40%;
-    height: 50px;
-  }
-  .form-cu input {
-    width: 70%;
-    position: absolute;
-    border: 2px solid black;
-    border-radius: 5px;
-    font-family: inherit;
-    font-size: inherit;
-    color: black;
-    outline: none;
-    padding: 11px 20px;
     background: none;
   }
   
   .form-loaiSP {
     width: 100%;
+    padding-top: 15px;
+  }
+  .form_sale {
+    width: 30%;
+  }
+  .form_trangthai {
+    width: 30%;
   }
   
   .form-loaiSP select {
-    width: 79%;
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 12px 10px;
+  }
+
+  .form_sale select {
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 12px 10px;
+  }
+  .form_trangthai select {
+    width: 100%;
     border: 2px solid black;
     border-radius: 5px;
     padding: 12px 10px;
   }
   
   .form input:hover,
-  .form-cu input:hover,
-  .form-moi input:hover,
+  .form_nhap input:hover,
   .form-row input:hover {
     border-color: red;
   }
   .form-cbx-left:hover,
   .form-cbx-right:hover,
   .form-cbx-up:hover,
-  .form-loaiSP select:hover {
+  .form-loaiSP select:hover,
+  .form_sale select:hover,
+  .form_trangthai select:hover {
     border: 2px solid red;
   }
   
   .form input:focus,
-  .form-cu input:focus,
-  .form-moi input:focus {
+  .form_nhap input:focus {
     border-color: rgb(0, 241, 0);
   }
   
   .form label,
-  .form-cu label,
-  .form-moi label {
+  .form_nhap label {
     position: absolute;
     left: 1rem;
     top: 12px;
@@ -189,153 +123,9 @@
     left: 0.8rem;
   }
   
-  /*-------- right */
-  .formdesign {
-    width: 50%;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-  }
-  .form-row {
-    width: 60%;
-    border-radius: 5px;
-  }
-  .form-row-img {
-    width: 60%;
-    height: 300px;
-    border-radius: 5px;
-    border: 1px solid black;
-    float: left;
-  }
-  .form-row-img img {
-    border-radius: 10px;
-    padding: 1%;
-    width: 98%;
-    height: 296px;
-  }
-  .formdesign-up {
-    width: 50%;
-    height: 330px;
-    float: left;
-  }
-  
-  .form-row-up {
-    width: 100%;
-    border-radius: 5px;
-    display: flex;
-  }
-  
-  .form-row-up-img {
-    margin-right: 10px;
-    width: 41%;
-    height: 300px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    float: left;
-  }
-  .old-image-up {
-    float: left;
-    width: 42%;
-    height: 40px;
-    font-family: inherit;
-    font-size: inherit;
-    border-radius: 5px;
-    color: black;
-    background: none;
-  }
-  .old-image-up p {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    margin: 0;
-  }
-  .new-image-up {
-    float: left;
-    width: 40%;
-    height: 20px;
-    margin-bottom: 10px;
-    border: 1px solid black;
-    font-family: inherit;
-    font-size: inherit;
-    border-radius: 5px;
-    color: black;
-    padding: 10px;
-    background: none;
-  }
-  .form-row-up-img img {
-    border-radius: 10px;
-    padding: 1%;
-    width: 98%;
-    height: 295px;
-  }
-  
-  .form-control {
-    border: 1px solid black;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-  
-  .previewimg {
-    padding: 5px;
-    border-radius: 5px;
-    display: flex;
-    width: 100%;
-  }
-  .previewimg-up {
-    width: 20%;
-    height: 10%;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-  }
-  
-  .btn-add-sp {
-    width: 90%;
-    margin: 0 auto;
-    height: 100px;
-  }
-  .btn-add-ao {
-    width: 100%;
-    display: block;
-    -webkit-appearance: none;
-    appearance: none;
-    -webkit-filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
-    filter: drop-shadow(0 5px 5px rgba(203, 89, 89, 0.1));
-    -webkit-transition: all 0.5s ease;
-    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
-    -webkit-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-    border: none;
-    background: #e5e5e5;
-    border-radius: 30px;
-    text-transform: uppercase;
-    box-sizing: border-box;
-    padding: 15px 40px;
-    font-weight: 400;
-    font-size: 13px;
-    cursor: cursor;
-    background-image: linear-gradient(#fbb034, #ffdd00);
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .btn-add-ao:hover {
-    color: #ffffff;
-    background: #222222;
-    -webkit-filter: drop-shadow(0 0 5px rgba(235, 22, 22, 0.784));
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
-  }
   
   .btn-dialog {
-    width: 97%;
-    height: 30px;
-    margin-bottom: 20px;
-    display: flex;
-    float: right;
+    width: 100%;
   }
   .btn-close {
     justify-content: center;
@@ -343,7 +133,7 @@
     text-align: center;
     background: #efefef;
     width: 7%;
-    height: 20px;
+
     padding: 6px;
     border-radius: 10px;
     color: #000;
@@ -354,7 +144,6 @@
     text-align: center;
     background: #efefef;
     width: 7%;
-    height: 20px;
     padding: 6px;
     border-radius: 10px;
     color: #000;
@@ -365,7 +154,6 @@
     text-align: center;
     background: #efefef;
     width: 7%;
-    height: 20px;
     padding: 6px;
     border-radius: 10px;
     color: #000;
