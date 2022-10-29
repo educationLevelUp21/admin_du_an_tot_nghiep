@@ -8,7 +8,6 @@ import {
   Card,
   Table,
   Stack,
-  Avatar,
   Button,
   Checkbox,
   TableRow,
@@ -18,7 +17,14 @@ import {
   Typography,
   TableContainer,
   TablePagination,
+
 } from '@mui/material';
+
+// avatar
+import Avatar from '@mui/material/Avatar';
+import hinhanh from '../assets/Img_login.png';
+
+
 // components
 import Page from '../components/Page';
 import Label from '../components/Label';
@@ -30,23 +36,35 @@ import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashbo
 // import USERLIST from '../_mock/user';
 
 import axios from "axios";
+import { VpnLockSharp } from '@mui/icons-material';
+import Switch from '@mui/material/Switch';
 
+import ChiTietSPPage from '../dialog/ChiTietSp.js'
+
+
+import DialogActions from '@mui/material/DialogActions';
+
+// css
+import '../css/user.css';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name', alignRight: false },
-  { id: 'company', label: 'Company', alignRight: false },
-  { id: 'role', label: 'Role', alignRight: false },
-  { id: 'isVerified', label: 'Verified', alignRight: false },
-  { id: 'status', label: 'Status', alignRight: false },
-  { id: 'dsad', label: 'test', alignRight: false },
-  { id: 'dsad', label: 'test', alignRight: false },
+  { id: 'image1', label: '', alignRight: false },
+  { id: 'name', label: 'Tên sản phẩm', alignRight: false },
+  { id: 'price', label: 'Giá gốc', alignRight: false },
+  { id: 'price', label: 'Giá bán', alignRight: false },
+  { id: 'number', label: 'Số lượng', alignRight: false },
+  { id: 'discount', label: 'Giảm giá', alignRight: false },
+  { id: 'TrangThaiSP', label: 'Trạng thái', alignRight: false },
+  { id: 'Type&Details', label: 'Loại & chi tiết', alignRight: false },
   { id: '' },
+
 ];
 
 // ----------------------------------------------------------------------
 
 function descendingComparator(a, b, orderBy) {
+
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -79,6 +97,8 @@ export default function User() {
 
   const ip = "http://localhost:8080"
 
+  const [SWTrangThaiSP, setSWTrangThaiSP] = useState(true)
+
   const [danhsachSP, setdanhsachSP] = useState([]);
 
   const [page, setPage] = useState(0);
@@ -102,6 +122,11 @@ export default function User() {
 
   },)
 
+  // dialog
+  const [open, setOpen] = useState(false);
+  const handleClickItem = () => {
+    setOpen(true)
+  }
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -179,7 +204,7 @@ export default function User() {
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
-                <TableBody>
+                <TableBody >
                   {/* {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     const { id, name, role, status, company, avatarUrl, isVerified } = row;
                     const isItemSelected = selected.indexOf(name) !== -1; */}
@@ -189,46 +214,89 @@ export default function User() {
                       , DateNhapSP, SaleSP, TrangThaiSP, LoaiSP, ChiTietSP } = vl;
                     const isItemSelected = selected.indexOf(NameSP) !== -1;
 
-
                     return (
-                      <TableRow
-                        hover
-                        key={_id}
-                        tabIndex={-1}
-                        role="checkbox"
-                        selected={isItemSelected}
-                        aria-checked={isItemSelected}
-                      >
-                        <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, NameSP)} />
-                        </TableCell>
-                        <TableCell component="th" scope="row" padding="none">
-                          {/* <Stack direction="row" alignItems="center" spacing={2}> */}
-                          {/* <Avatar alt={name} src={avatarUrl} /> */}
-                          <Typography variant="subtitle2" noWrap>
-                            {NameSP}
-                          </Typography>
-                          {/* </Stack> */}
-                        </TableCell>
-                        <TableCell align="left">
-                          <Typography variant="subtitle2" noWrap>
-                            Giá gốc: {GiaGocSP}
-                          </Typography>
-                          <Typography variant="subtitle2" noWrap>
-                            Giá bán: {GiaBanSP}
-                          </Typography>
-                        </TableCell>
-                        <TableCell align="left">{GiaBanSP}</TableCell>
-                        <TableCell align="left">
-                          {/* <Label variant="ghost" >
-                            {sentenceCase(TrangThaiSP)}
-                          </Label> */}
-                        </TableCell>
+                      <>
+                        <ChiTietSPPage
+                          open={open}
+                          setOpen={setOpen}
+                          LoaiSP={LoaiSP}
+                          ChiTietSP={ChiTietSP}
+                        />
+                        <TableRow
+                          hover
+                          key={_id}
+                          tabIndex={-1}
+                          role="checkbox"
+                          selected={isItemSelected}
+                          aria-checked={isItemSelected}
+                        >
+                          <TableCell padding="checkbox">
+                            <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, NameSP)} />
+                          </TableCell>
+                          {/* --------------- Ảnh ----------------- */}
+                          <TableCell className='image_sp' component="th" scope="row"  >
+                            {/* <Avatar alt={NameSP} src={Avatar} /> */}
+                            <Avatar sx={{ minWidth: 80, minHeight: 80 }} variant="square">
+                              <img className='img' src={hinhanh} alt="login" width={'100%'} />
+                            </Avatar>
+                          </TableCell>
+                          {/* --------------- tên sản phẩm ----------------- */}
+                          <TableCell className='name_sp' component="th" scope="row"  >
+                            {/* <Stack direction="row" alignItems="center" spacing={2}> */}
+                            {/* <Avatar alt={name} src={avatarUrl} /> */}
+                            <Typography align='left' variant="subtitle2" wordWrap="break-word" >
+                              {NameSP}
+                            </Typography>
+                          </TableCell>
+                          {/* --------------- giá gốc & giá bán sản phẩm ----------------- */}
+                          <TableCell className='giaGoc_giaBan'>
+                            <Typography align='left' variant="subtitle2" wordWrap="break-word" >
+                              {GiaGocSP}VND
+                            </Typography>
+                          </TableCell>
+                          <TableCell className='giaGoc_giaBan'>
+                            <Typography align='left' variant="subtitle2" wordWrap="break-word" >
+                              {GiaBanSP}VND
+                            </Typography>
+                          </TableCell>
+                          {/* --------------- số lượng ----------------- */}
+                          <TableCell className='so_luong' component="th" scope="row"  >
+                            <Typography align='left' variant="subtitle2" >
+                              {SoLuongSP}
+                            </Typography>
+                          </TableCell>
+                          {/* --------------- giảm giá sale----------------- */}
+                          <TableCell className='giam_gia' component="th" scope="row" >
+                            <Typography align='left' variant="subtitle2" >
+                              {SaleSP}%
+                            </Typography>
+                          </TableCell>
+                          {/* ---------------  ngày nhập----------------- */}
 
-                        <TableCell align="right">
-                          <UserMoreMenu />
-                        </TableCell>
-                      </TableRow>
+                          {/* --------------- trạng thái----------------- */}
+                          <TableCell className='trang_thai' component="th" scope="row" >
+                            <Typography align='left' variant="subtitle2"  >
+                              {/* {TrangThaiSP} */}
+                              <label class="switch">
+                                <input type="checkbox" defaultChecked={SWTrangThaiSP} onChange={(e) => setSWTrangThaiSP(!SWTrangThaiSP)} />
+                                <span class="slider round"></span>
+                              </label>
+                              {/* <Label color={(TrangThaiSP === 'Không hoạt động' && 'error') || 'success'}>{sentenceCase(TrangThaiSP)}</Label> */}
+                            </Typography>
+                          </TableCell>
+                          {/* --------------- loại & chi tiết sản phẩm ----------------- */}
+                          <TableCell className='loai_chiTiet' >
+                            <Typography align='left' variant="subtitle2" wordWrap="break-word" >
+                              <Button className='btn_xemThem' variant="outlined" onClick={() => handleClickItem()}> Xem thêm</Button>
+                            </Typography>
+                          </TableCell>
+                          {/* ---------------------------------------------- */}
+                          <TableCell align="right">
+                            <UserMoreMenu />
+                          </TableCell>
+                        </TableRow>
+
+                      </>
                     );
                   })}
                   {emptyRows > 0 && (
@@ -262,6 +330,6 @@ export default function User() {
           />
         </Card>
       </Container>
-    </Page>
+    </Page >
   );
 }

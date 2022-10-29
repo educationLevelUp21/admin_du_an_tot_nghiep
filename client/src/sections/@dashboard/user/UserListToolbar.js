@@ -20,7 +20,7 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
     easing: theme.transitions.easing.easeInOut,
     duration: theme.transitions.duration.shorter,
   }),
-  '&.Mui-focused': { width: 320, boxShadow: theme.customShadows.z8 },
+  '&.Mui-focused': { width: 350, boxShadow: theme.customShadows.z8 },
   '& fieldset': {
     borderWidth: `1px !important`,
     borderColor: `${theme.palette.grey[500_32]} !important`,
@@ -56,7 +56,7 @@ export default function UserListToolbar({ numSelected, filterName, onFilterName 
           placeholder="Search user..."
           startAdornment={
             <InputAdornment position="start">
-              <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled', width: 20, height: 20 }} />
+              <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled', width: 50, height: 20 }} />
             </InputAdornment>
           }
         />

@@ -1,164 +1,199 @@
-
 /* -------------------------------------------------- */
 .container-up {
-    width: 100%;
-    margin: 0 auto;
-  }
-  /*-------- left --------*/
-  .form-text-input-up {
-    /* padding-left: 8%; */
-    width: 40%;
-    float: left;
-  }
-  
-  .form {
-    position: relative;
-    width: 100%;
-    height: 60px;
-  }
-  
-  .form-date {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  .form input {
-    width: 100%;
-    
-    position: absolute;
-    border: 2px solid black;
-    border-radius: 5px;
-    font-family: inherit;
-    font-size: inherit;
-    color: black;
-    outline: none;
-    padding: 12px 20px;
-    background: none;
-  }
-  .form_nhap {
-    position: relative;
-    width: 35%;
-  }
-  .form_nhap input {
-    width: 100%;
-    position: absolute;
-    border: 2px solid black;
-    border-radius: 5px;
-    font-family: inherit;
-    font-size: inherit;
-    color: black;
-    outline: none;
-    padding: 10px 20px;
-    background: none;
-  }
-  
-  .form-loaiSP {
-    width: 100%;
-    padding-top: 15px;
-  }
-  .form_sale {
-    width: 30%;
-  }
-  .form_trangthai {
-    width: 30%;
-  }
-  
-  .form-loaiSP select {
-    width: 100%;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 12px 10px;
-  }
+  width: 100%;
+  margin: 0 auto;
+}
+/*-------- left --------*/
+.form input {
+  width: 100%;
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: inherit;
+  color: black;
+  outline: none;
+  padding: 12px 20px;
+  background: none;
+}
+.form-text-input-up {
+  width: 40%;
+  float: left;
+}
 
-  .form_sale select {
-    width: 100%;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 12px 10px;
-  }
-  .form_trangthai select {
-    width: 100%;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 12px 10px;
-  }
-  
-  .form input:hover,
-  .form_nhap input:hover,
-  .form-row input:hover {
-    border-color: red;
-  }
-  .form-cbx-left:hover,
-  .form-cbx-right:hover,
-  .form-cbx-up:hover,
-  .form-loaiSP select:hover,
-  .form_sale select:hover,
-  .form_trangthai select:hover {
-    border: 2px solid red;
-  }
-  
-  .form input:focus,
-  .form_nhap input:focus {
-    border-color: rgb(0, 241, 0);
-  }
-  
-  .form label,
-  .form_nhap label {
-    position: absolute;
-    left: 1rem;
-    top: 12px;
-    padding: 0 5px;
-    color: black;
-    cursor: text;
-    transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
-    background-color: rgb(255, 255, 255);
-  }
-  
-  .form__input:focus ~ .form__label,
-  .form__input:not(:placeholder-shown).form__input:not(:focus) ~ .form__label {
-    top: -0.4rem;
-    font-size: 0.8rem;
-    left: 0.8rem;
-  }
-  
-  
-  .btn-dialog {
-    width: 100%;
-  }
-  .btn-close {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: #efefef;
-    width: 7%;
+.form {
+  position: relative;
+  width: 100%;
+  height: 60px;
+}
 
-    padding: 6px;
-    border-radius: 10px;
-    color: #000;
-  }
-  .btn-delete {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: #efefef;
-    width: 7%;
-    padding: 6px;
-    border-radius: 10px;
-    color: #000;
-  }
-  .btn-update {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: #efefef;
-    width: 7%;
-    padding: 6px;
-    border-radius: 10px;
-    color: #000;
-  }
-  .btn-update:hover {
-    background: #e5e5e5;
-    color: #000;
-  }
+/* -------------------------------------- */
+.form_gia {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.form_giaGoc {
+  position: relative;
+  width: 48.5%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  display: flex;
+}
+.form_giaGoc input {
+  width: 100%;
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: inherit;
+  color: black;
+  outline: none;
+  padding: 12px 20px;
+  background: none;
+}
+
+/* -------------------------------------- */
+.form-date {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.form_nhap {
+  position: relative;
+  width: 35%;
+}
+.form_nhap input {
+  width: 100%;
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: inherit;
+  color: black;
+  outline: none;
+  padding: 10px 20px;
+  background: none;
+}
+
+/* -------------------------------------- */
+.form_sale {
+  width: 30%;
+}
+.form_sale select {
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 12px 10px;
+}
+
+/* -------------------------------------- */
+.form_trangthai {
+  width: 30%;
+}
+.form_trangthai select {
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 12px 10px;
+}
+
+/* -------------------------------------- */
+.form-loaiSP {
+  width: 100%;
+  padding-top: 15px;
+}
+.form-loaiSP select {
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 12px 10px;
+}
+
+/* -------------------------------------- */
+.form_mota {
+  width: 100%;
+  margin-top: 15px;
+}
+.mota_txtArea {
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 12px 17px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+/* -------------------------------------- */
+.form input:hover,
+.form_giaGoc input:hover,
+.form_nhap input:hover {
+  border-color: #2065d1;
+}
+.form-loaiSP select:hover,
+.form_sale select:hover,
+.form_trangthai select:hover {
+  border: 1px solid #2065d1;
+}
+
+.form_giaGoc input:focus,
+.form input:focus,
+.form_nhap input:focus {
+  border-color: rgb(0, 241, 0);
+}
+
+.form_giaGoc label,
+.form label,
+.form_nhap label {
+  position: absolute;
+  left: 1rem;
+  top: 12px;
+  padding: 0 5px;
+  color: black;
+  cursor: text;
+  transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+  background-color: rgb(255, 255, 255);
+}
+
+.form__input:focus ~ .form__label,
+.form__input:not(:placeholder-shown).form__input:not(:focus) ~ .form__label {
+  top: -0.4rem;
+  font-size: 0.8rem;
+  left: 0.8rem;
+}
+
+.btn-dialog {
+  width: 100%;
+}
+
+.btn_add_cancel {
+  margin: 0 1%;
+  width: 10%;
+  height: 40px;
+}
+
+/* --------------- dialog Chi tiết sản phẩm ---------------*/
+.container {
+  width: 100%;
+  height: 200px;
+  margin: 0 auto;
+}
+.dl_xemThem {
+  border-bottom: 1px solid #f0f2f4;
+  display: flex;
+  font-weight: 600;
+  line-height: 1.5714285714285714;
+  font-size: 1rem;
+  padding: 2%;
+  width: 100%;
+}
+.btn_dialog {
+  width: 100%;
+}
+.btn_cancel {
+  width: 20%;
+  height: 40px;
+}
