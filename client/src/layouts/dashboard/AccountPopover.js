@@ -40,10 +40,13 @@ export default function AccountPopover() {
     
   };
 
-  const handleClose = () => {
-    setOpen(null);
+  const handleLogout = () =>{
     localStorage.removeItem("User");
     window.location.href = "/dashboard/app";
+  }
+
+  const handleClose = () => {
+    setOpen(null);
   };
 
   return (
@@ -104,7 +107,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </MenuPopover>

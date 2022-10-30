@@ -14,7 +14,7 @@ import axios from "axios";
 import "../css/dialog.css"
 
 
-export default function ChiTietSP(props) {
+export default function ChiTietSp(props) {
 
     const ip = "http://localhost:8080"
 
@@ -35,15 +35,11 @@ export default function ChiTietSP(props) {
                         textAlign: 'center', paddingBottom: '10px',
                         color: '#2065d1'
                     }}>Thông tin xem thêm</h2>
+                    {/* <p className="dl_xemThem">Loại sản phẩm: {props.IdSP}</p> */}
                     <p className="dl_xemThem">Loại sản phẩm: {props.LoaiSP}</p>
                     <p className="dl_xemThem">Chi tiết sản phẩm: {props.ChiTietSP}</p>
                 </div>
             </DialogContent>
-            {/* <DialogActions >
-                 <div className="btn-update" color="primary" >
-                    Thêm Sản Phẩm
-                </div> 
-            </DialogActions> */}
             <DialogActions className="btn_dialog">
                 <Button variant="outlined" className="btn_cancel" onClick={handleClose}>Cancel</Button>
             </DialogActions>

@@ -5,14 +5,51 @@ import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/mat
 // component
 import Iconify from '../../../components/Iconify';
 
+// dialog
+import UpdateSP from '../../../dialog/UpdateSP';
+
+import axios from "axios";
+
 // ----------------------------------------------------------------------
 
-export default function UserMoreMenu() {
+export default function UserMoreMenu(props) {
+
+  const ip = "http://localhost:8080"
+
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
+   // dialog Update
+ const [openFix, setOpenFix] = useState(false);
+ const handleClickItemFix = () => {
+    setOpenFix(true)
+    setIsOpen(false)
+    // console.log(props._id);
+ }
+
+ const btnDeleteDS = (id) => {
+    axios.delete(ip + `/DeleteSP/${id}`)
+}
+
   return (
     <>
+      <UpdateSP
+         open={openFix}
+         setOpen={setOpenFix}
+         key={props._id}
+         _id={props._id}
+         NameSP={props.NameSP}
+         GiaGocSP={props.GiaGocSP}
+         GiaBanSP={props.GiaBanSP}
+         SoLuongSP={props.SoLuongSP}
+         DateNhapSP={props.DateNhapSP}
+         SaleSP={props.SaleSP}
+         TrangThaiSP={props.TrangThaiSP}
+         LoaiSP={props.LoaiSP}
+         ChiTietSP={props.ChiTietSP}
+         danhsachSP={props.danhsachSP}
+         setdanhsachSP={props.setdanhsachSP}
+      />
       <IconButton ref={ref} onClick={() => setIsOpen(true)}>
         <Iconify icon="eva:more-vertical-fill" width={20} height={20} />
       </IconButton>
@@ -31,14 +68,21 @@ export default function UserMoreMenu() {
           <ListItemIcon>
             <Iconify icon="eva:trash-2-outline" width={24} height={24} />
           </ListItemIcon>
-          <ListItemText primary="Delete" primaryTypographyProps={{ variant: 'body2' }} />
+          <ListItemText onClick={() => {
+            const checkdelete = window.confirm(
+              "Bạn chắc chắn muốn xóa??? "
+            )
+            if (checkdelete == true) {
+              btnDeleteDS(props._id)
+            }
+          }} primary="Delete" primaryTypographyProps={{ variant: 'body2' }} />
         </MenuItem>
 
         <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }}>
           <ListItemIcon>
             <Iconify icon="eva:edit-fill" width={24} height={24} />
           </ListItemIcon>
-          <ListItemText primary="Edit" primaryTypographyProps={{ variant: 'body2' }} />
+          <ListItemText onClick={() => handleClickItemFix()} primary="Edit" primaryTypographyProps={{ variant: 'body2' }} />
         </MenuItem>
       </Menu>
     </>

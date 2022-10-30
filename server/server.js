@@ -47,6 +47,8 @@ require("./useDetails");
 
 const UserAdmin = mongoose.model("UserInfoAdmin");
 
+const Product_sp = mongoose.model("Product_SP");
+
 // ------------------------Register Admin------------------------------------
 
 app.post("/register-admin", async (req, res) => {
@@ -99,7 +101,7 @@ app.post("/login-admin", async (req, res) => {
     }
 })
 
-// ------------------------get du lieu------------------------------------
+// ------------------------get login------------------------------------
 
 app.post("/UserAdmin-data", async (req, res) => {
 
@@ -123,15 +125,17 @@ app.post("/UserAdmin-data", async (req, res) => {
 // --------------------------add procduct sp--------------------------------------
 
 
-const Add_product_sp = mongoose.model("Product_SP");
 
+
+// sp
 app.post("/add_Product", async (req, res) => {
 
-    const { NameSP, GiaGocSP, GiaBanSP,SoLuongSP
+    const {idSP, NameSP, GiaGocSP, GiaBanSP,SoLuongSP
         ,DateNhapSP,SaleSP,TrangThaiSP,LoaiSP,ChiTietSP } = req.body;
 
     try {
-        await Add_product_sp.create({
+        await Product_sp.create({
+
             NameSP: NameSP,
             GiaGocSP: GiaGocSP,
             GiaBanSP: GiaBanSP,
@@ -148,13 +152,83 @@ app.post("/add_Product", async (req, res) => {
     }
 });
 
+// app.post("/add_Product", async (req, res) => {
+//     let demId = Product_sp.find({}).sort({idSP: -1}).limit(1)
+//     demId.forEach(obj => {
+//         if(obj){
+//             let dsSP = {
+//                 idSP : obj.idSP +1,
+//                 NameSP: req.body.NameSP,
+//                 GiaGocSP: req.body.GiaGocSP,
+//                 GiaBanSP: req.body.GiaBanSP,
+//                 SoLuongSP: req.body.SoLuongSP,
+//                 DateNhapSP: req.body.DateNhapSP,
+//                 SaleSP: req.body.SaleSP,
+//                 TrangThaiSP: req.body.TrangThaiSP,
+//                 LoaiSP: req.body.LoaiSP,
+//                 ChiTietSP: req.body.ChiTietSP,
+//             }
+//             Product_sp.insertMany(dsSP, (err,result)=>{
+//                 if(err) res.status(500).send(err)
+//                 res.send("add thanh cong")
+//             })
+//         }
+//     })
+// });
+// ----------------------------- update dulieu--------------------------------
 
-app.get("/getData", async(req,resp) =>{
-    Add_product_sp.find((err,result)=>{
+// sp
+app.put("/UpdateSP/:_id",(req,res) => {
+    let SP={
+        NameSP: req.body.NameSP,
+        GiaGocSP: req.body.GiaGocSP,
+        GiaBanSP: req.body.GiaBanSP,
+        SoLuongSP: req.body.SoLuongSP,   
+        DateNhapSP: req.body.DateNhapSP,
+        SaleSP: req.body.SaleSP,
+        TrangThaiSP: req.body.TrangThaiSP,
+        LoaiSP: req.body.LoaiSP,
+        ChiTietSP: req.body.ChiTietSP,
+    }
+
+    Product_sp.updateOne(
+            {_id: req.params._id},
+            {$set:SP},
+            (err,result) => {
+            if(err) throw err
+            res.send(SP);
+        })
+})
+
+// -----------------------------delete dulieu ------------------------------
+
+// sp
+app.delete("/DeleteSP/:_id",(req,res) =>{
+    Product_sp.deleteOne(
+        {_id : req.params._id},
+        (err,result) =>{
+            if(err) throw err
+            res.send("Delete thanh cong")
+        })
+})
+
+
+// ----------------------------- get du lieu--------------------------------
+
+app.get("/getData", async(req,res) =>{
+    Product_sp.find((err,result)=>{
         if(err) throw err
-        resp.send(result)
+        res.send(result)
     })
 })
+
+// app.get("/getData/:id", async (req,res) => {
+//     Add_product_sp.find({id: parseInt(req.body.id)},(err,result)=>{
+//         if(err) throw err
+//         res.send(result)
+//     }) 
+// })
+
 
 app.listen(PORT, console.log(`server run with port ${PORT}`))
 

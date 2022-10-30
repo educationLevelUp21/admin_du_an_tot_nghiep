@@ -45,7 +45,7 @@ import ChiTietSPPage from '../dialog/ChiTietSp.js'
 import DialogActions from '@mui/material/DialogActions';
 
 // css
-import '../css/user.css';
+import '../css/add_product.css';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
@@ -114,13 +114,13 @@ export default function User() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
 
-  useEffect(() => {
-    axios.get(ip + '/getData')
-      .then((response) => {
-        setdanhsachSP(response.data);
-      })
+  // useEffect(() => {
+  //   axios.get(ip + '/getData')
+  //     .then((response) => {
+  //       setdanhsachSP(response.data);
+  //     })
 
-  },)
+  // },)
 
   // dialog
   const [open, setOpen] = useState(false);
@@ -205,10 +205,6 @@ export default function User() {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody >
-                  {/* {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, status, company, avatarUrl, isVerified } = row;
-                    const isItemSelected = selected.indexOf(name) !== -1; */}
-
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((vl) => {
                     const { _id, NameSP, GiaGocSP, GiaBanSP, SoLuongSP
                       , DateNhapSP, SaleSP, TrangThaiSP, LoaiSP, ChiTietSP } = vl;
@@ -216,12 +212,12 @@ export default function User() {
 
                     return (
                       <>
-                        <ChiTietSPPage
+                        {/* <ChiTietSPPage
                           open={open}
                           setOpen={setOpen}
                           LoaiSP={LoaiSP}
                           ChiTietSP={ChiTietSP}
-                        />
+                        /> */}
                         <TableRow
                           hover
                           key={_id}
@@ -287,7 +283,7 @@ export default function User() {
                           {/* --------------- loại & chi tiết sản phẩm ----------------- */}
                           <TableCell className='loai_chiTiet' >
                             <Typography align='left' variant="subtitle2" wordWrap="break-word" >
-                              <Button className='btn_xemThem' variant="outlined" onClick={() => handleClickItem()}> Xem thêm</Button>
+                              {/* <Button className='btn_xemThem' variant="outlined" onClick={() => handleClickItem()}> Xem thêm</Button> */}
                             </Typography>
                           </TableCell>
                           {/* ---------------------------------------------- */}

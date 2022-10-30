@@ -8,35 +8,34 @@ import {
 } from '@mui/material';
 import axios from "axios";
 
-export default function Add_product(props) {
+export default function UpdateSP(props) {
 
   const ip = "http://localhost:8080"
 
-  // const [,set] = useState("")
-  const [NameSP, setNameSP] = useState("")
-  const [GiaGocSP, setGiaGocSP] = useState(0)
-  const [GiaBanSP, setGiaBanSP] = useState(0)
-  const [SoLuongSP, setSoLuongSP] = useState(0)
-  const [DateNhapSP, setDateNhapSP] = useState(new Date())
-  const [SaleSP, setSaleSP] = useState(0)
-  const [TrangThaiSP, setTrangThaiSP] = useState("Hoạt động")
-  const [LoaiSP, setLoaiSP] = useState("Chai lọ mĩ phẫm")
-  const [ChiTietSP, setChiTietSP] = useState("")
+  const [NameSPFix, setNameSPFix] = useState(props.NameSP)
+  const [GiaGocSPFix, setGiaGocSPFix] = useState(props.GiaGocSP)
+  const [GiaBanSPFix, setGiaBanSPFix] = useState(props.GiaBanSP)
+  const [SoLuongSPFix, setSoLuongSPFix] = useState(props.SoLuongSP)
+  const [DateNhapSPFix, setDateNhapSPFix] = useState(props.DateNhapSP)
+  const [SaleSPFix, setSaleSPFix] = useState(props.SaleSP)
+  const [TrangThaiSPFix, setTrangThaiSPFix] = useState(props.TrangThaiSP)
+  const [LoaiSPFix, setLoaiSPFix] = useState(props.LoaiSP)
+  const [ChiTietSPFix, setChiTietSPFix] = useState(props.ChiTietSP)
 
 
-
-  const btnAdd_Product = () => {
-    axios.post(ip + "/add_Product", {
-      NameSP: NameSP,
-      GiaGocSP: GiaGocSP,
-      GiaBanSP: GiaBanSP,
-      SoLuongSP: SoLuongSP,
-      DateNhapSP: DateNhapSP,
-      SaleSP: SaleSP,
-      TrangThaiSP: TrangThaiSP,
-      LoaiSP: LoaiSP,
-      ChiTietSP: ChiTietSP,
+  const btnUpdate_Product = () => {
+    axios.put(ip + `/UpdateSP/${props._id}`, {
+      NameSP: NameSPFix,
+      GiaGocSP: GiaGocSPFix,
+      GiaBanSP: GiaBanSPFix,
+      SoLuongSP: SoLuongSPFix,
+      DateNhapSP: DateNhapSPFix,
+      SaleSP: SaleSPFix,
+      TrangThaiSP: TrangThaiSPFix,
+      LoaiSP: LoaiSPFix,
+      ChiTietSP: ChiTietSPFix,
     })
+    console.log( props._id);
   }
 
   const handleClose = () => {
@@ -44,12 +43,13 @@ export default function Add_product(props) {
   };
 
 
-  // var format = new Date(DateNhapSP);
-  // var day = format.getDate();
-  // var month = format.getMonth() + 1;
-  // var year = format.getFullYear();
+  var format = new Date(props.DateNhapSP);
+  var day = format.getDate();
+  var month = format.getMonth() + 1;
+  var year = format.getFullYear();
 
-  // var date = day + "/" + month + "/" + year;
+  var date = day + "/" + month + "/" + year;
+
   return (
     <Dialog
       open={props.open}
@@ -60,32 +60,36 @@ export default function Add_product(props) {
     >
       <DialogContent>
         <div className="container-up" >
-          <h2 style={{ textAlign: 'center', paddingBottom: '20px', color: '#2065d1' }}>Thêm thông tin sản phẩm</h2>
+          <h2 style={{ textAlign: 'center', paddingBottom: '20px', color: '#2065d1' }}>Sửa thông tin sản phẩm</h2>
 
           <div className="form-text-input-up">
             <div className="form">
               <input type="text" className="form__input" placeholder=" " name="Tên áo"
-                onChange={(e) => setNameSP(e.target.value)}
+                onChange={(e) => setNameSPFix(e.target.value)}
+                defaultValue={props.NameSP}
               />
               <label className="form__label">Tên SP</label>
             </div>
             <div className="form_gia">
               <div className="form_giaGoc">
                 <input type="text" className="form__input" placeholder=" " name="Giá gốc"
-                  onChange={(e) => setGiaGocSP(e.target.value)}
+                  onChange={(e) => setGiaGocSPFix(e.target.value)}
+                  defaultValue={props.GiaGocSP}
                 />
                 <label className="form__label">Giá gốc</label>
               </div>
               <div className="form_giaGoc">
                 <input type="text" className="form__input" placeholder=" " name="Giá bán"
-                  onChange={(e) => setGiaBanSP(e.target.value)}
+                  onChange={(e) => setGiaBanSPFix(e.target.value)}
+                  defaultValue={props.GiaBanSP}
                 />
                 <label className="form__label">Giá bán</label>
               </div>
             </div>
             <div className="form">
               <input type="text" className="form__input" placeholder=" " name="Số lượng"
-                onChange={(e) => setSoLuongSP(e.target.value)}
+                onChange={(e) => setSoLuongSPFix(e.target.value)}
+                defaultValue={props.SoLuongSP}
               />
 
               <label className="form__label">Số lượng</label>
@@ -94,25 +98,25 @@ export default function Add_product(props) {
             <div className="form-date">
               <div className="form_nhap">
                 <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
-                  onChange={(e) => setDateNhapSP(e.target.value)}
+                  onChange={(e) => setDateNhapSPFix(e.target.value)} defaultValue={date}
                 />
                 <label className="form__label">Ngày Nhập</label>
               </div>
               <div className="form_sale">
-                <select defaultValue={SaleSP} onChange={(e) => setSaleSP(e.target.value)}>
+                <select defaultValue={SaleSPFix} onChange={(e) => setSaleSPFix(e.target.value)}>
                   <option value="10">10%</option>
                   <option value="20">20%</option>
                 </select>
               </div>
               <div className="form_trangthai">
-                <select defaultValue={TrangThaiSP} onChange={(e) => setTrangThaiSP(e.target.value)}>
+                <select defaultValue={TrangThaiSPFix} onChange={(e) => setTrangThaiSPFix(e.target.value)}>
                   <option value="Hoạt động">Hoạt động</option>
                   <option value="Không hoạt động">Không hoạt động </option>
                 </select>
               </div>
             </div>
             <div className="form-loaiSP">
-              <select defaultValue={LoaiSP} onChange={(e) => setLoaiSP(e.target.value)}>
+              <select defaultValue={LoaiSPFix} onChange={(e) => setLoaiSPFix(e.target.value)}>
                 <option value="Chai lọ mĩ phẫm">Chai lọ mĩ phẫm</option>
                 <option value="Chai lọ thực phẩm">Chai lọ thực phẩm</option>
                 <option value="Chai lọ dược phẩm">Chai lọ dược phẩm</option>
@@ -120,7 +124,10 @@ export default function Add_product(props) {
               </select>
             </div>
             <div className="form_mota">
-              <textarea onChange={(e) => setChiTietSP(e.target.value)} title="" placeholder="Mô tả" name="thông tin" className="mota_txtArea" rows="10"></textarea>
+              <textarea onChange={(e) => setChiTietSPFix(e.target.value)} 
+              defaultValue={props.ChiTietSP}
+              title="" 
+              placeholder="Mô tả" name="thông tin" className="mota_txtArea" rows="10"></textarea>
             </div>
           </div>
 
@@ -128,8 +135,8 @@ export default function Add_product(props) {
       </DialogContent>
       <DialogActions className="btn-dialog">
         <Button variant="outlined" className="btn_add_cancel" onClick={handleClose}>Hủy</Button>
-        <Button variant="outlined" className="btn_add_cancel" color="primary" onClick={btnAdd_Product}>
-          Thêm
+        <Button variant="outlined" className="btn_add_cancel" color="primary" onClick={btnUpdate_Product}>
+          Sửa
         </Button>
       </DialogActions>
     </Dialog>
