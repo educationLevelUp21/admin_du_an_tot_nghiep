@@ -46,7 +46,7 @@ const TABLE_HEAD = [
   { id: 'number', label: 'Số lượng', alignRight: false },
   { id: 'discount', label: 'Giảm giá', alignRight: false },
   { id: 'TrangThaiSP', label: 'Trạng thái', alignRight: false },
-  { id: 'Type&Details', label: 'Loại & chi tiết', alignRight: false },
+  { id: 'Type&Details', label: '', },
   { id: '' },
 
 ];

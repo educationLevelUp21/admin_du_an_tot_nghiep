@@ -65,6 +65,13 @@ export default function ItemListSP(props) {
             <ChiTietSp
                 open={openCT}
                 setOpen={setOpenCT}
+                NameSP={props.NameSP}
+                GiaGocSP={props.GiaGocSP}
+                GiaBanSP={props.GiaBanSP}
+                SoLuongSP={props.SoLuongSP}
+                DateNhapSP={props.DateNhapSP}
+                SaleSP={props.SaleSP}
+                TrangThaiSP={props.TrangThaiSP}
                 LoaiSP={props.LoaiSP}
                 ChiTietSP={props.ChiTietSP}
 
