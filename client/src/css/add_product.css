@@ -1,7 +1,7 @@
 /* -------------------------------------------- TableCell --------------------------------------------*/
 
 .name_sp {
-  width: 29%;
+  width: 23%;
 }
 .image_sp {
   width: 5%;
@@ -10,16 +10,16 @@
   width: 15%;
 }
 .so_luong {
-  width: 6%;
-}
-.giam_gia {
-  width: 6%;
-}
-.trang_thai {
   width: 5%;
 }
+.giam_gia {
+  width: 5%;
+}
+.trang_thai {
+  width: 17%;
+}
 .loai_chiTiet {
-  width: 15%;
+  width: 14%;
 }
 .btn_xemThem {
   width: 100%;

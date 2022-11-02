@@ -36,10 +36,10 @@ import ItemListSP from '../Item/ItemListSP';
 
 // css
 import '../css/add_product.css';
-import '../css/dialog.css'; 
+import '../css/dialog.css';
 
 const TABLE_HEAD = [
-  { id: 'image1', label: 'img', alignRight: false },
+  { id: 'image1', label: '', alignRight: false },
   { id: 'name', label: 'Tên sản phẩm', alignRight: false },
   { id: 'priceGoc', label: 'Giá gốc', alignRight: false },
   { id: 'priceBan', label: 'Giá bán', alignRight: false },
@@ -111,7 +111,7 @@ export default function EcommerceShop() {
         setdanhsachSP(response.data);
       })
 
-      // console.log(filterName);
+    // console.log(filterName);
   },)
 
   // dialog add
@@ -172,117 +172,117 @@ export default function EcommerceShop() {
 
   return (
     <>
-    <Add_product 
-    open={openAdd} 
-    setOpen={setOpenAdd} 
-    // danhsachSP={danhsachSP}
-    // setdanhsachSP={setdanhsachSP}
-    />
-    <Page title="Dashboard: Products">
-      <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" gutterBottom>
-            Kho hàng
-          </Typography>
-          <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />} 
-            onClick={handleClickItemAdd}>
-            Thêm sản phẩm
-          </Button>
-        </Stack>
+      <Add_product
+        open={openAdd}
+        setOpen={setOpenAdd}
+      // danhsachSP={danhsachSP}
+      // setdanhsachSP={setdanhsachSP}
+      />
+      <Page title="Dashboard: Products">
+        <Container>
+          <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+            <Typography variant="h4" gutterBottom>
+              Kho hàng
+            </Typography>
+            <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}
+              onClick={handleClickItemAdd}>
+              Thêm sản phẩm
+            </Button>
+          </Stack>
 
-        <Card>
-          <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
+          <Card>
+            <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
 
-          <Scrollbar>
-            <TableContainer sx={{ minWidth: 800 }}>
-              <Table>
-                <UserListHead
-                  order={order}
-                  orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
-                  rowCount={danhsachSP.length}
-                  numSelected={selected.length}
-                  onRequestSort={handleRequestSort}
-                  onSelectAllClick={handleSelectAllClick}
-                />
-                <TableBody >
-                  {/* {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+            <Scrollbar>
+              <TableContainer sx={{ minWidth: 800 }}>
+                <Table>
+                  <UserListHead
+                    order={order}
+                    orderBy={orderBy}
+                    headLabel={TABLE_HEAD}
+                    rowCount={danhsachSP.length}
+                    numSelected={selected.length}
+                    onRequestSort={handleRequestSort}
+                    onSelectAllClick={handleSelectAllClick}
+                  />
+                  <TableBody >
+                    {/* {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     const { id, name, role, status, company, avatarUrl, isVerified } = row;
                     const isItemSelected = selected.indexOf(name) !== -1; */}
 
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((val) => {
-                    const isItemSelected = selected.indexOf(val.NameSP) !== -1;
+                    {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((val) => {
+                      const isItemSelected = selected.indexOf(val.NameSP) !== -1;
 
-                    return (
+                      return (
 
-                      <ItemListSP
-                        key={val._id}
-                        _id={val._id}
-                        NameSP={val.NameSP}
-                        GiaGocSP={val.GiaGocSP}
-                        GiaBanSP={val.GiaBanSP}
-                        SoLuongSP={val.SoLuongSP}
-                        DateNhapSP={val.DateNhapSP}
-                        SaleSP={val.SaleSP}
-                        TrangThaiSP={val.TrangThaiSP}
-                        LoaiSP={val.LoaiSP}
-                        ChiTietSP={val.ChiTietSP}
-                        danhsachSP={danhsachSP}
-                        setdanhsachSP={setdanhsachSP}
-                        isItemSelected={isItemSelected}
-                        selected={selected}
-                        setSelected={setSelected}
-                      />
+                        <ItemListSP
+                          key={val._id}
+                          _id={val._id}
+                          NameSP={val.NameSP}
+                          GiaGocSP={val.GiaGocSP}
+                          GiaBanSP={val.GiaBanSP}
+                          SoLuongSP={val.SoLuongSP}
+                          DateNhapSP={val.DateNhapSP}
+                          SaleSP={val.SaleSP}
+                          TrangThaiSP={val.TrangThaiSP}
+                          LoaiSP={val.LoaiSP}
+                          ChiTietSP={val.ChiTietSP}
+                          danhsachSP={danhsachSP}
+                          setdanhsachSP={setdanhsachSP}
+                          isItemSelected={isItemSelected}
+                          selected={selected}
+                          setSelected={setSelected}
+                        />
 
-                    );
-                  })}
-                  {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={6} />
-                    </TableRow>
-                  )}
-                </TableBody>
-
-                {isUserNotFound && (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                        {/* <SearchNotFound searchQuery={filterName} /> */}
-                        <Paper
-                          sx={{
-                            textAlign: 'center',
-                          }}
-                        >
-                          <Typography variant="h6" paragraph>
-                            Not found
-                          </Typography>
-
-                          <Typography variant="body2">
-                            No results found for &nbsp;
-                            <strong>&quot;{filterName}&quot;</strong>.
-                            <br /> Try checking for typos or using complete words.
-                          </Typography>
-                        </Paper>
-                      </TableCell>
-                    </TableRow>
+                      );
+                    })}
+                    {emptyRows > 0 && (
+                      <TableRow style={{ height: 53 * emptyRows }}>
+                        <TableCell colSpan={6} />
+                      </TableRow>
+                    )}
                   </TableBody>
-                )}
-              </Table>
-            </TableContainer>
-          </Scrollbar>
 
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={danhsachSP.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Card>
-      </Container>
-    </Page >
+                  {isUserNotFound && (
+                    <TableBody>
+                      <TableRow>
+                        <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                          {/* <SearchNotFound searchQuery={filterName} /> */}
+                          <Paper
+                            sx={{
+                              textAlign: 'center',
+                            }}
+                          >
+                            <Typography variant="h6" paragraph>
+                              Not found
+                            </Typography>
+
+                            <Typography variant="body2">
+                              No results found for &nbsp;
+                              <strong>&quot;{filterName}&quot;</strong>.
+                              <br /> Try checking for typos or using complete words.
+                            </Typography>
+                          </Paper>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  )}
+                </Table>
+              </TableContainer>
+            </Scrollbar>
+
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={danhsachSP.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Card>
+        </Container>
+      </Page >
     </>
   );
 }

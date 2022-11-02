@@ -35,7 +35,7 @@ export default function UpdateSP(props) {
       LoaiSP: LoaiSPFix,
       ChiTietSP: ChiTietSPFix,
     })
-    console.log( props._id);
+    console.log(props._id);
   }
 
   const handleClose = () => {
@@ -61,8 +61,10 @@ export default function UpdateSP(props) {
       <DialogContent>
         <div className="container-up" >
           <h2 style={{ textAlign: 'center', paddingBottom: '20px', color: '#2065d1' }}>Sửa thông tin sản phẩm</h2>
-
-          <div className="form-text-input-up">
+          <div className="form_text_ipt_lefft">
+            này để ảnh
+          </div>
+          <div className="form_text_ipt_right">
             <div className="form">
               <input type="text" className="form__input" placeholder=" " name="Tên áo"
                 onChange={(e) => setNameSPFix(e.target.value)}
@@ -124,10 +126,10 @@ export default function UpdateSP(props) {
               </select>
             </div>
             <div className="form_mota">
-              <textarea onChange={(e) => setChiTietSPFix(e.target.value)} 
-              defaultValue={props.ChiTietSP}
-              title="" 
-              placeholder="Mô tả" name="thông tin" className="mota_txtArea" rows="10"></textarea>
+              <textarea onChange={(e) => setChiTietSPFix(e.target.value)}
+                defaultValue={props.ChiTietSP}
+                title=""
+                placeholder="Mô tả" name="thông tin" className="mota_txtArea" rows="10"></textarea>
             </div>
           </div>
 

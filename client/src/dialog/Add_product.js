@@ -61,8 +61,10 @@ export default function Add_product(props) {
       <DialogContent>
         <div className="container-up" >
           <h2 style={{ textAlign: 'center', paddingBottom: '20px', color: '#2065d1' }}>Thêm thông tin sản phẩm</h2>
-
-          <div className="form-text-input-up">
+          <div className="form_text_ipt_lefft">
+            này để ảnh
+          </div>
+          <div className="form_text_ipt_right">
             <div className="form">
               <input type="text" className="form__input" placeholder=" " name="Tên áo"
                 onChange={(e) => setNameSP(e.target.value)}
@@ -128,9 +130,7 @@ export default function Add_product(props) {
       </DialogContent>
       <DialogActions className="btn-dialog">
         <Button variant="outlined" className="btn_add_cancel" onClick={handleClose}>Hủy</Button>
-        <Button variant="outlined" className="btn_add_cancel" color="primary" onClick={btnAdd_Product}>
-          Thêm
-        </Button>
+        <Button variant="outlined" className="btn_add_cancel" color="primary" onClick={btnAdd_Product}>Thêm</Button>
       </DialogActions>
     </Dialog>
   )
