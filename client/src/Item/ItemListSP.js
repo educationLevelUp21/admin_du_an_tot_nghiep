@@ -12,21 +12,39 @@ import {
 
 } from '@mui/material';
 // avatar
-import Avatar from '@mui/material/Avatar';
-import hinhanh from '../assets/Img_login.png';
 // components
 import { UserMoreMenu } from '../sections/@dashboard/user';
 
 import axios from "axios";
 
 import ChiTietSp from '../dialog/ChiTietSp.js'
-import Label from '../components/Label';
+import ItemImage from './ItemImage';
 
 
 export default function ItemListSP(props) {
 
+    const ip = "http://localhost:8080"
 
-    const [SWTrangThaiSP, setSWTrangThaiSP] = useState(true)
+    const [multipleFiles, setMultipleFiles] = useState([]);
+
+    const [color, setColor] = useState("");
+
+
+
+    useEffect(() => {
+        axios.get(ip + `/getImg/${props.idImg}`)
+            .then((response) => {
+                setMultipleFiles(response.data);
+            })
+
+        if (props.TrangThaiSP == "Hoạt động") {
+            setColor("red")
+        } else if (props.TrangThaiSP == "Không hoạt động") {
+            setColor("blue")
+        }
+    },)
+
+
 
     // dialog chi tiet
     const [openCT, setOpenCT] = useState(false);
@@ -35,11 +53,12 @@ export default function ItemListSP(props) {
     }
 
 
-    const handleClick = (event, name) => {
-        const selectedIndex = selected.indexOf(name);
+
+    const handleClick = (event, id) => {
+        const selectedIndex = selected.indexOf(id);
         let newSelected = [];
         if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, name);
+            newSelected = newSelected.concat(selected, id);
         } else if (selectedIndex === 0) {
             newSelected = newSelected.concat(selected.slice(1));
         } else if (selectedIndex === selected.length - 1) {
@@ -50,12 +69,6 @@ export default function ItemListSP(props) {
         props.setSelected(newSelected);
     };
 
-    // var format = new Date(props.DateNhapSP);
-    // var day = format.getDate();
-    // var month = format.getMonth() + 1;
-    // var year = format.getFullYear();
-
-    // var date = day + "/" + month + "/" + year;
 
     let selected = props.selected
 
@@ -74,6 +87,7 @@ export default function ItemListSP(props) {
                 TrangThaiSP={props.TrangThaiSP}
                 LoaiSP={props.LoaiSP}
                 ChiTietSP={props.ChiTietSP}
+            // multipleFiles={multipleFiles}
 
             />
             <TableRow
@@ -85,14 +99,39 @@ export default function ItemListSP(props) {
                 aria-checked={props.isItemSelected}
             >
                 <TableCell padding="checkbox">
-                    <Checkbox checked={props.isItemSelected} onChange={(event) => handleClick(event, props.NameSP)} />
+                    <Checkbox checked={props.isItemSelected} onChange={(event) => handleClick(event, props.idImg)} />
                 </TableCell>
                 {/* --------------- Ảnh ----------------- */}
                 <TableCell className='image_sp' component="th" scope="row"  >
-                    {/* <Avatar alt={NameSP} src={Avatar} /> */}
-                    <Avatar sx={{ minWidth: 80, minHeight: 80 }} variant="square">
-                        <img className='img' src={hinhanh} alt="login" width={'100%'} />
-                    </Avatar>
+                    {/* {multipleFiles.map((element, index) =>
+                        <div key={index}>
+                            <div className="row">
+                                {element.files.map((file, index) => {
+                                    return (
+                                        <div className="col-6" key={index}>
+                                            <div className="card mb-2 border-0 p-0">
+                                                <img src={ip + `/${file.filePath}`} width="200" height="200" className="card-img-top img-responsive" alt="img" />
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                                )}
+                            </div>
+                        </div>
+                    )} */}
+
+                    {multipleFiles.map((element, index) => {
+                        
+                        return (
+                            <ItemImage
+                                key={index}
+                                files={element.files}
+                            />
+                        )
+                    }
+                    )}
+
+
                 </TableCell>
                 {/* --------------- tên sản phẩm ----------------- */}
                 <TableCell className='name_sp' component="th" scope="row"  >
@@ -129,14 +168,8 @@ export default function ItemListSP(props) {
 
                 {/* --------------- trạng thái----------------- */}
                 <TableCell className='trang_thai' component="th" scope="row" >
-                    <Typography align='left' variant="subtitle2"  >
+                    <Typography align='center' style={{ background: color, }} variant="subtitle2"  >
                         {props.TrangThaiSP}
-                        {/* <label className="switch">
-                          <input type="checkbox" defaultChecked={SWTrangThaiSP} onChange={(e) => setSWTrangThaiSP(!SWTrangThaiSP)} />
-                          <span className="slider round"></span>
-                      </label> */}
-                        {/* <Label color={(TrangThaiSP === 'banned' && 'success') || 'success'}>{sentenceCaseTransform(TrangThaiSP)}</Label> */}
-
                     </Typography>
                 </TableCell>
                 {/* --------------- loại & chi tiết sản phẩm ----------------- */}
@@ -151,6 +184,7 @@ export default function ItemListSP(props) {
                     <UserMoreMenu
                         key={props._id}
                         _id={props._id}
+                        idImg={props.idImg}
                         NameSP={props.NameSP}
                         GiaGocSP={props.GiaGocSP}
                         GiaBanSP={props.GiaBanSP}
@@ -162,6 +196,11 @@ export default function ItemListSP(props) {
                         ChiTietSP={props.ChiTietSP}
                         danhsachSP={props.danhsachSP}
                         setdanhsachSP={props.setdanhsachSP}
+                        multipleFiles={multipleFiles}
+                        dsLoaiSP={props.dsLoaiSP}
+                        setDsLoaiSP={props.setDsLoaiSP}
+                        dsSaleSP={props.dsSaleSP}
+                        setDsSaleSP={props.setDsSaleSP}
                     />
                 </TableCell>
             </TableRow>

@@ -18,6 +18,8 @@ export default function App() {
   const [pathRegister, setPathRegister] = useState("/register");
   const [pathUser, setPathUser] = useState("aaa");
   const [pathProducts, setPathProducts] = useState("aaa");
+  const [pathLoaiSP, setPathLoaiSP] = useState("aaa");
+  const [pathSaleSP, setPathSaleSP] = useState("aaa");
   const [pathBlog, setPathBlog] = useState("aaa");
   const [pathDanhThu, setPathDoanhThu] = useState("aaa");
 
@@ -37,6 +39,8 @@ export default function App() {
         setPathRegister("aaa")
         setPathUser("user")
         setPathProducts("products")
+        setPathLoaiSP("loaisp")
+        setPathSaleSP("salesp")
         setPathBlog("blog")
         setPathDoanhThu("doanhthu")
         return localStorage.removeItem("User2")
@@ -63,6 +67,8 @@ export default function App() {
               setPathRegister("aaa")
               setPathUser("user")
               setPathProducts("products")
+              setPathLoaiSP("loaisp")
+              setPathSaleSP("salesp")
               setPathBlog("blog")
               setPathDoanhThu("doanhthu")
             }
@@ -79,6 +85,8 @@ export default function App() {
       pathRegister={pathRegister}
       pathUser={pathUser}
       pathProducts={pathProducts}
+      pathLoaiSP={pathLoaiSP}
+      pathSaleSP={pathSaleSP}
       pathBlog={pathBlog}
       pathDanhThu={pathDanhThu}
       />

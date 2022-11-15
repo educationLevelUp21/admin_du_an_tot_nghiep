@@ -39,10 +39,23 @@ export default function ChiTietSp(props) {
                 {/* <p className="dl_xemThem">Loại sản phẩm: {props.LoaiSP}</p>
                     <p className="dl_xemThem">Chi tiết sản phẩm: {props.ChiTietSP}</p>
                 </div> */}
+
+
                 <div className="container-up" >
                     <h2 style={{ textAlign: 'center', paddingBottom: '20px', color: '#2065d1' }}>Xem thêm thông tin sản phẩm</h2>
                     <div className="dialog_xemthem_left">
-                        này để ảnh
+
+                        {/* {props.multipleFiles.map((element, index) =>
+                            <div key={index}>
+                                    {element.files.map((file, index) =>
+                                        <div className="col-6">
+                                            <div className="card mb-2 border-0 p-0">
+                                                <img src={ip + `/${file.filePath}`} height="200" className="card-img-top img-responsive" alt="img" />
+                                            </div>
+                                        </div>
+                                    )}
+                            </div>
+                        )} */}
                     </div>
                     <div className="dialog_xemthem_right">
                         <div className="dl_ten">{props.NameSP}</div>

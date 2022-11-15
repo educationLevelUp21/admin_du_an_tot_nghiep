@@ -32,14 +32,24 @@ const navConfig = [
     icon: getIcon('eva:shopping-bag-fill'),
   },
   {
+    title: 'Loại Sản Phẩm',
+    path: '/dashboard/loaisp',
+    icon: getIcon('eva:layers-fill'),
+  },
+  {
+    title: 'Mã giảm Giá',
+    path: '/dashboard/salesp',
+    icon: getIcon('la:money-check-alt'),
+  },
+  {
     title: 'blog',
     path: '/dashboard/blog',
     icon: getIcon('eva:file-text-fill'),
   },
   {
-    title: 'doanhthu',
+    title: 'Doanh Thu',
     path: '/dashboard/doanhthu',
-    icon: getIcon('eva:file-text-fill'),
+    icon: getIcon('eva:trending-up-fill'),
   },
 
   {

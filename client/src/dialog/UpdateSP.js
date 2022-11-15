@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -23,20 +23,67 @@ export default function UpdateSP(props) {
   const [ChiTietSPFix, setChiTietSPFix] = useState(props.ChiTietSP)
 
 
-  const btnUpdate_Product = () => {
-    axios.put(ip + `/UpdateSP/${props._id}`, {
-      NameSP: NameSPFix,
-      GiaGocSP: GiaGocSPFix,
-      GiaBanSP: GiaBanSPFix,
-      SoLuongSP: SoLuongSPFix,
-      DateNhapSP: DateNhapSPFix,
-      SaleSP: SaleSPFix,
-      TrangThaiSP: TrangThaiSPFix,
-      LoaiSP: LoaiSPFix,
-      ChiTietSP: ChiTietSPFix,
-    })
-    console.log(props._id);
+  // ---------------------------------------upload img--------------------------------
+
+  const [multipleFiles, setMultipleFiles] = useState('');
+
+  const multipleFilesUpload = async (data) => {
+    try {
+      await axios.post(ip + '/multipleFiles', data);
+    } catch (error) {
+      throw error;
+    }
   }
+  //chọn nhiều hình ảnh giai đoạn chọn hình ảnh
+  const MultipleFileChange = (e) => {
+    // set dữ liệu nhiều hình ảnh lên setMultipleFiles
+    setMultipleFiles(e.target.files);
+  }
+
+  // upload dữ liệu nhiều hình ảnh lên API
+  const UploadMultipleFiles = async () => {
+    if(multipleFiles == ''){
+      axios.put(ip + `/UpdateSP/${props._id}`, {
+        NameSP: NameSPFix,
+        GiaGocSP: GiaGocSPFix,
+        GiaBanSP: GiaBanSPFix,
+        SoLuongSP: SoLuongSPFix,
+        DateNhapSP: DateNhapSPFix,
+        SaleSP: SaleSPFix,
+        TrangThaiSP: TrangThaiSPFix,
+        LoaiSP: LoaiSPFix,
+        ChiTietSP: ChiTietSPFix,
+      })
+    }else if(multipleFiles != ''){
+
+      axios.delete(ip + `/DeleteImg/${props.idImg}`)
+
+      const formData = new FormData();
+      formData.append('idImg', props.idImg);
+      for (let i = 0; i < multipleFiles.length; i++) {
+        formData.append('files', multipleFiles[i]);
+      }
+      await multipleFilesUpload(formData);
+
+      axios.put(ip + `/UpdateSP/${props._id}`, {
+        NameSP: NameSPFix,
+        GiaGocSP: GiaGocSPFix,
+        GiaBanSP: GiaBanSPFix,
+        SoLuongSP: SoLuongSPFix,
+        DateNhapSP: DateNhapSPFix,
+        SaleSP: SaleSPFix,
+        TrangThaiSP: TrangThaiSPFix,
+        LoaiSP: LoaiSPFix,
+        ChiTietSP: ChiTietSPFix,
+      })
+    }
+
+     
+
+    
+}
+
+
 
   const handleClose = () => {
     props.setOpen(false);
@@ -62,7 +109,34 @@ export default function UpdateSP(props) {
         <div className="container-up" >
           <h2 style={{ textAlign: 'center', paddingBottom: '20px', color: '#2065d1' }}>Sửa thông tin sản phẩm</h2>
           <div className="form_text_ipt_lefft">
-            này để ảnh
+            <div className="container">
+              {props.multipleFiles.map((element, index) =>
+                <div key={index}>
+                  <div className="row">
+                    {element.files.map((file, index) => {
+                      return (
+                        <div className="col-6" key={index}>
+                          <div className="card mb-2 border-0 p-0">
+                            <img src={ip + `/${file.filePath}`} width="200" height="200" className="card-img-top img-responsive" alt="img" />
+                          </div>
+                        </div>
+                      )
+                    }
+                    )}
+                  </div>
+                </div>
+              )}
+              <div className="row">
+                <div className="col-6">
+                  <div className="form-group">
+                    <label>Nhieu hinh`</label>
+                    <input type="file" onChange={(e) => MultipleFileChange(e)} className="form-control" multiple />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="container-fluid mt-5">
+            </div>
           </div>
           <div className="form_text_ipt_right">
             <div className="form">
@@ -106,8 +180,16 @@ export default function UpdateSP(props) {
               </div>
               <div className="form_sale">
                 <select defaultValue={SaleSPFix} onChange={(e) => setSaleSPFix(e.target.value)}>
-                  <option value="10">10%</option>
-                  <option value="20">20%</option>
+                  <option value='0'> Không giảm giá </option>
+                  {props.dsSaleSP.map((vl, index) => {
+                    if (vl.TrangThaiSale == "Hoạt động") {
+                      return (
+                        <option key={vl._id} value={vl.PhanTramGiamGia}> {vl.NameSaleSP} giảm {vl.PhanTramGiamGia}%</option>
+                      )
+                    } else if (vl.TrangThaiSale == "Không hoạt động") {
+
+                    }
+                  })}
                 </select>
               </div>
               <div className="form_trangthai">
@@ -119,10 +201,15 @@ export default function UpdateSP(props) {
             </div>
             <div className="form-loaiSP">
               <select defaultValue={LoaiSPFix} onChange={(e) => setLoaiSPFix(e.target.value)}>
-                <option value="Chai lọ mĩ phẫm">Chai lọ mĩ phẫm</option>
-                <option value="Chai lọ thực phẩm">Chai lọ thực phẩm</option>
-                <option value="Chai lọ dược phẩm">Chai lọ dược phẩm</option>
-                <option value="Chai lọ hóa chất">Chai lọ hóa chất</option>
+                {props.dsLoaiSP.map((vl, index) => {
+                  if (vl.TrangThaiLoaiSP == "Hoạt động") {
+                    return (
+                      <option key={vl._id} value={vl.NameLoaiSP}> {vl.NameLoaiSP}</option>
+                    )
+                  } else if (vl.TrangThaiLoaiSP == "Không hoạt động") {
+
+                  }
+                })}
               </select>
             </div>
             <div className="form_mota">
@@ -137,7 +224,7 @@ export default function UpdateSP(props) {
       </DialogContent>
       <DialogActions className="btn-dialog">
         <Button variant="outlined" className="btn_add_cancel" onClick={handleClose}>Hủy</Button>
-        <Button variant="outlined" className="btn_add_cancel" color="primary" onClick={btnUpdate_Product}>
+        <Button variant="outlined" className="btn_add_cancel" color="primary" onClick={UploadMultipleFiles}>
           Sửa
         </Button>
       </DialogActions>

@@ -11,6 +11,8 @@ import Register from './pages/Register';
 import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
 import DoanhThu from './pages/DoanhThu';
+import LoaiSP from './pages/LoaiSP';
+import SaleSP from './pages/SaleSP';
 import { useEffect, useState } from 'react';
 
 // ----------------------------------------------------------------------
@@ -34,6 +36,8 @@ export default function Router(props) {
         { path: 'app', element: <DashboardApp /> },
         { path: props.pathUser, element: <User/> },
         { path: props.pathProducts, element: <Products /> },
+        { path: props.pathLoaiSP, element: <LoaiSP/> },
+        { path: props.pathSaleSP, element: <SaleSP/> },
         { path: props.pathBlog, element: <Blog /> },
         { path: props.pathDanhThu, element: <DoanhThu /> },
       ],

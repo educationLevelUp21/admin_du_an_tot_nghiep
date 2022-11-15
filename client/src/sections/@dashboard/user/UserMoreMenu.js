@@ -29,6 +29,7 @@ export default function UserMoreMenu(props) {
 
  const btnDeleteDS = (id) => {
     axios.delete(ip + `/DeleteSP/${id}`)
+    axios.delete(ip + `/DeleteImg/${id}`)
 }
 
   return (
@@ -38,6 +39,7 @@ export default function UserMoreMenu(props) {
          setOpen={setOpenFix}
          key={props._id}
          _id={props._id}
+         idImg={props.idImg}
          NameSP={props.NameSP}
          GiaGocSP={props.GiaGocSP}
          GiaBanSP={props.GiaBanSP}
@@ -49,6 +51,11 @@ export default function UserMoreMenu(props) {
          ChiTietSP={props.ChiTietSP}
          danhsachSP={props.danhsachSP}
          setdanhsachSP={props.setdanhsachSP}
+         multipleFiles={props.multipleFiles}
+         dsLoaiSP={props.dsLoaiSP}
+         setDsLoaiSP={props.setDsLoaiSP}
+         dsSaleSP={props.dsSaleSP}
+         setDsSaleSP={props.setDsSaleSP}
       />
       <IconButton ref={ref} onClick={() => setIsOpen(true)}>
         <Iconify icon="eva:more-vertical-fill" width={20} height={20} />
@@ -73,7 +80,7 @@ export default function UserMoreMenu(props) {
               "Bạn chắc chắn muốn xóa??? "
             )
             if (checkdelete == true) {
-              btnDeleteDS(props._id)
+              btnDeleteDS(props.idImg)
             }
           }} primary="Delete" primaryTypographyProps={{ variant: 'body2' }} />
         </MenuItem>

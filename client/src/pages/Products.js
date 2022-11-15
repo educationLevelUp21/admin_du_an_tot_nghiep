@@ -27,7 +27,7 @@ import Page from '../components/Page';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
+import { UserListHead,ProductsListToolbar } from '../sections/@dashboard/user';
 
 
 // trang
@@ -38,57 +38,58 @@ import ItemListSP from '../Item/ItemListSP';
 import '../css/add_product.css';
 import '../css/dialog.css';
 
-const TABLE_HEAD = [
-  { id: 'image1', label: '', alignRight: false },
-  { id: 'name', label: 'Tên sản phẩm', alignRight: false },
-  { id: 'priceGoc', label: 'Giá gốc', alignRight: false },
-  { id: 'priceBan', label: 'Giá bán', alignRight: false },
-  { id: 'number', label: 'Số lượng', alignRight: false },
-  { id: 'discount', label: 'Giảm giá', alignRight: false },
-  { id: 'TrangThaiSP', label: 'Trạng thái', alignRight: false },
-  { id: 'Type&Details', label: '', },
-  { id: '' },
 
-];
 
-// ----------------------------------------------------------------------
 
-function descendingComparator(a, b, orderBy) {
-
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator(order, orderBy) {
-  return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-function applySortFilter(array, comparator, query) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  if (query) {
-    return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
-  }
-  return stabilizedThis.map((el) => el[0]);
-}
-
-export default function EcommerceShop() {
+export default function Products() {
 
 
   const ip = "http://localhost:8080"
 
-
+  const TABLE_HEAD = [
+    { id: 'image1', label: '', alignRight: false },
+    { id: 'NameSP', label: 'Tên sản phẩm', alignRight: false },
+    { id: 'GiaGocSP', label: 'Giá gốc', alignRight: false },
+    { id: 'GiaBanSP', label: 'Giá bán', alignRight: false },
+    { id: 'SoLuongSP', label: 'Số lượng', alignRight: false },
+    { id: 'SaleSP', label: 'Giảm giá', alignRight: false },
+    { id: 'TrangThaiSP', label: 'Trạng thái', alignRight: false },
+    { id: 'Type&Details', label: '', },
+    { id: '' },
+  
+  ];
+  
+  // ----------------------------------------------------------------------
+  
+  function descendingComparator(a, b, orderBy) {
+  
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }
+  
+  function getComparator(order, orderBy) {
+    return order === 'desc'
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  }
+  
+  function applySortFilter(array, comparator, query) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) return order;
+      return a[1] - b[1];
+    });
+    if (query) {
+      return filter(array, (array) => array.NameSP.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    }
+    return stabilizedThis.map((el) => el[0]);
+  }
 
   const [danhsachSP, setdanhsachSP] = useState([]);
 
@@ -98,22 +99,55 @@ export default function EcommerceShop() {
 
   const [selected, setSelected] = useState([]);
 
-  const [orderBy, setOrderBy] = useState('name');
+  const [orderBy, setOrderBy] = useState('');
 
   const [filterName, setFilterName] = useState('');
 
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  //  array combobox
+
+  const [dsSaleSP, setDsSaleSP] = useState([])
+  const [dsLoaiSP, setDsLoaiSP] = useState([])
 
 
-  useEffect(() => {
+
+  const getData = () => {
     axios.get(ip + '/getData')
       .then((response) => {
         setdanhsachSP(response.data);
       })
+  }
 
-    // console.log(filterName);
-  },)
+  const getDataSaleSP = () => {
+    axios.get(ip + '/getDataSaleSP')
+      .then((response) => {
+        setDsSaleSP(response.data);
+      })
 
+  }
+
+  const getDataLoaiSP = () => {
+    axios.get(ip + '/getDataLoaiSP')
+      .then((response) => {
+        setDsLoaiSP(response.data);
+      })
+  }
+  
+
+  
+  const Loading = () =>{
+    getData();
+    getDataSaleSP();
+    getDataLoaiSP();
+    setSelected([]);
+  }
+
+  useEffect(() => {
+    getData();
+    getDataSaleSP();
+    getDataLoaiSP();
+  }, [])
   // dialog add
   const [openAdd, setOpenAdd] = useState(false);
   const handleClickItemAdd = () => {
@@ -128,28 +162,15 @@ export default function EcommerceShop() {
   };
 
   const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = danhsachSP.map((n) => n.NameSP);
+    if (event.target.checked == true) {
+      const newSelecteds = danhsachSP.map((n) => n.idImg);
       setSelected(newSelecteds);
-      return;
     }
-    setSelected([]);
+    if(event.target.checked == false){
+      setSelected([]);
+    }
   };
 
-  // const handleClick = (event, name) => {
-  //   const selectedIndex = selected.indexOf(name);
-  //   let newSelected = [];
-  //   if (selectedIndex === -1) {
-  //     newSelected = newSelected.concat(selected, name);
-  //   } else if (selectedIndex === 0) {
-  //     newSelected = newSelected.concat(selected.slice(1));
-  //   } else if (selectedIndex === selected.length - 1) {
-  //     newSelected = newSelected.concat(selected.slice(0, -1));
-  //   } else if (selectedIndex > 0) {
-  //     newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
-  //   }
-  //   setSelected(newSelected);
-  // };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -175,15 +196,24 @@ export default function EcommerceShop() {
       <Add_product
         open={openAdd}
         setOpen={setOpenAdd}
-      // danhsachSP={danhsachSP}
-      // setdanhsachSP={setdanhsachSP}
+        dsLoaiSP={dsLoaiSP}
+        setDsLoaiSP={setDsLoaiSP}
+        dsSaleSP={dsSaleSP}
+        setDsSaleSP={setDsSaleSP}
+        danhsachSP={danhsachSP}
+        setdanhsachSP={setdanhsachSP}
       />
       <Page title="Dashboard: Products">
         <Container>
+
+
+
           <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
             <Typography variant="h4" gutterBottom>
               Kho hàng
+              <button onClick={Loading}>dsadas</button>
             </Typography>
+
             <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}
               onClick={handleClickItemAdd}>
               Thêm sản phẩm
@@ -191,8 +221,7 @@ export default function EcommerceShop() {
           </Stack>
 
           <Card>
-            <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
-
+            <ProductsListToolbar selected={selected} numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
             <Scrollbar>
               <TableContainer sx={{ minWidth: 800 }}>
                 <Table>
@@ -206,18 +235,15 @@ export default function EcommerceShop() {
                     onSelectAllClick={handleSelectAllClick}
                   />
                   <TableBody >
-                    {/* {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, status, company, avatarUrl, isVerified } = row;
-                    const isItemSelected = selected.indexOf(name) !== -1; */}
 
                     {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((val) => {
-                      const isItemSelected = selected.indexOf(val.NameSP) !== -1;
-
+                      const isItemSelected = selected.indexOf(val.idImg) !== -1;
                       return (
 
                         <ItemListSP
                           key={val._id}
                           _id={val._id}
+                          idImg={val.idImg}
                           NameSP={val.NameSP}
                           GiaGocSP={val.GiaGocSP}
                           GiaBanSP={val.GiaBanSP}
@@ -232,6 +258,10 @@ export default function EcommerceShop() {
                           isItemSelected={isItemSelected}
                           selected={selected}
                           setSelected={setSelected}
+                          dsLoaiSP={dsLoaiSP}
+                          setDsLoaiSP={setDsLoaiSP}
+                          dsSaleSP={dsSaleSP}
+                          setDsSaleSP={setDsSaleSP}
                         />
 
                       );
@@ -272,7 +302,7 @@ export default function EcommerceShop() {
             </Scrollbar>
 
             <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
+              rowsPerPageOptions={[10, 20, 30]}
               component="div"
               count={danhsachSP.length}
               rowsPerPage={rowsPerPage}
