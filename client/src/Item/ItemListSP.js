@@ -38,9 +38,9 @@ export default function ItemListSP(props) {
             })
 
         if (props.TrangThaiSP == "Hoạt động") {
-            setColor("red")
+            setColor("rgba(84, 214, 44, 0.16)")
         } else if (props.TrangThaiSP == "Không hoạt động") {
-            setColor("blue")
+            setColor("rgba(255, 72, 66, 0.16)")
         }
     },)
 
@@ -119,19 +119,18 @@ export default function ItemListSP(props) {
                             </div>
                         </div>
                     )} */}
-
-                    {multipleFiles.map((element, index) => {
-                        
-                        return (
-                            <ItemImage
-                                key={index}
-                                files={element.files}
-                            />
-                        )
-                    }
-                    )}
-
-
+                    <Typography>
+                        {multipleFiles.map((element, index) => {
+                            return (
+                                <ItemImage
+                                    key={index}
+                                    files={element.files}
+                                    height={120}
+                                />
+                            )
+                        }
+                        )}
+                    </Typography>
                 </TableCell>
                 {/* --------------- tên sản phẩm ----------------- */}
                 <TableCell className='name_sp' component="th" scope="row"  >
@@ -168,16 +167,17 @@ export default function ItemListSP(props) {
 
                 {/* --------------- trạng thái----------------- */}
                 <TableCell className='trang_thai' component="th" scope="row" >
-                    <Typography align='center' style={{ background: color, }} variant="subtitle2"  >
+                    <Typography className='trang_thai_2' align='center' style={{ background: color }} variant="subtitle2"  >
                         {props.TrangThaiSP}
                     </Typography>
                 </TableCell>
                 {/* --------------- loại & chi tiết sản phẩm ----------------- */}
-                <TableCell className='loai_chiTiet' >
+                <TableCell className='loai_chiTiet' padding="none" >
                     <Typography align='left' variant="subtitle2" >
                         <Button className='btn_xemThem' variant="outlined" onClick={() => handleClickItemChiTiet()}> Xem thêm</Button>
                     </Typography>
                 </TableCell>
+
 
                 {/* ---------------------------------------------- */}
                 <TableCell align="right">

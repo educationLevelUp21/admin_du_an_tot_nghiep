@@ -40,7 +40,7 @@ export default function DoanhThu() {
   return (
     <Page title="Dashboard: DoanhThu">
       <Container>
-        <h1>dasdsa</h1>
+        <h1>Doanh thu</h1>
 
       </Container>
     </Page>

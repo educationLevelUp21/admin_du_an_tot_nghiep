@@ -28,6 +28,8 @@
     "react-hook-form": "^7.36.0",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
+    "react-spinners": "^0.13.6",
     "simplebar-react": "^2.4.1",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"

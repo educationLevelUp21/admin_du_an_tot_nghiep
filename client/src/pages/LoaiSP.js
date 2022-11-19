@@ -59,18 +59,18 @@ export default function LoaiSP() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const TABLE_HEAD = [
-    { id: 'ImageLoaiSP', label: 'Image', alignRight: false },
+    { id: 'ImageLoaiSP', label: '', alignRight: false },
     { id: 'NameLoaiSP', label: 'Tên loại sản phẩm', alignRight: false },
-    { id: 'MotaLoaiSP', label: 'Mô tả', alignRight: false },
+    { id: 'MotaLoaiSP', label: 'Mô tả sản phẩm', alignRight: false },
     { id: 'TrangThaiLoaiSP', label: 'Trạng thái', alignRight: false },
     { id: '' },
-  
+
   ];
-  
+
   // ----------------------------------------------------------------------
-  
+
   function descendingComparator(a, b, orderBy) {
-  
+
     if (b[orderBy] < a[orderBy]) {
       return -1;
     }
@@ -79,13 +79,13 @@ export default function LoaiSP() {
     }
     return 0;
   }
-  
+
   function getComparator(order, orderBy) {
     return order === 'desc'
       ? (a, b) => descendingComparator(a, b, orderBy)
       : (a, b) => -descendingComparator(a, b, orderBy);
   }
-  
+
   function applySortFilter(array, comparator, query) {
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
@@ -99,7 +99,7 @@ export default function LoaiSP() {
     return stabilizedThis.map((el) => el[0]);
   }
 
-  const Loading = () =>{
+  const Loading = () => {
     getDataLoaiSP();
     setSelected([]);
   }
@@ -113,7 +113,7 @@ export default function LoaiSP() {
 
   useEffect(() => {
     getDataLoaiSP();
-  },[])
+  }, [])
 
   // dialog
   const [open, setOpen] = useState(false);
@@ -132,7 +132,7 @@ export default function LoaiSP() {
       const newSelecteds = danhsachSP.map((n) => n._id);
       setSelected(newSelecteds);
     }
-    if(event.target.checked == false){
+    if (event.target.checked == false) {
       setSelected([]);
     }
   };
@@ -171,7 +171,7 @@ export default function LoaiSP() {
               <button onClick={Loading}>dsadas</button>
             </Typography>
             <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}
-            onClick={handleClickItem}>
+              onClick={handleClickItem}>
               Thêm Loại Sản Phẩm
             </Button>
           </Stack>
@@ -195,9 +195,9 @@ export default function LoaiSP() {
                     {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((val) => {
                       const isItemSelected = selected.indexOf(val._id) !== -1;
 
-                      return (         
-                         <ItemLoaiSP
-                          key = {val._id}
+                      return (
+                        <ItemLoaiSP
+                          key={val._id}
                           _id={val._id}
                           ImageLoaiSP={val.ImageLoaiSP}
                           NameLoaiSP={val.NameLoaiSP}

@@ -18,31 +18,31 @@ export default function LoaiSPMoreMenu(props) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
-   // dialog Update
- const [openFix, setOpenFix] = useState(false);
- const handleClickItemFix = () => {
+  // dialog Update
+  const [openFix, setOpenFix] = useState(false);
+  const handleClickItemFix = () => {
     setOpenFix(true)
     setIsOpen(false)
     // console.log(props._id);
- }
+  }
 
- const btnDeleteDS = (id) => {
+  const btnDeleteDS = (id) => {
     axios.delete(ip + `/DeleteLoaiSP/${id}`)
-}
+  }
 
   return (
     <>
       <UpdateLoaiSP
-         open={openFix}
-         setOpen={setOpenFix}
-         key={props._id}
-         _id={props._id}
-         ImageLoaiSP={props.ImageLoaiSP}
-         NameLoaiSP={props.NameLoaiSP}
-         MotaLoaiSP={props.MotaLoaiSP}
-         TrangThaiLoaiSP={props.TrangThaiLoaiSP}
-         danhsachSP={props.danhsachSP}
-         setdanhsachSP={props.setdanhsachSP}
+        open={openFix}
+        setOpen={setOpenFix}
+        key={props._id}
+        _id={props._id}
+        ImageLoaiSP={props.ImageLoaiSP}
+        NameLoaiSP={props.NameLoaiSP}
+        MotaLoaiSP={props.MotaLoaiSP}
+        TrangThaiLoaiSP={props.TrangThaiLoaiSP}
+        danhsachSP={props.danhsachSP}
+        setdanhsachSP={props.setdanhsachSP}
       />
       <IconButton ref={ref} onClick={() => setIsOpen(true)}>
         <Iconify icon="eva:more-vertical-fill" width={20} height={20} />
@@ -58,27 +58,27 @@ export default function LoaiSPMoreMenu(props) {
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        <MenuItem sx={{ color: 'text.secondary' }}>
+        <MenuItem sx={{ color: '#fc7e7ed3' }}>
           <ListItemIcon>
-            <Iconify icon="eva:trash-2-outline" width={24} height={24} />
+            <Iconify sx={{ color: '#fc7e7ed3' }} icon="eva:trash-2-outline" width={24} height={24} />
           </ListItemIcon>
-          <ListItemText 
-          onClick={() => {
-            const checkdelete = window.confirm(
-              "Bạn chắc chắn muốn xóa??? "
-            )
-            if (checkdelete == true) {
-              btnDeleteDS(props._id)
-            }
-          }} 
-          primary="Delete" primaryTypographyProps={{ variant: 'body2' }} />
+          <ListItemText
+            onClick={() => {
+              const checkdelete = window.confirm(
+                "Bạn chắc chắn muốn xóa??? "
+              )
+              if (checkdelete == true) {
+                btnDeleteDS(props._id)
+              }
+            }}
+            primary="Xóa" primaryTypographyProps={{ variant: 'body2' }} />
         </MenuItem>
 
-        <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }}>
+        <MenuItem component={RouterLink} to="#" sx={{ color: '#2065d1' }}>
           <ListItemIcon>
-            <Iconify icon="eva:edit-fill" width={24} height={24} />
+            <Iconify sx={{ color: '#2065d1' }} icon="eva:edit-fill" width={24} height={24} />
           </ListItemIcon>
-          <ListItemText onClick={() => handleClickItemFix()} primary="Edit" primaryTypographyProps={{ variant: 'body2' }} />
+          <ListItemText onClick={() => handleClickItemFix()} primary="Sửa" primaryTypographyProps={{ variant: 'body2' }} />
         </MenuItem>
       </Menu>
     </>

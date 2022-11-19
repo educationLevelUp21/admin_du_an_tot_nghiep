@@ -23,7 +23,7 @@ import Page from '../components/Page';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
-import { UserListHead,SaleListToolbar } from '../sections/@dashboard/user';
+import { UserListHead, SaleListToolbar } from '../sections/@dashboard/user';
 // mock
 // import USERLIST from '../_mock/user';
 
@@ -43,13 +43,13 @@ import '../css/add_product.css';
 export default function SaleSP() {
 
   const TABLE_HEAD = [
-    { id: 'name', label: 'NameSaleSP', alignRight: false },
-    { id: 'PhanTramGiamGia', label: 'PhanTramGiamGia', alignRight: false },
-    { id: 'NgayTaoSale', label: 'NgayTaoSale', alignRight: false },
-    { id: 'NgayEndSale', label: 'NgayEndSale', alignRight: false },
-    { id: 'TrangThaiSale', label: 'TrangThaiSale', alignRight: false },
+    { id: 'name', label: 'Tên giảm giá', alignRight: false },
+    { id: 'PhanTramGiamGia', label: 'Giảm giá (%)', alignRight: false },
+    { id: 'NgayTaoSale', label: 'Ngày Tạo', alignRight: false },
+    { id: 'NgayEndSale', label: 'Ngày kết thúc', alignRight: false },
+    { id: 'TrangThaiSale', label: 'Trạng Thái', alignRight: false },
     { id: '' },
-  
+
   ];
 
   const ip = "http://localhost:8080"
@@ -69,46 +69,46 @@ export default function SaleSP() {
 
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-// ----------------------------------------------------------------------
+  // ----------------------------------------------------------------------
 
-function descendingComparator(a, b, orderBy) {
+  function descendingComparator(a, b, orderBy) {
 
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
   }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
+
+  function getComparator(order, orderBy) {
+    return order === 'desc'
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
   }
-  return 0;
-}
 
-function getComparator(order, orderBy) {
-  return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-function applySortFilter(array, comparator, query) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  if (query) {
-    return filter(array, (array) => array.NameSaleSP.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+  function applySortFilter(array, comparator, query) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) return order;
+      return a[1] - b[1];
+    });
+    if (query) {
+      return filter(array, (array) => array.NameSaleSP.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    }
+    return stabilizedThis.map((el) => el[0]);
   }
-  return stabilizedThis.map((el) => el[0]);
-}
 
-const Loading = () =>{
-  getDataSaleSP();
-  setSelected([]);
-}
+  const Loading = () => {
+    getDataSaleSP();
+    setSelected([]);
+  }
 
   useEffect(() => {
     getDataSaleSP();
-  },[])
+  }, [])
 
   const getDataSaleSP = () => {
     axios.get(ip + '/getDataSaleSP')
@@ -135,7 +135,7 @@ const Loading = () =>{
       const newSelecteds = danhsachSP.map((n) => n._id);
       setSelected(newSelecteds);
     }
-    if(event.target.checked == false){
+    if (event.target.checked == false) {
       setSelected([]);
     }
 
@@ -171,12 +171,12 @@ const Loading = () =>{
         <Container>
           <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
             <Typography variant="h4" gutterBottom>
-              Loại Sản Phẩm
+              Mã Giảm Giá Sản Phẩm
               <button onClick={Loading}>dsadas</button>
             </Typography>
             <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}
-            onClick={handleClickItem}>
-              Thêm Loại Sản Phẩm
+              onClick={handleClickItem}>
+              Thêm Mã Giảm Giá
             </Button>
           </Stack>
 
@@ -199,9 +199,9 @@ const Loading = () =>{
                     {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((val) => {
                       const isItemSelected = selected.indexOf(val._id) !== -1;
 
-                      return (         
-                         <ItemSaleSP
-                          key = {val._id}
+                      return (
+                        <ItemSaleSP
+                          key={val._id}
                           _id={val._id}
                           NameSaleSP={val.NameSaleSP}
                           PhanTramGiamGia={val.PhanTramGiamGia}

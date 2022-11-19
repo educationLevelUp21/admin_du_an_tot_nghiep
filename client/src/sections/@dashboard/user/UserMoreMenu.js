@@ -19,43 +19,43 @@ export default function UserMoreMenu(props) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
-   // dialog Update
- const [openFix, setOpenFix] = useState(false);
- const handleClickItemFix = () => {
+  // dialog Update
+  const [openFix, setOpenFix] = useState(false);
+  const handleClickItemFix = () => {
     setOpenFix(true)
     setIsOpen(false)
     // console.log(props._id);
- }
+  }
 
- const btnDeleteDS = (id) => {
+  const btnDeleteDS = (id) => {
     axios.delete(ip + `/DeleteSP/${id}`)
     axios.delete(ip + `/DeleteImg/${id}`)
-}
+  }
 
   return (
     <>
       <UpdateSP
-         open={openFix}
-         setOpen={setOpenFix}
-         key={props._id}
-         _id={props._id}
-         idImg={props.idImg}
-         NameSP={props.NameSP}
-         GiaGocSP={props.GiaGocSP}
-         GiaBanSP={props.GiaBanSP}
-         SoLuongSP={props.SoLuongSP}
-         DateNhapSP={props.DateNhapSP}
-         SaleSP={props.SaleSP}
-         TrangThaiSP={props.TrangThaiSP}
-         LoaiSP={props.LoaiSP}
-         ChiTietSP={props.ChiTietSP}
-         danhsachSP={props.danhsachSP}
-         setdanhsachSP={props.setdanhsachSP}
-         multipleFiles={props.multipleFiles}
-         dsLoaiSP={props.dsLoaiSP}
-         setDsLoaiSP={props.setDsLoaiSP}
-         dsSaleSP={props.dsSaleSP}
-         setDsSaleSP={props.setDsSaleSP}
+        open={openFix}
+        setOpen={setOpenFix}
+        key={props._id}
+        _id={props._id}
+        idImg={props.idImg}
+        NameSP={props.NameSP}
+        GiaGocSP={props.GiaGocSP}
+        GiaBanSP={props.GiaBanSP}
+        SoLuongSP={props.SoLuongSP}
+        DateNhapSP={props.DateNhapSP}
+        SaleSP={props.SaleSP}
+        TrangThaiSP={props.TrangThaiSP}
+        LoaiSP={props.LoaiSP}
+        ChiTietSP={props.ChiTietSP}
+        danhsachSP={props.danhsachSP}
+        setdanhsachSP={props.setdanhsachSP}
+        multipleFiles={props.multipleFiles}
+        dsLoaiSP={props.dsLoaiSP}
+        setDsLoaiSP={props.setDsLoaiSP}
+        dsSaleSP={props.dsSaleSP}
+        setDsSaleSP={props.setDsSaleSP}
       />
       <IconButton ref={ref} onClick={() => setIsOpen(true)}>
         <Iconify icon="eva:more-vertical-fill" width={20} height={20} />
@@ -71,9 +71,9 @@ export default function UserMoreMenu(props) {
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        <MenuItem sx={{ color: 'text.secondary' }}>
+        <MenuItem sx={{ color: '#fc7e7ed3' }}>
           <ListItemIcon>
-            <Iconify icon="eva:trash-2-outline" width={24} height={24} />
+            <Iconify sx={{ color: '#fc7e7ed3' }} icon="eva:trash-2-outline" width={24} height={24} />
           </ListItemIcon>
           <ListItemText onClick={() => {
             const checkdelete = window.confirm(
@@ -82,14 +82,14 @@ export default function UserMoreMenu(props) {
             if (checkdelete == true) {
               btnDeleteDS(props.idImg)
             }
-          }} primary="Delete" primaryTypographyProps={{ variant: 'body2' }} />
+          }} primary="Xóa" primaryTypographyProps={{ variant: 'body2' }} />
         </MenuItem>
 
-        <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }}>
+        <MenuItem component={RouterLink} to="#" sx={{ color: '#2065d1' }}>
           <ListItemIcon>
-            <Iconify icon="eva:edit-fill" width={24} height={24} />
+            <Iconify sx={{ color: '#2065d1' }} icon="eva:edit-fill" width={24} height={24} />
           </ListItemIcon>
-          <ListItemText onClick={() => handleClickItemFix()} primary="Edit" primaryTypographyProps={{ variant: 'body2' }} />
+          <ListItemText onClick={() => handleClickItemFix()} primary="Sửa" primaryTypographyProps={{ variant: 'body2' }} />
         </MenuItem>
       </Menu>
     </>

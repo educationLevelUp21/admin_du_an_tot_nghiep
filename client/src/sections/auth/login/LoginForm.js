@@ -11,20 +11,20 @@ function useKey(key, cb) {
 
   const callbackRef = useRef(cb);
 
-  useEffect(()=> {
+  useEffect(() => {
     callbackRef.current = cb;
   })
 
-  useEffect(()=>{
+  useEffect(() => {
 
-    function handle(event){
-      if(event.code === key){
+    function handle(event) {
+      if (event.code === key) {
         callbackRef.current(event);
       }
     }
 
     document.addEventListener("keypress", handle);
-    return()=> document.removeEventListener("keypress", handle);
+    return () => document.removeEventListener("keypress", handle);
   }, [key])
 }
 
@@ -38,62 +38,62 @@ export default function LoginForm() {
   const [chxSave, setChxSave] = useState(false);
 
   const btnLogin = async () => {
-    
 
-    console.log(taikhoan,pass,chxSave);
 
-    fetch("http://localhost:8080/login-admin",{
-      method:"POST",
+    console.log(taikhoan, pass, chxSave);
+
+    fetch("http://localhost:8080/login-admin", {
+      method: "POST",
       crossDomain: true,
-      headers:{
-        "Content-Type":"application/json",
-        Accept:"application/json",
-        "Access-Control-Allow-Origin":"*",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
         taikhoan: taikhoan,
         pass: pass,
       }),
     })
-    .then((res) => res.json())
-    .then((data) =>{
-      console.log(data,"userLogin");
-      if(data.error == "Tài khoản không tồn tại"){
-        setTKCheck(false);
-        setColor2("red");
-        setErrorTK("Tài khoản không tồn tại");
-      }
-      if(data.error == "Mật khẩu sai"){
-        setPasswordCheck(false);
-        setColor3("red");
-        setErrorPassword("Mật khẩu sai");
-      }
-      if(data.status == "oke"){
-        if(chxSave == true){
-          window.localStorage.setItem("token", data.data);
-          window.location.href = "/dashboard/app"
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "userLogin");
+        if (data.error == "Tài khoản không tồn tại") {
+          setTKCheck(false);
+          setColor2("red");
+          setErrorTK("Tài khoản không tồn tại");
+        }
+        if (data.error == "Mật khẩu sai") {
+          setPasswordCheck(false);
+          setColor3("red");
+          setErrorPassword("Mật khẩu sai");
+        }
+        if (data.status == "oke") {
+          if (chxSave == true) {
+            window.localStorage.setItem("token", data.data);
+            window.location.href = "/dashboard/app"
             var user = {
               TKLocal: taikhoan,
               PassLocal: pass,
-              chxSave:chxSave
+              chxSave: chxSave
             }
             localStorage.setItem('User', JSON.stringify(user));
             window.localStorage.setItem("token", data.data);
             window.location.href = "/dashboard/app"
-  
-        }else if(chxSave == false){
-          window.localStorage.setItem("token", data.data);
-          window.location.href = "/dashboard/app"
+
+          } else if (chxSave == false) {
+            window.localStorage.setItem("token", data.data);
+            window.location.href = "/dashboard/app"
             var user = {
               TKLocal: taikhoan,
               PassLocal: pass,
-              chxSave:chxSave
+              chxSave: chxSave
             }
             localStorage.setItem('User2', JSON.stringify(user));
+          }
         }
-        } 
-      
-    })
+
+      })
   };
 
 
@@ -115,21 +115,21 @@ export default function LoginForm() {
       setErrorTK("Vui lòng không điền kí tự đặt biệt");
     }
 
-    if(se.length > 50){ 
+    if (se.length > 50) {
       setTKCheck(false);
       setColor2("red");
       setErrorTK("Tài khoản dài quá 50 kí tự");
-    } 
-    if(se.length < 5 && se.length > 0){ 
+    }
+    if (se.length < 5 && se.length > 0) {
       setTKCheck(false);
       setColor2("red");
       setErrorTK("Độ dài tài khoản lớn hơn 5 kí tự");
-    } 
-    if(se.length == 0){ 
+    }
+    if (se.length == 0) {
       setTKCheck(false);
       setColor2("red");
       setErrorTK("Tài khoản không được để trống");
-    } 
+    }
   }
   function ErrorTK(props) {
     if (props.isHidden) { return null; }
@@ -141,46 +141,46 @@ export default function LoginForm() {
   }
 
 
-    // mat khau
-    const [color3, setColor3] = useState("#d8dde1");
-    const [passwordCheck, setPasswordCheck] = useState(true);
-    const [errorPassword, setErrorPassword] = useState("");
-    const validatePass = (se) => {
-      const pass = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-      if (pass.test(se) == false) {
-        setPasswordCheck(true);
-        setColor3("#d8dde1");
-        setErrorPassword("");
-      } else {
-        setPasswordCheck(false);
-        setColor3("red");
-        setErrorPassword("Vui lòng không điền kí tự đặt biệt");
-      }
+  // mat khau
+  const [color3, setColor3] = useState("#d8dde1");
+  const [passwordCheck, setPasswordCheck] = useState(true);
+  const [errorPassword, setErrorPassword] = useState("");
+  const validatePass = (se) => {
+    const pass = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    if (pass.test(se) == false) {
+      setPasswordCheck(true);
+      setColor3("#d8dde1");
+      setErrorPassword("");
+    } else {
+      setPasswordCheck(false);
+      setColor3("red");
+      setErrorPassword("Vui lòng không điền kí tự đặt biệt");
+    }
 
-      if(se.length > 50){ 
-        setPasswordCheck(false);
-        setColor3("red");
-        setErrorPassword("Mật khẩu dài quá 50 kí tự");
-      } 
-      if(se.length < 5 && se.length > 0){ 
-        setPasswordCheck(false);
-        setColor3("red");
-        setErrorPassword("Độ dài Mật khẩu lớn hơn 5 kí tự");
-      } 
-      if(se.length == 0){ 
-        setPasswordCheck(false);
-        setColor3("red");
-        setErrorPassword("Mật khẩu không được để trống");
-      } 
+    if (se.length > 50) {
+      setPasswordCheck(false);
+      setColor3("red");
+      setErrorPassword("Mật khẩu dài quá 50 kí tự");
     }
-    function ErrolPassword(props) {
-      if (props.isHidden) { return null; }
-      return (
-        <div className="form_warning">
-          {props.errorPassword}
-        </div>
-      )
+    if (se.length < 5 && se.length > 0) {
+      setPasswordCheck(false);
+      setColor3("red");
+      setErrorPassword("Độ dài Mật khẩu lớn hơn 5 kí tự");
     }
+    if (se.length == 0) {
+      setPasswordCheck(false);
+      setColor3("red");
+      setErrorPassword("Mật khẩu không được để trống");
+    }
+  }
+  function ErrolPassword(props) {
+    if (props.isHidden) { return null; }
+    return (
+      <div className="form_warning">
+        {props.errorPassword}
+      </div>
+    )
+  }
   return (
     <div className="container">
 
@@ -209,7 +209,7 @@ export default function LoginForm() {
       </div>
       <div className="cbx">
         <div className='cbx_1'>
-          <input className='cbx_ipt' name="rememberme" type="checkbox"  onChange={(e) => setChxSave(!chxSave)} defaultChecked={chxSave} />
+          <input className='cbx_ipt' name="rememberme" type="checkbox" onChange={(e) => setChxSave(!chxSave)} defaultChecked={chxSave} />
           <p> Lưu mật khẩu</p>
         </div>
         <a className='cbx_2' href='/login'>

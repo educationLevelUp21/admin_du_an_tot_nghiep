@@ -22,12 +22,15 @@ import {
 //axios
 import axios from "axios";
 
+// loading
+import BeatLoader from "react-spinners/BeatLoader";
+
 // components
 import Page from '../components/Page';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
-import { UserListHead,ProductsListToolbar } from '../sections/@dashboard/user';
+import { UserListHead, ProductsListToolbar } from '../sections/@dashboard/user';
 
 
 // trang
@@ -56,13 +59,13 @@ export default function Products() {
     { id: 'TrangThaiSP', label: 'Trạng thái', alignRight: false },
     { id: 'Type&Details', label: '', },
     { id: '' },
-  
+
   ];
-  
+
   // ----------------------------------------------------------------------
-  
+
   function descendingComparator(a, b, orderBy) {
-  
+
     if (b[orderBy] < a[orderBy]) {
       return -1;
     }
@@ -71,13 +74,13 @@ export default function Products() {
     }
     return 0;
   }
-  
+
   function getComparator(order, orderBy) {
     return order === 'desc'
       ? (a, b) => descendingComparator(a, b, orderBy)
       : (a, b) => -descendingComparator(a, b, orderBy);
   }
-  
+
   function applySortFilter(array, comparator, query) {
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
@@ -133,10 +136,10 @@ export default function Products() {
         setDsLoaiSP(response.data);
       })
   }
-  
 
-  
-  const Loading = () =>{
+
+
+  const Loading = () => {
     getData();
     getDataSaleSP();
     getDataLoaiSP();
@@ -166,7 +169,7 @@ export default function Products() {
       const newSelecteds = danhsachSP.map((n) => n.idImg);
       setSelected(newSelecteds);
     }
-    if(event.target.checked == false){
+    if (event.target.checked == false) {
       setSelected([]);
     }
   };
@@ -210,8 +213,8 @@ export default function Products() {
 
           <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
             <Typography variant="h4" gutterBottom>
-              Kho hàng
-              <button onClick={Loading}>dsadas</button>
+              Tất cả sản phẩm
+              <button onClick={Loading}>loading</button>
             </Typography>
 
             <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}
@@ -284,19 +287,20 @@ export default function Products() {
                             }}
                           >
                             <Typography variant="h6" paragraph>
-                              Not found
+                              Không tìm thấy
                             </Typography>
 
-                            <Typography variant="body2">
-                              No results found for &nbsp;
+                            <Typography variant="body2" align="center">
+                              Không tìm thấy kết quả cho &nbsp;
                               <strong>&quot;{filterName}&quot;</strong>.
-                              <br /> Try checking for typos or using complete words.
+                              <br /> Hãy thử kiểm tra lỗi chính tả hoặc sử dụng các từ hoàn chỉnh.
                             </Typography>
                           </Paper>
                         </TableCell>
                       </TableRow>
                     </TableBody>
                   )}
+
                 </Table>
               </TableContainer>
             </Scrollbar>

@@ -37,14 +37,14 @@ ProductsListToolbar.propTypes = {
   onFilterName: PropTypes.func,
 };
 
-export default function ProductsListToolbar({selected, numSelected, filterName, onFilterName }) {
+export default function ProductsListToolbar({ selected, numSelected, filterName, onFilterName }) {
   const ip = "http://localhost:8080"
-  const DeleteDs_chx = () =>{
-      const id_chx = selected.map((vl,index) => {
-        axios.delete(ip + `/DeleteSP/${vl}`)
-        axios.delete(ip + `/DeleteImg/${vl}`)
-        return
-      })
+  const DeleteDs_chx = () => {
+    const id_chx = selected.map((vl, index) => {
+      axios.delete(ip + `/DeleteSP/${vl}`)
+      axios.delete(ip + `/DeleteImg/${vl}`)
+      return
+    })
   }
   return (
     <RootStyle
@@ -75,7 +75,7 @@ export default function ProductsListToolbar({selected, numSelected, filterName, 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton onClick={DeleteDs_chx}>
-            <Iconify  icon="eva:trash-2-fill" />
+            <Iconify icon="eva:trash-2-fill" />
           </IconButton>
         </Tooltip>
       ) : (

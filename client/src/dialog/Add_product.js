@@ -44,20 +44,20 @@ export default function Add_product(props) {
     // set dữ liệu nhiều hình ảnh lên setMultipleFiles
     setMultipleFiles(e.target.files);
   }
-  
+
 
   // upload dữ liệu nhiều hình ảnh lên API
   const UploadMultipleFiles = async () => {
-    if(idImg == idImgCheck){
+    if (idImg == idImgCheck) {
 
-    }else if(idImg != idImgCheck){
+    } else if (idImg != idImgCheck) {
       const formData = new FormData();
       formData.append('idImg', idImg);
       for (let i = 0; i < multipleFiles.length; i++) {
         formData.append('files', multipleFiles[i]);
       }
       await multipleFilesUpload(formData);
-  
+
       axios.post(ip + "/add_Product", {
         idImg: idImg,
         NameSP: NameSP,
@@ -71,7 +71,7 @@ export default function Add_product(props) {
         ChiTietSP: ChiTietSP,
       })
     }
-    
+
     // gọi hàm lấy dữ liệu nhiều hình ảnh
     // props.getMultiple();
   }
@@ -126,7 +126,7 @@ export default function Add_product(props) {
               <input type="text" className="form__input" placeholder=" " name="Tên áo"
                 onChange={(e) => setNameSP(e.target.value)}
               />
-              <label className="form__label">Tên SP</label>
+              <label className="form__label">Tên Sản phẩm</label>
             </div>
             <div className="form_gia">
               <div className="form_giaGoc">
@@ -159,7 +159,7 @@ export default function Add_product(props) {
               </div>
               <div className="form_sale">
                 <select defaultValue={SaleSP} onChange={(e) => setSaleSP(e.target.value)}>
-                  <option value= '0'> Không giảm giá </option>
+                  <option value='0'> Không giảm giá </option>
                   {props.dsSaleSP.map((vl, index) => {
                     if (vl.TrangThaiSale == "Hoạt động") {
                       return (

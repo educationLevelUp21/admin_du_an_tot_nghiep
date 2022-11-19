@@ -37,14 +37,14 @@ LoaiSPListToolbar.propTypes = {
   onFilterName: PropTypes.func,
 };
 
-export default function LoaiSPListToolbar({selected, numSelected, filterName, onFilterName }) {
+export default function LoaiSPListToolbar({ selected, numSelected, filterName, onFilterName }) {
 
   const ip = "http://localhost:8080"
-  const DeleteDs_chx = () =>{
-      const id_chx = selected.map((vl,index) => {
-        axios.delete(ip + `/DeleteLoaiSP/${vl}`)
-        return
-      })
+  const DeleteDs_chx = () => {
+    const id_chx = selected.map((vl, index) => {
+      axios.delete(ip + `/DeleteLoaiSP/${vl}`)
+      return
+    })
   }
   return (
     <RootStyle
@@ -75,7 +75,7 @@ export default function LoaiSPListToolbar({selected, numSelected, filterName, on
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton onClick={DeleteDs_chx}>
-            <Iconify  icon="eva:trash-2-fill" />
+            <Iconify icon="eva:trash-2-fill" />
           </IconButton>
         </Tooltip>
       ) : (

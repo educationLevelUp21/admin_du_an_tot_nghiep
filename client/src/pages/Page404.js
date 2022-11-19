@@ -4,6 +4,8 @@ import { styled } from '@mui/material/styles';
 import { Button, Typography, Container, Box } from '@mui/material';
 // components
 import Page from '../components/Page';
+import hinhanh404 from '../assets/404-error.png';
+
 
 // ----------------------------------------------------------------------
 
@@ -21,29 +23,29 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 export default function Page404() {
   return (
-    <Page title="404 Page Not Found">
-      <Container>
-        <ContentStyle sx={{ textAlign: 'center', alignItems: 'center' }}>
-          <Typography variant="h3" paragraph>
-            Sorry, page not found!
-          </Typography>
+    <Container>
+      <ContentStyle sx={{ textAlign: 'center', alignItems: 'center' }}>
+        <Typography variant="h3" paragraph>
+          Xin lỗi, không tìm thấy trang!
+        </Typography>
 
-          <Typography sx={{ color: 'text.secondary' }}>
-            Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL? Be
-            sure to check your spelling.
-          </Typography>
+        <Typography sx={{ color: 'text.secondary' }}>
+          Rất tiếc, chúng tôi không thể tìm thấy trang mà bạn đang tìm kiếm.
+        </Typography>
 
-          <Box
-            component="img"
-            src="/static/illustrations/illustration_404.svg"
-            sx={{ height: 260, mx: 'auto', my: { xs: 5, sm: 10 } }}
-          />
+        <div style={{
+          padding: '5% 0',
+          width: '100%', display: 'flex',
+          justifyContent: 'space-around', textAlign: 'center', alignItems: 'center'
+        }} className="number">
+          <img className='img' src={hinhanh404} alt="login" width={'70%'} />
 
-          <Button to="/" size="large" variant="contained" component={RouterLink}>
-            Go to Home
-          </Button>
-        </ContentStyle>
-      </Container>
-    </Page>
+        </div>
+
+        <Button to="/" size="medium" variant="contained" component={RouterLink}>
+          QUAY LẠI
+        </Button>
+      </ContentStyle>
+    </Container>
   );
 }

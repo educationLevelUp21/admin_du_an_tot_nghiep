@@ -42,7 +42,7 @@ export default function UpdateSP(props) {
 
   // upload dữ liệu nhiều hình ảnh lên API
   const UploadMultipleFiles = async () => {
-    if(multipleFiles == ''){
+    if (multipleFiles == '') {
       axios.put(ip + `/UpdateSP/${props._id}`, {
         NameSP: NameSPFix,
         GiaGocSP: GiaGocSPFix,
@@ -54,7 +54,7 @@ export default function UpdateSP(props) {
         LoaiSP: LoaiSPFix,
         ChiTietSP: ChiTietSPFix,
       })
-    }else if(multipleFiles != ''){
+    } else if (multipleFiles != '') {
 
       axios.delete(ip + `/DeleteImg/${props.idImg}`)
 
@@ -78,10 +78,10 @@ export default function UpdateSP(props) {
       })
     }
 
-     
 
-    
-}
+
+
+  }
 
 
 

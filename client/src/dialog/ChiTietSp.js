@@ -27,7 +27,7 @@ export default function ChiTietSp(props) {
             onClose={handleClose}
             aria-labelledby="form-dialog-title"
             fullWidth
-            maxWidth="lg"
+            maxWidth="md"
         >
             <DialogContent style={{ height: '710px' }} >
                 {/* <div className="container" >
@@ -44,16 +44,16 @@ export default function ChiTietSp(props) {
                 <div className="container-up" >
                     <h2 style={{ textAlign: 'center', paddingBottom: '20px', color: '#2065d1' }}>Xem thêm thông tin sản phẩm</h2>
                     <div className="dialog_xemthem_left">
-
-                        {/* {props.multipleFiles.map((element, index) =>
+                        {/* 
+                        {props.multipleFiles.map((element, index) =>
                             <div key={index}>
-                                    {element.files.map((file, index) =>
-                                        <div className="col-6">
-                                            <div className="card mb-2 border-0 p-0">
-                                                <img src={ip + `/${file.filePath}`} height="200" className="card-img-top img-responsive" alt="img" />
-                                            </div>
+                                {element.files.map((file, index) =>
+                                    <div className="col-6">
+                                        <div className="card mb-2 border-0 p-0">
+                                            <img src={ip + `/${file.filePath}`} height="200" className="card-img-top img-responsive" alt="img" />
                                         </div>
-                                    )}
+                                    </div>
+                                )}
                             </div>
                         )} */}
                     </div>
@@ -70,6 +70,7 @@ export default function ChiTietSp(props) {
                             <div className="mota2">{props.ChiTietSP}</div>
                         </DialogContent>
                     </div>
+                    <div className="frames_1"></div>
 
                 </div>
             </DialogContent>

@@ -26,10 +26,11 @@ export default function ItemSaleSP(props) {
 
     useEffect(() => {
         if (props.TrangThaiSale == "Hoạt động") {
-            setColor("red")
+            setColor("rgba(84, 214, 44, 0.16)")
         } else if (props.TrangThaiSale == "Không hoạt động") {
-            setColor("blue")
+            setColor("rgba(255, 72, 66, 0.16)")
         }
+
     },)
 
 
@@ -93,24 +94,24 @@ export default function ItemSaleSP(props) {
             {/* --------------- loại & chi tiết sản phẩm ----------------- */}
             <TableCell className='loai_chiTiet' >
                 <Typography align='left' variant="subtitle2" >
-                    {props.PhanTramGiamGia}
+                    {props.PhanTramGiamGia}%
                 </Typography>
             </TableCell>
             {/* --------------- trạng thái----------------- */}
             <TableCell className='trang_thai' component="th" scope="row" >
-                <Typography align='center' style={{ background: color, }} variant="subtitle2"  >
+                <Typography align='left' variant="subtitle2"  >
                     {dateTao}
                 </Typography>
             </TableCell>
 
             <TableCell className='trang_thai' component="th" scope="row" >
-                <Typography align='center' style={{ background: color, }} variant="subtitle2"  >
+                <Typography align='left' variant="subtitle2"  >
                     {dateEnd}
                 </Typography>
             </TableCell>
 
             <TableCell className='trang_thai' component="th" scope="row" >
-                <Typography align='center' style={{ background: color, }} variant="subtitle2"  >
+                <Typography className='trang_thai_2' align='center' style={{ background: color }} variant="subtitle2"  >
                     {props.TrangThaiSale}
                 </Typography>
             </TableCell>
