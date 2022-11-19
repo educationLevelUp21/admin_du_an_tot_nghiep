@@ -12,9 +12,9 @@ import Logo from '../components/Logo';
 import { LoginForm } from '../sections/auth/login';
 import AuthSocial from '../sections/auth/AuthSocial';
 
+// import hình ảnh assets
 import hinhanh from '../assets/Img_login.png';
-import eyeStart from '../assets/eye_icon.png';
-import eyeEnd from '../assets/eye_slash_icon.png';
+
 
 
 // css
@@ -107,9 +107,8 @@ export default function Login() {
 
             <AuthSocial />
 
+            {/* con mắt password */}
             <LoginForm
-              eyeStart={eyeStart}
-              eyeEnd={eyeEnd}
             />
 
             {!smUp && (
