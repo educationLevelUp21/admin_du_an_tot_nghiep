@@ -108,6 +108,8 @@ export default function Products() {
 
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
+  const [dsChx, setDsChx] = useState('all');
+
   //  array combobox
 
   const [dsSaleSP, setDsSaleSP] = useState([])
@@ -224,6 +226,12 @@ export default function Products() {
           </Stack>
 
           <Card>
+          <div className="form_trangthai">
+                <select defaultValue={dsChx} onChange={(e) => setDsChx(e.target.value)}>
+                  <option value="all">Tất cả</option>
+                  <option value="end">Sắp hết hàng</option>
+                </select>
+              </div>
             <ProductsListToolbar selected={selected} numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
             <Scrollbar>
               <TableContainer sx={{ minWidth: 800 }}>
@@ -241,33 +249,65 @@ export default function Products() {
 
                     {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((val) => {
                       const isItemSelected = selected.indexOf(val.idImg) !== -1;
-                      return (
 
-                        <ItemListSP
-                          key={val._id}
-                          _id={val._id}
-                          idImg={val.idImg}
-                          NameSP={val.NameSP}
-                          GiaGocSP={val.GiaGocSP}
-                          GiaBanSP={val.GiaBanSP}
-                          SoLuongSP={val.SoLuongSP}
-                          DateNhapSP={val.DateNhapSP}
-                          SaleSP={val.SaleSP}
-                          TrangThaiSP={val.TrangThaiSP}
-                          LoaiSP={val.LoaiSP}
-                          ChiTietSP={val.ChiTietSP}
-                          danhsachSP={danhsachSP}
-                          setdanhsachSP={setdanhsachSP}
-                          isItemSelected={isItemSelected}
-                          selected={selected}
-                          setSelected={setSelected}
-                          dsLoaiSP={dsLoaiSP}
-                          setDsLoaiSP={setDsLoaiSP}
-                          dsSaleSP={dsSaleSP}
-                          setDsSaleSP={setDsSaleSP}
-                        />
-
-                      );
+                      if(dsChx == "all"){
+                        return (
+                          <ItemListSP
+                            key={val._id}
+                            _id={val._id}
+                            idImg={val.idImg}
+                            NameSP={val.NameSP}
+                            GiaGocSP={val.GiaGocSP}
+                            GiaBanSP={val.GiaBanSP}
+                            SoLuongSP={val.SoLuongSP}
+                            DateNhapSP={val.DateNhapSP}
+                            SaleSP={val.SaleSP}
+                            TrangThaiSP={val.TrangThaiSP}
+                            LoaiSP={val.LoaiSP}
+                            ChiTietSP={val.ChiTietSP}
+                            danhsachSP={danhsachSP}
+                            setdanhsachSP={setdanhsachSP}
+                            isItemSelected={isItemSelected}
+                            selected={selected}
+                            setSelected={setSelected}
+                            dsLoaiSP={dsLoaiSP}
+                            setDsLoaiSP={setDsLoaiSP}
+                            dsSaleSP={dsSaleSP}
+                            setDsSaleSP={setDsSaleSP}
+                          />
+  
+                        );
+                      }else if(dsChx == "end"){
+                        if(val.SoLuongSP < 30 ){
+                          return (
+                            <ItemListSP
+                              key={val._id}
+                              _id={val._id}
+                              idImg={val.idImg}
+                              NameSP={val.NameSP}
+                              GiaGocSP={val.GiaGocSP}
+                              GiaBanSP={val.GiaBanSP}
+                              SoLuongSP={val.SoLuongSP}
+                              DateNhapSP={val.DateNhapSP}
+                              SaleSP={val.SaleSP}
+                              TrangThaiSP={val.TrangThaiSP}
+                              LoaiSP={val.LoaiSP}
+                              ChiTietSP={val.ChiTietSP}
+                              danhsachSP={danhsachSP}
+                              setdanhsachSP={setdanhsachSP}
+                              isItemSelected={isItemSelected}
+                              selected={selected}
+                              setSelected={setSelected}
+                              dsLoaiSP={dsLoaiSP}
+                              setDsLoaiSP={setDsLoaiSP}
+                              dsSaleSP={dsSaleSP}
+                              setDsSaleSP={setDsSaleSP}
+                            />
+    
+                          );
+                        }
+                      }
+                  
                     })}
                     {emptyRows > 0 && (
                       <TableRow style={{ height: 53 * emptyRows }}>
