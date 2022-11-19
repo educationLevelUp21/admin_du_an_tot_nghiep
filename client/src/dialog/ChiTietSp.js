@@ -27,7 +27,7 @@ export default function ChiTietSp(props) {
             onClose={handleClose}
             aria-labelledby="form-dialog-title"
             fullWidth
-            maxWidth="md"
+            maxWidth="lg"
         >
             <DialogContent style={{ height: '710px' }} >
                 {/* <div className="container" >

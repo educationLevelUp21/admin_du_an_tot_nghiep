@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 
 
+
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,7 +29,7 @@ function useKey(key, cb) {
   }, [key])
 }
 
-export default function LoginForm() {
+export default function LoginForm(props) {
 
   const navigate = useNavigate();
 
@@ -181,6 +182,23 @@ export default function LoginForm() {
       </div>
     )
   }
+
+  // con mắt password
+  const [type, setType] = useState("password");
+  const [eye, setEye] = useState(props.eyeStart);
+
+  const hanldeEye = () => {
+    if (eye == props.eyeEnd) {
+      setType("password")
+      setEye(props.eyeStart)
+    } else if (eye == props.eyeStart) {
+      setType("text")
+      setEye(props.eyeEnd)
+    }
+  }
+
+
+
   return (
     <div className="container">
 
@@ -197,11 +215,13 @@ export default function LoginForm() {
 
       </div>
       <div className="user">
-        <input type="password" className="form__input" style={{ borderColor: color3 }} placeholder=" " name="Tên đăng nhập"
+        <input type={type} className="form__input" style={{ borderColor: color3 }} placeholder=" " name="Tên đăng nhập"
           onChange={(e) => setPass(e.target.value)}
           onClick={useKey("Enter", btnLogin)}
           onBlur={(e) => validatePass(e.target.value)}
-          required /><label htmlFor="email" className="form__label">Mật khẩu</label>
+          required />
+        <label htmlFor="email" className="form__label">Mật khẩu</label>
+        <img style={{ color: color3 }} onClick={hanldeEye} src={eye} width='25' height='25' />
         <ErrolPassword
           isHidden={passwordCheck}
           errorPassword={errorPassword} />

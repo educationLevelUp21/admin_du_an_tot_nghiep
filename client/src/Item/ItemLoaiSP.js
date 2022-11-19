@@ -67,7 +67,7 @@ export default function ItemLoaiSP(props) {
             {/* --------------- Ảnh ----------------- */}
             <TableCell className='image_sp' component="th" scope="row">
                 {/* <Avatar alt={NameSP} src={Avatar} /> */}
-                <Avatar sx={{ minWidth: 80, minHeight: 80 }} variant="square">
+                <Avatar sx={{ minWidth: 130, minHeight: 170 }} variant="square">
                     <img className='img' src={ip + '/uploads/' + props.ImageLoaiSP} alt="login" width={'100%'} />
                 </Avatar>
             </TableCell>

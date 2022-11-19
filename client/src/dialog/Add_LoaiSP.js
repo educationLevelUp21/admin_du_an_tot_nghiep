@@ -24,24 +24,7 @@ export default function Add_LoaiSP(props) {
   const [lspCheck, setLSPCheck] = useState(true);
   const [errorLSP, setErrorLSP] = useState("");
   const validateTenLSP = (se) => {
-    const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
-    if (format.test(se) == false) {
-      setLSPCheck(true);
-      setColorLSP("#d8dde1");
-      setErrorLSP("");
-
-    } else {
-      setLSPCheck(false);
-      setColorLSP("red");
-      setErrorLSP("Vui lòng không điền kí tự đặt biệt");
-    }
-
-    // if (se.length > 50) {
-    //   setLSPCheck(false);
-    //   setColorLSP("red");
-    //   setErrorLSP("Tài khoản dài quá 50 kí tự nef");
-    // }
     if (se.length < 5 && se.length > 0) {
       setLSPCheck(false);
       setColorLSP("red");
@@ -51,6 +34,10 @@ export default function Add_LoaiSP(props) {
       setLSPCheck(false);
       setColorLSP("red");
       setErrorLSP("Tên loại sản phẩm không được để trống");
+    } else {
+      setLSPCheck(true);
+      setColorLSP("#d8dde1");
+      setErrorLSP("");
     }
   }
   function ErrorLoaiSP(props) {
@@ -67,24 +54,7 @@ export default function Add_LoaiSP(props) {
   const [MotaCheck, setMotaCheck] = useState(true);
   const [errorMota, setErrorMoTa] = useState("");
   const validateMota = (se) => {
-    // const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
-    // if (format.test(se) == false) {
-    //   setMotaCheck(true);
-    //   setColorMota("#fff");
-    //   setErrorMoTa("");
-
-    // } else {
-    //   setMotaCheck(false);
-    //   setColorMota("red");
-    //   setErrorMoTa("Vui lòng không điền kí tự đặt biệt nef");
-    // }
-
-    // if (se.length > 50) {
-    //   setMotaCheck(false);
-    //   setColorMota("red");
-    //   setErrorMoTa("Tài khoản dài quá 50 kí tự nef");
-    // }
     if (se.length < 5 && se.length > 0) {
       setMotaCheck(false);
       setColorMota("red");
@@ -131,25 +101,14 @@ export default function Add_LoaiSP(props) {
   }
 
   const btnAdd_LoaiSP = () => {
-    if (setMotaCheck(false) && (setLSPCheck(false))) {
-      setColorMota("red");
-      setErrorMoTa("Độ dài mô tả lớn hơn 5 kí tự nef");
-      setColorMota("red");
-      setErrorMoTa("Mô tả không được để trống nef");
-      setColorLSP("red");
-      setErrorLSP("Tên loại sản phẩm không được để trống nef");
-      setColorLSP("red");
-      setErrorLSP("Vui lòng không điền kí tự đặt biệt nef");
-    } else
-      if (setMotaCheck(true) && (setLSPCheck(true))) {
-        axios.post(ip + "/add_LoaiSP", {
-          NameLoaiSP: NameLoaiSP,
-          MotaLoaiSP: MotaLoaiSP,
-          TrangThaiLoaiSP: TrangThaiLoaiSP,
-        })
-      }
-
+    axios.post(ip + "/add_LoaiSP", {
+      NameLoaiSP: NameLoaiSP,
+      MotaLoaiSP: MotaLoaiSP,
+      TrangThaiLoaiSP: TrangThaiLoaiSP,
+    })
   }
+
+
 
   const handleClose = () => {
     props.setOpen(false);

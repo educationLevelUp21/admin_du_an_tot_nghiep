@@ -108,17 +108,15 @@ export default function UpdateSP(props) {
       <DialogContent>
         <div className="container-up" >
           <h2 style={{ textAlign: 'center', paddingBottom: '20px', color: '#2065d1' }}>Sửa thông tin sản phẩm</h2>
-          <div className="form_text_ipt_lefft">
+          <div className="form_AddSP_Top_Left">
             <div className="container">
               {props.multipleFiles.map((element, index) =>
                 <div key={index}>
-                  <div className="row">
+                  <div className="imgUpdateProduct">
                     {element.files.map((file, index) => {
                       return (
-                        <div className="col-6" key={index}>
-                          <div className="card mb-2 border-0 p-0">
-                            <img src={ip + `/${file.filePath}`} width="200" height="200" className="card-img-top img-responsive" alt="img" />
-                          </div>
+                        <div key={index}>
+                          <img src={ip + `/${file.filePath}`} width="200" height="200" className="card-img-top img-responsive" alt="img" />
                         </div>
                       )
                     }
@@ -127,42 +125,34 @@ export default function UpdateSP(props) {
                 </div>
               )}
               <div className="row">
-                <div className="col-6">
-                  <div className="form-group">
-                    <label>Nhieu hinh`</label>
-                    <input type="file" onChange={(e) => MultipleFileChange(e)} className="form-control" multiple />
-                  </div>
-                </div>
+                <label>Nhieu hinh`</label>
+                <input type="file" onChange={(e) => MultipleFileChange(e)} multiple />
+
               </div>
             </div>
-            <div className="container-fluid mt-5">
-            </div>
-          </div>
-          <div className="form_text_ipt_right">
-            <div className="form">
+
+            <div className="form_Product">
               <input type="text" className="form__input" placeholder=" " name="Tên áo"
                 onChange={(e) => setNameSPFix(e.target.value)}
                 defaultValue={props.NameSP}
               />
               <label className="form__label">Tên SP</label>
             </div>
-            <div className="form_gia">
-              <div className="form_giaGoc">
-                <input type="text" className="form__input" placeholder=" " name="Giá gốc"
-                  onChange={(e) => setGiaGocSPFix(e.target.value)}
-                  defaultValue={props.GiaGocSP}
-                />
-                <label className="form__label">Giá gốc</label>
-              </div>
-              <div className="form_giaGoc">
-                <input type="text" className="form__input" placeholder=" " name="Giá bán"
-                  onChange={(e) => setGiaBanSPFix(e.target.value)}
-                  defaultValue={props.GiaBanSP}
-                />
-                <label className="form__label">Giá bán</label>
-              </div>
+            <div className="form_Product">
+              <input type="text" className="form__input" placeholder=" " name="Giá gốc"
+                onChange={(e) => setGiaGocSPFix(e.target.value)}
+                defaultValue={props.GiaGocSP}
+              />
+              <label className="form__label">Giá gốc</label>
             </div>
-            <div className="form">
+            <div className="form_Product">
+              <input type="text" className="form__input" placeholder=" " name="Giá bán"
+                onChange={(e) => setGiaBanSPFix(e.target.value)}
+                defaultValue={props.GiaBanSP}
+              />
+              <label className="form__label">Giá bán</label>
+            </div>
+            <div className="form_Product">
               <input type="text" className="form__input" placeholder=" " name="Số lượng"
                 onChange={(e) => setSoLuongSPFix(e.target.value)}
                 defaultValue={props.SoLuongSP}
@@ -170,36 +160,37 @@ export default function UpdateSP(props) {
 
               <label className="form__label">Số lượng</label>
             </div>
+          </div>
+          <div className="form_AddSP_Top_Right">
 
-            <div className="form-date">
-              <div className="form_nhap">
-                <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
-                  onChange={(e) => setDateNhapSPFix(e.target.value)} defaultValue={date}
-                />
-                <label className="form__label">Ngày Nhập</label>
-              </div>
-              <div className="form_sale">
-                <select defaultValue={SaleSPFix} onChange={(e) => setSaleSPFix(e.target.value)}>
-                  <option value='0'> Không giảm giá </option>
-                  {props.dsSaleSP.map((vl, index) => {
-                    if (vl.TrangThaiSale == "Hoạt động") {
-                      return (
-                        <option key={vl._id} value={vl.PhanTramGiamGia}> {vl.NameSaleSP} giảm {vl.PhanTramGiamGia}%</option>
-                      )
-                    } else if (vl.TrangThaiSale == "Không hoạt động") {
 
-                    }
-                  })}
-                </select>
-              </div>
-              <div className="form_trangthai">
-                <select defaultValue={TrangThaiSPFix} onChange={(e) => setTrangThaiSPFix(e.target.value)}>
-                  <option value="Hoạt động">Hoạt động</option>
-                  <option value="Không hoạt động">Không hoạt động </option>
-                </select>
-              </div>
+            <div className="form_Product">
+              <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
+                onChange={(e) => setDateNhapSPFix(e.target.value)} defaultValue={date}
+              />
+              <label className="form__label">Ngày Nhập</label>
             </div>
-            <div className="form-loaiSP">
+            <div className="form_trangthai_product">
+              <select defaultValue={SaleSPFix} onChange={(e) => setSaleSPFix(e.target.value)}>
+                <option value='0'> Không giảm giá </option>
+                {props.dsSaleSP.map((vl, index) => {
+                  if (vl.TrangThaiSale == "Hoạt động") {
+                    return (
+                      <option key={vl._id} value={vl.PhanTramGiamGia}> {vl.NameSaleSP} giảm {vl.PhanTramGiamGia}%</option>
+                    )
+                  } else if (vl.TrangThaiSale == "Không hoạt động") {
+
+                  }
+                })}
+              </select>
+            </div>
+            <div className="form_trangthai_product">
+              <select defaultValue={TrangThaiSPFix} onChange={(e) => setTrangThaiSPFix(e.target.value)}>
+                <option value="Hoạt động">Hoạt động</option>
+                <option value="Không hoạt động">Không hoạt động </option>
+              </select>
+            </div>
+            <div className="form_trangthai_product">
               <select defaultValue={LoaiSPFix} onChange={(e) => setLoaiSPFix(e.target.value)}>
                 {props.dsLoaiSP.map((vl, index) => {
                   if (vl.TrangThaiLoaiSP == "Hoạt động") {
@@ -212,7 +203,7 @@ export default function UpdateSP(props) {
                 })}
               </select>
             </div>
-            <div className="form_mota">
+            <div className="form_mota_Product">
               <textarea onChange={(e) => setChiTietSPFix(e.target.value)}
                 defaultValue={props.ChiTietSP}
                 title=""

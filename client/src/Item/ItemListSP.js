@@ -143,12 +143,12 @@ export default function ItemListSP(props) {
                 {/* --------------- giá gốc & giá bán sản phẩm ----------------- */}
                 <TableCell className='giaGoc_giaBan'>
                     <Typography align='left' variant="subtitle2"  >
-                        {props.GiaGocSP} VND
+                        {props.GiaGocSP}VND
                     </Typography>
                 </TableCell>
                 <TableCell className='giaGoc_giaBan'>
                     <Typography align='left' variant="subtitle2"  >
-                        {props.GiaBanSP} VND
+                        {props.GiaBanSP}VND
                     </Typography>
                 </TableCell>
                 {/* --------------- số lượng ----------------- */}

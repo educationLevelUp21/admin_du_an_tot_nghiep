@@ -19,6 +19,60 @@ export default function UpdateSaleSP(props) {
   const [TrangThaiSaleFix, setTrangThaiSaleFix] = useState(props.TrangThaiSale)
 
 
+  // ten giam gia
+  const [colorSale, setColorSale] = useState("#d8dde1");
+  const [saleCheck, setLSaleCheck] = useState(true);
+  const [errorSale, setErrorSale] = useState("");
+  const validateNameSale = (se) => {
+    if (se.length < 5 && se.length > 0) {
+      setLSaleCheck(false);
+      setColorSale("red");
+      setErrorSale("Độ dài tên loại sản phẩm lớn hơn 5 kí tự");
+    } else {
+      setLSaleCheck(true);
+      setColorSale("#d8dde1");
+      setErrorSale("");
+    }
+    if (se.length == 0) {
+      setLSaleCheck(false);
+      setColorSale("red");
+      setErrorSale("Tên giảm giá không được để trống");
+    }
+  }
+  function ErrorNameSale(props) {
+    if (props.isHidden) { return null; }
+    return (
+      <div className="form_warning">
+        {props.ErrorNameSale}
+      </div>
+    )
+  }
+
+
+  // % giam gia
+  const [colorPercent, setColorPercent] = useState("#d8dde1");
+  const [percentCheck, setLPercentCheck] = useState(true);
+  const [errorPercent, setErrorPercent] = useState("");
+  const validatePercentSale = (se) => {
+
+    if (se.length == 0) {
+      setLPercentCheck(false);
+      setColorPercent("red");
+      setErrorPercent("Phần trăm giảm giá không được để trống");
+    } else {
+      setLPercentCheck(true);
+      setColorPercent("#d8dde1");
+      setErrorPercent("");
+    }
+  }
+  function ErrorPercentSale(props) {
+    if (props.isHidden) { return null; }
+    return (
+      <div className="form_warning">
+        {props.ErrorNameSale}
+      </div>
+    )
+  }
 
   const btnUpdate_SaleSP = () => {
     axios.put(ip + `/UpdateSaleSP/${props._id}`, {
@@ -48,33 +102,53 @@ export default function UpdateSaleSP(props) {
 
           <div className="frames_sale">
             <div className="sale_left">
-              <div className="form">
-                <input type="text" className="form__input" placeholder=" " name="Tên áo"
-                  onChange={(e) => setNameSaleSPFix(e.target.value)}
-                  defaultValue={props.NameSaleSP}
-                />
-                <label className="form__label">Tên giảm giá</label>
+              <div className="sale_left_top">
+                <div className="form">
+                  <input type="text" className="form__input" placeholder=" " name="Tên áo"
+                    onChange={(e) => setNameSaleSPFix(e.target.value)}
+                    defaultValue={props.NameSaleSP}
+                    style={{ borderColor: colorSale }}
+                    onBlur={(e) => validateNameSale(e.target.value)}
+                    required
+                  />
+                  <label className="form__label">Tên giảm giá</label>
+                </div>
+                <ErrorNameSale
+                  isHidden={saleCheck}
+                  ErrorNameSale={errorSale} />
               </div>
-              <div className="form">
-                <input type="text" className="form__input" placeholder=" " name="Tên áo"
-                  onChange={(e) => setPhanTramGiamGiaFix(e.target.value)}
-                  defaultValue={props.PhanTramGiamGia}
-                />
-                <label className="form__label">Phần trăm giảm giá</label>
+              <div className="sale_left_top">
+                <div className="form">
+                  <input type="text" className="form__input" placeholder=" " name="Tên áo"
+                    onChange={(e) => setPhanTramGiamGiaFix(e.target.value)}
+                    defaultValue={props.PhanTramGiamGia}
+                    style={{ borderColor: colorPercent }}
+                    onBlur={(e) => validatePercentSale(e.target.value)}
+                    required
+                  />
+                  <label className="form__label">Phần trăm giảm giá</label>
+                </div>
+                <ErrorPercentSale
+                  isHidden={percentCheck}
+                  ErrorNameSale={errorPercent} />
               </div>
             </div>
             <div className="sale_right">
-              <div className="form">
-                <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
-                  onChange={(e) => setNgayTaoSaleFix(e.target.value)}
-                />
-                <label className="form__label">Ngày tạo</label>
+              <div className="sale_right_top">
+                <div className="form_dateGG">
+                  <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
+                    onChange={(e) => setNgayTaoSaleFix(e.target.value)}
+                  />
+                  <label className="form__label">Ngày tạo</label>
+                </div>
               </div>
-              <div className="form">
-                <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
-                  onChange={(e) => setNgayEndSaleFix(e.target.value)}
-                />
-                <label className="form__label">Ngày kết thúc</label>
+              <div className="sale_right_top">
+                <div className="form_dateGG">
+                  <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
+                    onChange={(e) => setNgayEndSaleFix(e.target.value)}
+                  />
+                  <label className="form__label">Ngày kết thúc</label>
+                </div>
               </div>
               <div className="form_trangthai">
                 <select defaultValue={props.TrangThaiSale} onChange={(e) => setTrangThaiSaleFix(e.target.value)}>

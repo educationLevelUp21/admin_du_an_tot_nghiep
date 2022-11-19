@@ -13,6 +13,9 @@ import { LoginForm } from '../sections/auth/login';
 import AuthSocial from '../sections/auth/AuthSocial';
 
 import hinhanh from '../assets/Img_login.png';
+import eyeStart from '../assets/eye_icon.png';
+import eyeEnd from '../assets/eye_slash_icon.png';
+
 
 // css
 import '../css/register_login_form.css';
@@ -104,7 +107,10 @@ export default function Login() {
 
             <AuthSocial />
 
-            <LoginForm />
+            <LoginForm
+              eyeStart={eyeStart}
+              eyeEnd={eyeEnd}
+            />
 
             {!smUp && (
               <Typography variant="body2" align="center" sx={{ mt: 3 }}>

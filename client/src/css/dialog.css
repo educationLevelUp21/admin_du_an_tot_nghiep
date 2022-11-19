@@ -3,17 +3,6 @@
   width: 100%;
   margin: 0 auto;
 }
-.form_text_ipt_lefft {
-  width: 50%;
-  height: 450px;
-  float: left;
-  border: 1px solid black;
-  border-radius: 8px;
-}
-.form_text_ipt_right {
-  width: 45%;
-  float: right;
-}
 
 .form {
   position: relative;
@@ -36,31 +25,24 @@
   background: none;
 }
 /* -------------------------------------- */
-.form_gia {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.form_giaGoc {
+
+.form_dateGG {
   position: relative;
-  width: 48.5%;
-  height: 60px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  display: flex;
+  width: 100%;
+  height: 50px;
+  background: #fff;
+  border-radius: 5px;
 }
-.form_giaGoc input {
+.form_dateGG input {
   width: 100%;
   position: absolute;
-  border: 1px solid black;
+  border: 1px solid white;
   border-radius: 5px;
   font-family: inherit;
   font-size: inherit;
   color: black;
   outline: none;
-  padding: 12px 20px;
+  padding: 14px 20px;
   background: none;
 }
 
@@ -143,7 +125,7 @@
   border: 1px solid black;
 }
 /* -------------------------------------- */
-.form input:hover,
+/*.form input:hover,
 .form_giaGoc input:hover,
 .form_nhap input:hover {
   border-color: #2065d1;
@@ -153,13 +135,15 @@
   border: 1px solid #2065d1;
 }
 
-.form_giaGoc input:focus,
+ .form_giaGoc input:focus,
 .form input:focus,
 .form_nhap input:focus {
   border-color: rgb(0, 241, 0);
-}
+} */
 
 .form_giaGoc label,
+.form_Product label,
+.form_dateGG label,
 .form label,
 .form_nhap label {
   position: absolute;
@@ -306,9 +290,14 @@
 .sale_right {
   padding: 2%;
   margin: 2%;
-  background: #fc7e7ed3;
+  background: #ffcccc;
   width: 50%;
   border-radius: 8px;
+}
+.sale_right_top {
+  width: 100%;
+  height: 65px;
+  margin-top: 1%;
 }
 /* ========== dialog thêm, sửa, loại sản phẩm ==========*/
 .frames_loaiSp {
@@ -321,7 +310,7 @@
 .loaiSP_left {
   padding: 2%;
   margin: 2%;
-  background: #fc7e7ed3;
+  background: #ffcccc;
   width: 31%;
   border-radius: 8px;
   display: flex;
@@ -382,7 +371,7 @@
 .loaiSP_leftFix {
   padding: 2%;
   margin: 2%;
-  background: #fc7e7ed3;
+  background: #ffcccc;
   width: 23%;
   border-radius: 8px;
   display: flex;
@@ -393,7 +382,7 @@
 .loaiSP_centerFix {
   padding: 2%;
   margin: 2% 0;
-  background: #fc7e7ed3;
+  background: #ffcccc;
   width: 23%;
   border-radius: 8px;
   display: flex;
@@ -452,4 +441,98 @@
   width: 100%;
   font-size: 15px;
   color: red;
+}
+
+/* ========== dialog thêm, sửa, sản phẩm PRODUCT==========*/
+.frames_product {
+  width: 100%;
+  height: 370px;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+.form_AddSP_Top_Left {
+  margin: 2% 1% 2% 2%;
+  padding: 2%;
+  width: 47%;
+  float: left;
+  background-color: #fff6e5;
+  border-radius: 8px;
+}
+/* ảnh */
+.form_img_product {
+  padding: 2%;
+  border-radius: 8px;
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+}
+.label_img {
+  padding: 1.5% 0 0 2%;
+  width: 30%;
+  text-align: center;
+}
+/* id ảnh */
+
+/* tên */
+
+/* hoạt động */
+
+.form_AddSP_Top_Right {
+  margin: 2% 2% 2% 1%;
+  padding: 2%;
+  width: 47%;
+  float: right;
+  background-color: #ffcccc;
+  border-radius: 8px;
+}
+
+.form_Product {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin-top: 3%;
+  background: #fff;
+  border-radius: 5px;
+}
+
+.form_Product input {
+  width: 100%;
+  position: absolute;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: inherit;
+  color: black;
+  outline: none;
+  padding: 12px 20px;
+  background: none;
+}
+.form_mota_Product {
+  width: 100%;
+  margin: 2% 0;
+}
+.form_mota_Product textarea {
+  border: none;
+  padding: 2% 4%;
+  border-radius: 5px;
+}
+.form_trangthai_product {
+  width: 100%;
+  height: 50px;
+  background: #fff;
+  border-radius: 5px;
+  margin-top: 2%;
+}
+.form_trangthai_product select {
+  font-size: 15px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+}
+/* sửa */
+.imgUpdateProduct {
+  width: 100%;
+  display: flex;
 }

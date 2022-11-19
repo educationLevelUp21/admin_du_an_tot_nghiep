@@ -37,7 +37,8 @@ export default function Add_SaleSP(props) {
     if (se.length == 0) {
       setLSaleCheck(false);
       setColorSale("red");
-      setErrorSale("Tên loại sản phẩm không được để trống");
+      setErrorSale("Tên giảm giá không được để trống");
+
     }
   }
   function ErrorNameSale(props) {
@@ -56,19 +57,15 @@ export default function Add_SaleSP(props) {
   const [errorPercent, setErrorPercent] = useState("");
   const validatePercentSale = (se) => {
 
-    if (se.length < 5 && se.length > 0) {
+
+    if (se.length == 0) {
       setLPercentCheck(false);
       setColorPercent("red");
-      setErrorPercent("Độ dài tên loại sản phẩm lớn hơn 5 kí tự");
+      setErrorPercent("Phần trăm giảm giá không được để trống");
     } else {
       setLPercentCheck(true);
       setColorPercent("#d8dde1");
       setErrorPercent("");
-    }
-    if (se.length == 0) {
-      setLPercentCheck(false);
-      setColorPercent("red");
-      setErrorPercent("Tên loại sản phẩm không được để trống");
     }
   }
   function ErrorPercentSale(props) {
@@ -144,18 +141,23 @@ export default function Add_SaleSP(props) {
               </div>
             </div>
             <div className="sale_right">
-              <div className="form">
-                <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
-                  onChange={(e) => setNgayTaoSale(e.target.value)}
-                />
-                <label className="form__label">Ngày tạo</label>
+              <div className="sale_right_top">
+                <div className="form_dateGG">
+                  <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
+                    onChange={(e) => setNgayTaoSale(e.target.value)}
+                  />
+                  <label className="form__label">Ngày tạo</label>
+                </div>
               </div>
-              <div className="form">
-                <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
-                  onChange={(e) => setNgayEndSale(e.target.value)}
-                />
-                <label className="form__label">Ngày kết thúc</label>
+              <div className="sale_right_top">
+                <div className="form_dateGG">
+                  <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
+                    onChange={(e) => setNgayEndSale(e.target.value)}
+                  />
+                  <label className="form__label">Ngày kết thúc</label>
+                </div>
               </div>
+
               <div className="form_trangthai">
                 <select defaultValue={TrangThaiSale} onChange={(e) => setTrangThaiSale(e.target.value)}>
                   <option value="Hoạt động">Hoạt động</option>

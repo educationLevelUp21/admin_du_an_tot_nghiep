@@ -48,6 +48,7 @@ export default function Add_product(props) {
 
   // upload dữ liệu nhiều hình ảnh lên API
   const UploadMultipleFiles = async () => {
+    // check validate trùng id
     if (idImg == idImgCheck) {
 
     } else if (idImg != idImgCheck) {
@@ -93,71 +94,57 @@ export default function Add_product(props) {
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       fullWidth
-      maxWidth="lg"
+      maxWidth="md"
     >
       <DialogContent>
         <div className="container-up" >
           <h2 style={{ textAlign: 'center', paddingBottom: '20px', color: '#2065d1' }}>Thêm thông tin sản phẩm</h2>
-          <div className="form_text_ipt_lefft">
-
-            <div className="container">
-              <div className="row">
-                <div className="col-6">
-                  <div className="form-group">
-                    <label>Nhieu hinh`</label>
-                    <input type="file" onChange={(e) => MultipleFileChange(e)} className="form-control" multiple />
-                  </div>
-                </div>
+          <div className="frames_product">
+            <div className="form_AddSP_Top_Left">
+              <div className="form_img_product">
+                <label className="label_img">Nhiều ảnh: </label>
+                <input type="file" onChange={(e) => MultipleFileChange(e)} className="form_img_product" multiple />
               </div>
-            </div>
-            <div className="container-fluid mt-5">
-            </div>
-
-
-          </div>
-          <div className="form_text_ipt_right">
-            <div className="form">
-              <input type="text" className="form__input" placeholder=" " name="Tên áo"
-                onChange={(e) => setIdImg(e.target.value)}
-              />
-              <label className="form__label">idImg</label>
-            </div>
-            <div className="form">
-              <input type="text" className="form__input" placeholder=" " name="Tên áo"
-                onChange={(e) => setNameSP(e.target.value)}
-              />
-              <label className="form__label">Tên Sản phẩm</label>
-            </div>
-            <div className="form_gia">
-              <div className="form_giaGoc">
-                <input type="text" className="form__input" placeholder=" " name="Giá gốc"
+              <div className="form_Product">
+                <input type="text" className="form__input" placeholder=" "
+                  onChange={(e) => setIdImg(e.target.value)}
+                />
+                <label className="form__label">idImg</label>
+              </div>
+              <div className="form_Product">
+                <input type="text" className="form__input" placeholder=" "
+                  onChange={(e) => setNameSP(e.target.value)}
+                />
+                <label className="form__label">Tên Sản phẩm</label>
+              </div>
+              <div className="form_Product">
+                <input type="text" className="form__input" placeholder=" "
                   onChange={(e) => setGiaGocSP(e.target.value)}
                 />
                 <label className="form__label">Giá gốc</label>
               </div>
-              <div className="form_giaGoc">
-                <input type="text" className="form__input" placeholder=" " name="Giá bán"
+              <div className="form_Product">
+                <input type="text" className="form__input" placeholder=" "
                   onChange={(e) => setGiaBanSP(e.target.value)}
                 />
                 <label className="form__label">Giá bán</label>
               </div>
-            </div>
-            <div className="form">
-              <input type="text" className="form__input" placeholder=" " name="Số lượng"
-                onChange={(e) => setSoLuongSP(e.target.value)}
-              />
+              <div className="form_Product">
+                <input type="text" className="form__input" placeholder=" "
+                  onChange={(e) => setSoLuongSP(e.target.value)}
+                />
 
-              <label className="form__label">Số lượng</label>
+                <label className="form__label">Số lượng</label>
+              </div>
             </div>
-
-            <div className="form-date">
-              <div className="form_nhap">
-                <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
+            <div className="form_AddSP_Top_Right">
+              <div className="form_Product">
+                <input type="date" className="form__input" placeholder=" "
                   onChange={(e) => setDateNhapSP(e.target.value)}
                 />
                 <label className="form__label">Ngày Nhập</label>
               </div>
-              <div className="form_sale">
+              <div className="form_trangthai_product">
                 <select defaultValue={SaleSP} onChange={(e) => setSaleSP(e.target.value)}>
                   <option value='0'> Không giảm giá </option>
                   {props.dsSaleSP.map((vl, index) => {
@@ -171,29 +158,32 @@ export default function Add_product(props) {
                   })}
                 </select>
               </div>
-              <div className="form_trangthai">
+              <div className="form_trangthai_product">
                 <select defaultValue={TrangThaiSP} onChange={(e) => setTrangThaiSP(e.target.value)}>
                   <option value="Hoạt động">Hoạt động</option>
                   <option value="Không hoạt động">Không hoạt động </option>
                 </select>
               </div>
-            </div>
-            <div className="form-loaiSP">
-              <select defaultValue={LoaiSP} onChange={(e) => setLoaiSP(e.target.value)}>
-                {props.dsLoaiSP.map((vl, index) => {
-                  if (vl.TrangThaiLoaiSP == "Hoạt động") {
-                    return (
-                      <option key={vl._id} value={vl.NameLoaiSP}> {vl.NameLoaiSP}</option>
-                    )
-                  } else if (vl.TrangThaiLoaiSP == "Không hoạt động") {
+              <div className="form_trangthai_product">
+                <select defaultValue={LoaiSP} onChange={(e) => setLoaiSP(e.target.value)}>
+                  {props.dsLoaiSP.map((vl, index) => {
+                    if (vl.TrangThaiLoaiSP == "Hoạt động") {
+                      return (
+                        <option key={vl._id} value={vl.NameLoaiSP}> {vl.NameLoaiSP}</option>
+                      )
+                    } else if (vl.TrangThaiLoaiSP == "Không hoạt động") {
 
-                  }
-                })}
-              </select>
+                    }
+                  })}
+                </select>
+              </div>
+              <div className="form_mota_Product">
+                <textarea onChange={(e) => setChiTietSP(e.target.value)} title="" placeholder="Mô tả" className="form_mota_Product" rows="10"></textarea>
+              </div>
             </div>
-            <div className="form_mota">
-              <textarea onChange={(e) => setChiTietSP(e.target.value)} title="" placeholder="Mô tả" name="thông tin" className="mota_txtArea" rows="10"></textarea>
-            </div>
+
+
+
           </div>
 
         </div>
