@@ -131,11 +131,23 @@ export default function Add_LoaiSP(props) {
   }
 
   const btnAdd_LoaiSP = () => {
-    axios.post(ip + "/add_LoaiSP", {
-      NameLoaiSP: NameLoaiSP,
-      MotaLoaiSP: MotaLoaiSP,
-      TrangThaiLoaiSP: TrangThaiLoaiSP,
-    })
+    if (setMotaCheck(false) && (setLSPCheck(false))) {
+      setColorMota("red");
+      setErrorMoTa("Độ dài mô tả lớn hơn 5 kí tự nef");
+      setColorMota("red");
+      setErrorMoTa("Mô tả không được để trống nef");
+      setColorLSP("red");
+      setErrorLSP("Tên loại sản phẩm không được để trống nef");
+      setColorLSP("red");
+      setErrorLSP("Vui lòng không điền kí tự đặt biệt nef");
+    } else
+      if (setMotaCheck(true) && (setLSPCheck(true))) {
+        axios.post(ip + "/add_LoaiSP", {
+          NameLoaiSP: NameLoaiSP,
+          MotaLoaiSP: MotaLoaiSP,
+          TrangThaiLoaiSP: TrangThaiLoaiSP,
+        })
+      }
 
   }
 

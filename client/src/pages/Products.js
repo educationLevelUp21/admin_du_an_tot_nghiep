@@ -22,8 +22,8 @@ import {
 //axios
 import axios from "axios";
 
-// loading
-import BeatLoader from "react-spinners/BeatLoader";
+// // loading
+// import BeatLoader from "react-spinners/BeatLoader";
 
 // components
 import Page from '../components/Page';
