@@ -1,48 +1,30 @@
+import { useEffect, useState } from 'react';
 
 // material
-import { Container } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Container, TextField } from '@mui/material';
+
 // components
 import Page from '../components/Page';
 
 // ----------------------------------------------------------------------
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 export default function DoanhThu() {
+
+  const [value, setValue] = useState(new Date());
+
 
   // const [uname, setUname] = useState("");
   // const [TK, setTK] = useState("");
 
-
-
-
-  // fetch("http://localhost:8080/UserAdmin-data", {
-  //   method: "POST",
-  //   crossDomain: true,
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Accept: "application/json",
-  //     "Access-Control-Allow-Origin": "*",
-  //   },
-  //   body: JSON.stringify({
-  //     token: window.localStorage.getItem("token"),
-  //   }),
-  // })
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     console.log(data, "userData");
-  //     setUname(data.data.uname)
-  //     setTK(data.data.taikhoan)
-
-  //     console.log(uname, TK);
-  //   })
-
-
   return (
     <Page title="Dashboard: DoanhThu">
       <Container>
-        <h1>Doanh thu</h1>
-
+      <h1>dsadsa</h1>
       </Container>
     </Page>
   );
 }
+

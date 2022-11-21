@@ -16,29 +16,43 @@ export default function Add_SaleSP(props) {
   // const [,set] = useState("")
   const [NameSaleSP, setNameSaleSP] = useState("")
   const [PhanTramGiamGia, setPhanTramGiamGia] = useState(0)
-  const [NgayTaoSale, setNgayTaoSale] = useState(new Date())
-  const [NgayEndSale, setNgayEndSale] = useState(new Date())
+  const [NgayTaoSale, setNgayTaoSale] = useState()
+  const [NgayEndSale, setNgayEndSale] = useState()
   const [TrangThaiSale, setTrangThaiSale] = useState("Hoạt động")
+
+  const [tokenDayStart, setTokenDayStart] = useState("")
+  const [tokenMonthStart, setTokenMonthStart] = useState("")
+
+  const [tokenDayEnd, setTokenDayEnd] = useState("")
+  const [tokenMonthEnd, setTokenMonthEnd] = useState("")
+
+  const [max, setMax] = useState("")
+  const [min, setMin] = useState("")
 
   // ten giam gia
   const [colorSale, setColorSale] = useState("#d8dde1");
-  const [saleCheck, setLSaleCheck] = useState(true);
+  const [saleCheck, setSaleCheck] = useState(true);
   const [errorSale, setErrorSale] = useState("");
+
+  const [chxBtnName, setChxBtnName] = useState();
   const validateNameSale = (se) => {
-    if (se.length < 5 && se.length > 0) {
-      setLSaleCheck(false);
-      setColorSale("red");
-      setErrorSale("Độ dài tên loại sản phẩm lớn hơn 5 kí tự");
-    } else {
-      setLSaleCheck(true);
+    if (se != null) {
+      setSaleCheck(true);
       setColorSale("#d8dde1");
       setErrorSale("");
+      setChxBtnName(true)
+    }
+    if (se == null) {
+      setSaleCheck(false);
+      setColorSale("red");
+      setChxBtnName(false)
+      setErrorSale("Tên giảm giá không được để trống");
     }
     if (se.length == 0) {
-      setLSaleCheck(false);
+      setSaleCheck(false);
       setColorSale("red");
+      setChxBtnName(false)
       setErrorSale("Tên giảm giá không được để trống");
-
     }
   }
   function ErrorNameSale(props) {
@@ -53,19 +67,36 @@ export default function Add_SaleSP(props) {
 
   // % giam gia
   const [colorPercent, setColorPercent] = useState("#d8dde1");
-  const [percentCheck, setLPercentCheck] = useState(true);
+  const [percentCheck, setPercentCheck] = useState(true);
   const [errorPercent, setErrorPercent] = useState("");
+
+  const [chxBtnSale, setChxBtn] = useState();
   const validatePercentSale = (se) => {
 
-
-    if (se.length == 0) {
-      setLPercentCheck(false);
-      setColorPercent("red");
-      setErrorPercent("Phần trăm giảm giá không được để trống");
-    } else {
-      setLPercentCheck(true);
+    if (se != null) {
+      setPercentCheck(true);
       setColorPercent("#d8dde1");
       setErrorPercent("");
+      setChxBtn(true)
+    }
+    if (se == null) {
+      setPercentCheck(false);
+      setColorPercent("red");
+      setChxBtn(false)
+      setErrorPercent("Phần trăm giảm giá không được để trống");
+    }
+
+    if (se == 0) {
+      setPercentCheck(false);
+      setColorPercent("red");
+      setChxBtn(false)
+      setErrorPercent("Phần trăm giảm giá không được để trống");
+    }
+    if (se.length == 0) {
+      setPercentCheck(false);
+      setColorPercent("red");
+      setChxBtn(false)
+      setErrorPercent("Phần trăm giảm giá không được để trống");
     }
   }
   function ErrorPercentSale(props) {
@@ -77,26 +108,167 @@ export default function Add_SaleSP(props) {
     )
   }
 
-  const btnAdd_SaleSP = () => {
-    axios.post(ip + "/add_SaleSP", {
-      NameSaleSP: NameSaleSP,
-      PhanTramGiamGia: PhanTramGiamGia,
-      NgayTaoSale: NgayTaoSale,
-      NgayEndSale: NgayEndSale,
-      TrangThaiSale: TrangThaiSale,
-    })
+  // ngay Start
+  const [colorDateStart, setColorDateStart] = useState("#d8dde1");
+  const [dateStartCheck, setDateStartCheck] = useState(true);
+  const [errorDateStart, setErrorDateStart] = useState("");
+  const [chxBtnDateStart, setChxBtnDateStart] = useState();
+  const validateDateStart = (se) => {
+    if (se != null) {
+      setMin(se)
+      setDateStartCheck(true)
+      setColorDateStart("#d8dde1")
+      setErrorDateStart("")
+      setChxBtnDateStart(true)
+    }
+    if (se == null || NgayTaoSale == null) {
+      setDateStartCheck(false)
+      setColorDateStart("red")
+      setErrorDateStart("Chưa nhập ngày tạo giảm giá")
+      setChxBtnDateStart(false)
+    }
+
   }
+  function ErrorDateStart(props) {
+    if (props.isHidden) { return null; }
+    return (
+      <div className="form_warning">
+        {props.ErrorDateStart}
+      </div>
+    )
+  }
+
+  // ngay End
+  const [colorDateEnd, setColorDateEnd] = useState("#d8dde1");
+  const [dateEndCheck, setDateEndCheck] = useState(true);
+  const [errorDateEnd, setErrorDateEnd] = useState("");
+  const [chxBtnDateEnd, setChxBtnDateEnd] = useState();
+  const validateDateEnd = (se) => {
+    if (se != null) {
+      setMax(se)
+      setDateEndCheck(true)
+      setColorDateEnd("#d8dde1")
+      setErrorDateEnd("")
+      setChxBtnDateEnd(true)
+    }
+    if (se == null || NgayEndSale == null) {
+      setDateEndCheck(false)
+      setColorDateEnd("red")
+      setChxBtnDateEnd(false)
+      setErrorDateEnd("Chưa nhập ngày kết thúc giảm giá")
+    }
+  }
+  function ErrorDateEnd(props) {
+    if (props.isHidden) { return null; }
+    return (
+      <div className="form_warning">
+        {props.ErrorDateEnd}
+      </div>
+    )
+  }
+
+  const btnAdd_SaleSP = () => {
+    if (chxBtnDateEnd == true && chxBtnDateStart == true && chxBtnName == true && chxBtnSale == true) {
+      axios.post(ip + "/add_SaleSP", {
+        NameSaleSP: NameSaleSP,
+        PhanTramGiamGia: PhanTramGiamGia,
+        NgayTaoSale: NgayTaoSale,
+        NgayEndSale: NgayEndSale,
+        TrangThaiSale: TrangThaiSale,
+      })
+      handleClose();
+    } else {
+      validateNameSale(NameSaleSP);
+      validatePercentSale(PhanTramGiamGia);
+      validateDateStart(NgayTaoSale);
+      validateDateEnd(NgayEndSale);
+    }
+
+  }
+
 
   const handleClose = () => {
     props.setOpen(false);
   };
 
-  // var format = new Date(props.NgayNhapSP);
-  // var day = format.getDate();
-  // var month = format.getMonth() + 1;
-  // var year = format.getFullYear();
+  useEffect(() => {
 
-  // var date = day + "/" + month + "/" + year;
+    // ngay tao
+    if (dayStart < 10) {
+      setTokenDayStart("-0")
+    } else {
+      setTokenDayStart("-")
+    }
+    if (monthStart < 10) {
+      setTokenMonthStart("-0")
+    } else {
+      setTokenMonthStart("-")
+    }
+
+    // ngay end
+    if (dayEnd < 10) {
+      setTokenDayEnd("-0")
+    } else {
+      setTokenDayEnd("-")
+    }
+    if (monthEnd < 10) {
+      setTokenMonthEnd("-0")
+    } else {
+      setTokenMonthEnd("-")
+    }
+
+    if (props.open == false) {
+      //  giá trị về mặc định
+      setNameSaleSP("")
+      setPhanTramGiamGia(0)
+      setNgayTaoSale()
+      setNgayEndSale()
+      setMin()
+      setMax()
+      setTrangThaiSale("Hoạt động")
+      // check validate về ẩn
+      setSaleCheck(true)
+      setPercentCheck(true)
+      setDateStartCheck(true)
+      setDateEndCheck(true)
+      // setColor về mặc định
+      setColorSale("#d8dde1")
+      setColorPercent("#d8dde1")
+      setColorDateStart("#d8dde1")
+      setColorDateEnd("#d8dde1")
+      // setButton add ve rong
+      setChxBtnName()
+      setChxBtnDateEnd()
+      setChxBtn()
+      setChxBtnDateStart()
+    }
+  })
+
+  //  format ngay Start
+  var formatHT = new Date();
+
+  var dayHT = formatHT.getDate();
+  var monthHT = formatHT.getMonth() + 1;
+  var yearHT = formatHT.getFullYear();
+
+  var dateHT = yearHT + "-" + monthHT + "-" + dayHT;
+
+  //  format ngay Start
+  var formatStart = new Date(NgayTaoSale);
+
+  var dayStart = formatStart.getDate();
+  var monthStart = formatStart.getMonth() + 1;
+  var yearStart = formatStart.getFullYear();
+
+  var dateStart = yearStart + `${tokenMonthStart}` + monthStart + `${tokenDayStart}` + dayStart;
+
+  //  format ngay end
+  var formatEnd = new Date(NgayEndSale);
+
+  var dayEnd = formatEnd.getDate();
+  var monthEnd = formatEnd.getMonth() + 1;
+  var yearEnd = formatEnd.getFullYear();
+  var dateEnd = yearEnd + `${tokenMonthEnd}` + monthEnd + `${tokenDayEnd}` + dayEnd;
 
   return (
     <Dialog
@@ -144,18 +316,30 @@ export default function Add_SaleSP(props) {
               <div className="sale_right_top">
                 <div className="form_dateGG">
                   <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
+                    style={{ borderColor: colorDateStart }}
+                    max={max}
                     onChange={(e) => setNgayTaoSale(e.target.value)}
+                    onBlur={() => validateDateStart(dateStart)}
                   />
                   <label className="form__label">Ngày tạo</label>
                 </div>
+                <ErrorDateStart
+                  isHidden={dateStartCheck}
+                  ErrorDateStart={errorDateStart} />
               </div>
               <div className="sale_right_top">
                 <div className="form_dateGG">
                   <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
+                    style={{ borderColor: colorDateEnd }}
+                    min={min}
                     onChange={(e) => setNgayEndSale(e.target.value)}
+                    onBlur={() => validateDateEnd(dateEnd)}
                   />
                   <label className="form__label">Ngày kết thúc</label>
                 </div>
+                <ErrorDateEnd
+                  isHidden={dateEndCheck}
+                  ErrorDateEnd={errorDateEnd} />
               </div>
 
               <div className="form_trangthai">

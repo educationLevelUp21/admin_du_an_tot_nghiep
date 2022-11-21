@@ -3,6 +3,11 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
+// import
+
+import eyeStart from '../login/eye_icon.png'
+import eyeEnd from '../login/eye_slash_icon.png';
+
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
@@ -182,6 +187,22 @@ export default function RegisterForm() {
     )
   }
 
+    // con mắt password
+    const [type, setType] = useState("password");
+    const [eye, setEye] = useState(eyeStart);
+    const hanldeEye = () => {
+      if (eye == eyeStart) {
+        setType("text")
+        setEye(eyeEnd)
+        return
+      }
+      if (eye == eyeEnd) {
+        setType("password")
+        setEye(eyeStart)
+        return
+      }
+    }
+
   return (
 
     <div className="container">
@@ -209,10 +230,11 @@ export default function RegisterForm() {
       </div>
       {/* pass */}
       <div className="user">
-        <input type="password" className="form__input" style={{ borderColor: color3 }} placeholder=" " name="Tên đăng nhập"
+        <input type={type} className="form__input" style={{ borderColor: color3 }} placeholder=" " name="Tên đăng nhập"
           onChange={(e) => setPassword(e.target.value)}
           onBlur={(e) => validatePass(e.target.value)}
           required /><label htmlFor="email" className="form__label">Mật khẩu</label>
+               <img onClick={hanldeEye} src={eye} width='25' height='25' />
         <ErrolPassword
           isHidden={passwordCheck}
           errorPassword={errorPassword} />

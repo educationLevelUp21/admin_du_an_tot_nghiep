@@ -230,6 +230,8 @@ export default function Products() {
                 <select defaultValue={dsChx} onChange={(e) => setDsChx(e.target.value)}>
                   <option value="all">Tất cả</option>
                   <option value="end">Sắp hết hàng</option>
+                  <option value="Hoạt động">Hoạt động</option>
+                  <option value="Không hoạt động">Không hoạt động</option>
                 </select>
               </div>
             <ProductsListToolbar selected={selected} numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
@@ -305,6 +307,64 @@ export default function Products() {
                             />
     
                           );
+                        }
+                      }else if(dsChx == "Hoạt động"){
+                        if(val.TrangThaiSP  == "Hoạt động" ){
+                        return (
+                          <ItemListSP
+                            key={val._id}
+                            _id={val._id}
+                            idImg={val.idImg}
+                            NameSP={val.NameSP}
+                            GiaGocSP={val.GiaGocSP}
+                            GiaBanSP={val.GiaBanSP}
+                            SoLuongSP={val.SoLuongSP}
+                            DateNhapSP={val.DateNhapSP}
+                            SaleSP={val.SaleSP}
+                            TrangThaiSP={val.TrangThaiSP}
+                            LoaiSP={val.LoaiSP}
+                            ChiTietSP={val.ChiTietSP}
+                            danhsachSP={danhsachSP}
+                            setdanhsachSP={setdanhsachSP}
+                            isItemSelected={isItemSelected}
+                            selected={selected}
+                            setSelected={setSelected}
+                            dsLoaiSP={dsLoaiSP}
+                            setDsLoaiSP={setDsLoaiSP}
+                            dsSaleSP={dsSaleSP}
+                            setDsSaleSP={setDsSaleSP}
+                          />
+  
+                        );
+                        }
+                      }else if(dsChx == "Không hoạt động"){
+                        if(val.TrangThaiSP  == "Không hoạt động" ){
+                        return (
+                          <ItemListSP
+                            key={val._id}
+                            _id={val._id}
+                            idImg={val.idImg}
+                            NameSP={val.NameSP}
+                            GiaGocSP={val.GiaGocSP}
+                            GiaBanSP={val.GiaBanSP}
+                            SoLuongSP={val.SoLuongSP}
+                            DateNhapSP={val.DateNhapSP}
+                            SaleSP={val.SaleSP}
+                            TrangThaiSP={val.TrangThaiSP}
+                            LoaiSP={val.LoaiSP}
+                            ChiTietSP={val.ChiTietSP}
+                            danhsachSP={danhsachSP}
+                            setdanhsachSP={setdanhsachSP}
+                            isItemSelected={isItemSelected}
+                            selected={selected}
+                            setSelected={setSelected}
+                            dsLoaiSP={dsLoaiSP}
+                            setDsLoaiSP={setDsLoaiSP}
+                            dsSaleSP={dsSaleSP}
+                            setDsSaleSP={setDsSaleSP}
+                          />
+  
+                        );
                         }
                       }
                   

@@ -78,12 +78,9 @@ export default function UpdateSP(props) {
       })
     }
 
-
-
-
   }
 
-
+ 
 
   const handleClose = () => {
     props.setOpen(false);
