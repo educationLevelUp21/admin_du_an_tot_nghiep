@@ -6,7 +6,6 @@ import {
   Button,
 } from '@mui/material';
 
-import imgnhap from '../dialog/avt.png';
 import axios from "axios";
 
 export default function Add_product(props) {
