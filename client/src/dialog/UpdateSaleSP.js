@@ -17,7 +17,6 @@ export default function UpdateSaleSP(props) {
   const [NgayTaoSaleFix, setNgayTaoSaleFix] = useState(props.NgayTaoSale)
   const [NgayEndSaleFix, setNgayEndSaleFix] = useState(props.NgayEndSale)
   const [TrangThaiSaleFix, setTrangThaiSaleFix] = useState(props.TrangThaiSale)
-
   const [tokenDayStart, setTokenDayStart] = useState("")
   const [tokenMonthStart, setTokenMonthStart] = useState("")
 
@@ -106,105 +105,111 @@ export default function UpdateSaleSP(props) {
     )
   }
 
-    // ngay Start
-    const [dateStartCheck, setDateStartCheck] = useState(true);
-    const [chxBtnDateStart, setChxBtnDateStart] = useState(true);
-    const validateDateStart = (se) => {
-      if (se != null) {
-        setMin(se)
-        setDateStartCheck(true)
-      }
+  // ngay Start
+  const [dateStartCheck, setDateStartCheck] = useState(true);
+  const [chxBtnDateStart, setChxBtnDateStart] = useState(true);
+  const validateDateStart = (se) => {
+    if (se != null) {
+      setMin(se)
+      setDateStartCheck(true)
     }
-
-  
-    // ngay End
-    const [dateEndCheck, setDateEndCheck] = useState(true);
-    const [chxBtnDateEnd, setChxBtnDateEnd] = useState(true);
-    const validateDateEnd = (se) => {
-      if (se != null) {
-        setMax(se)
-        setDateEndCheck(true)
-      }
-    }
-
-
-  useEffect(()=>{
-    // ngay tao
-    if (dayStartBF < 10) {
-     setTokenDayStart("-0")
-   } else {
-     setTokenDayStart("-")
-   }
-   if (monthStartBF < 10) {
-     setTokenMonthStart("-0")
-   } else {
-     setTokenMonthStart("-")
-   }
-
-   // ngay end
-   if (dayEndBF < 10) {
-     setTokenDayEnd("-0")
-   } else {
-     setTokenDayEnd("-")
-   }
-   if (monthEndBF < 10) {
-     setTokenMonthEnd("-0")
-   } else {
-     setTokenMonthEnd("-")
-   }
-
-   if (props.open == false) {
-    // check validate về ẩn
-    setSaleCheck(true)
-    setPercentCheck(true)
-    setDateStartCheck(true)
-    setDateEndCheck(true)
-    // setColor về mặc định
-    setColorSale("#d8dde1")
-    setColorPercent("#d8dde1")
-    // setButton add ve rong
-    setChxBtnName()
-    setChxBtn()
   }
- })
- const btnUpdate_SaleSP = () => {
-  console.log(chxBtnDateEnd,chxBtnDateStart,chxBtnName,chxBtnSale);
-  if (chxBtnName == false && chxBtnSale == false) {
+
+
+  // ngay End
+  const [dateEndCheck, setDateEndCheck] = useState(true);
+  const [chxBtnDateEnd, setChxBtnDateEnd] = useState(true);
+  const validateDateEnd = (se) => {
+    if (se != null) {
+      setMax(se)
+      setDateEndCheck(true)
+    }
+  }
+
+
+  useEffect(() => {
     validateNameSale(NameSaleSPFix);
     validatePercentSale(PhanTramGiamGiaFix);
     validateDateStart(NgayTaoSaleFix);
     validateDateEnd(NgayEndSaleFix);
-  }else{
-    axios.put(ip + `/UpdateSaleSP/${props._id}`, {
-      NameSaleSP: NameSaleSPFix,
-      PhanTramGiamGia: PhanTramGiamGiaFix,
-      NgayTaoSale: NgayTaoSaleFix,
-      NgayEndSale: NgayEndSaleFix,
-      TrangThaiSale: TrangThaiSaleFix,
-    })
-    handleClose();
+    // ngay tao
+    if (dayStartBF < 10) {
+      setTokenDayStart("-0")
+    } else {
+      setTokenDayStart("-")
+    }
+    if (monthStartBF < 10) {
+      setTokenMonthStart("-0")
+    } else {
+      setTokenMonthStart("-")
+    }
+
+    // ngay end
+    if (dayEndBF < 10) {
+      setTokenDayEnd("-0")
+    } else {
+      setTokenDayEnd("-")
+    }
+    if (monthEndBF < 10) {
+      setTokenMonthEnd("-0")
+    } else {
+      setTokenMonthEnd("-")
+    }
+
+    if (props.open == false) {
+      // check validate về ẩn
+      setSaleCheck(true)
+      setPercentCheck(true)
+      setDateStartCheck(true)
+      setDateEndCheck(true)
+      // setColor về mặc định
+      setColorSale("#d8dde1")
+      setColorPercent("#d8dde1")
+      // setButton add ve rong
+      setChxBtnName()
+      setChxBtn()
+    }
+  })
+  const btnUpdate_SaleSP = () => {
+    console.log(chxBtnName, chxBtnSale);
+    if (NameSaleSPFix == props.NameSaleSP && PhanTramGiamGiaFix == props.PhanTramGiamGia && chxBtnName == null && chxBtnSale == null) {
+      validateNameSale(NameSaleSPFix);
+      validatePercentSale(PhanTramGiamGiaFix);
+      validateDateStart(NgayTaoSaleFix);
+      validateDateEnd(NgayEndSaleFix);
+      return
+    } else
+      if (chxBtnName == true && chxBtnSale == true) {
+        axios.put(ip + `/UpdateSaleSP/${props._id}`, {
+          NameSaleSP: NameSaleSPFix,
+          PhanTramGiamGia: PhanTramGiamGiaFix,
+          NgayTaoSale: NgayTaoSaleFix,
+          NgayEndSale: NgayEndSaleFix,
+          TrangThaiSale: TrangThaiSaleFix,
+        })
+        handleClose();
+      }
   }
-}
 
 
 
 
-//  format ngay Start
-var formatStartBF = new Date(NgayTaoSaleFix);
+  //  format ngay Start
+  var formatStartBF = new Date(NgayTaoSaleFix);
 
-var dayStartBF = formatStartBF.getDate();
-var monthStartBF = formatStartBF.getMonth() + 1;
-var yearStartBF = formatStartBF.getFullYear();
+  var dayStartBF = formatStartBF.getDate();
+  var monthStartBF = formatStartBF.getMonth() + 1;
+  var yearStartBF = formatStartBF.getFullYear();
 
-var dateStartBF = yearStartBF + `${tokenMonthStart}` + monthStartBF + `${tokenDayStart}` + dayStartBF;
+  var dateStartBF = yearStartBF + `${tokenMonthStart}` + monthStartBF + `${tokenDayStart}` + dayStartBF;
 
-//  format ngay end
-var formatEndBF = new Date(NgayEndSaleFix);
+  //  format ngay end
+  var formatEndBF = new Date(NgayEndSaleFix);
 
-var dayEndBF = formatEndBF.getDate();
-var monthEndBF = formatEndBF.getMonth() + 1;
-var yearEndBF = formatEndBF.getFullYear();
-var dateEndBF = yearEndBF + `${tokenMonthEnd}` + monthEndBF + `${tokenDayEnd}` + dayEndBF;
+  var dayEndBF = formatEndBF.getDate();
+  var monthEndBF = formatEndBF.getMonth() + 1;
+  var yearEndBF = formatEndBF.getFullYear();
+  var dateEndBF = yearEndBF + `${tokenMonthEnd}` + monthEndBF + `${tokenDayEnd}` + dayEndBF;
 
 
 
@@ -220,11 +225,11 @@ var dateEndBF = yearEndBF + `${tokenMonthEnd}` + monthEndBF + `${tokenDayEnd}` +
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       fullWidth
-      maxWidth="md"
+      maxWidth="sm"
     >
       <DialogContent>
         <div className="container-up" >
-          <h2 style={{ textAlign: 'center', paddingBottom: '20px', color: '#2065d1' }}>Thêm thông tin loại sản phẩm</h2>
+          <h2 style={{ textAlign: 'center', paddingBottom: '20px', color: '#2065d1' }}>Sửa thông tin mã giảm giá</h2>
 
           <div className="frames_sale">
             <div className="sale_left">
@@ -258,20 +263,7 @@ var dateEndBF = yearEndBF + `${tokenMonthEnd}` + monthEndBF + `${tokenDayEnd}` +
                   isHidden={percentCheck}
                   ErrorNameSale={errorPercent} />
               </div>
-            </div>
-            <div className="sale_right">
-            <div className="sale_right_top">
-                <div className="form_dateGG">
-                  <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
-                    defaultValue={dateStartBF}
-                    max={max}
-                    onChange={(e) => setNgayTaoSaleFix(e.target.value)}
-                    onBlur={() => validateDateStart(dateStartBF)}
-                  />
-                  <label className="form__label">Ngày tạo</label>
-                </div>
 
-              </div>
               <div className="sale_right_top">
                 <div className="form_dateGG">
                   <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
@@ -282,7 +274,17 @@ var dateEndBF = yearEndBF + `${tokenMonthEnd}` + monthEndBF + `${tokenDayEnd}` +
                   />
                   <label className="form__label">Ngày kết thúc</label>
                 </div>
-
+              </div>
+              <div className="sale_right_top">
+                <div className="form_dateGG">
+                  <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
+                    defaultValue={dateStartBF}
+                    max={max}
+                    onChange={(e) => setNgayTaoSaleFix(e.target.value)}
+                    onBlur={() => validateDateStart(dateStartBF)}
+                  />
+                  <label className="form__label">Ngày tạo</label>
+                </div>
               </div>
               <div className="form_trangthai">
                 <select defaultValue={props.TrangThaiSale} onChange={(e) => setTrangThaiSaleFix(e.target.value)}>
@@ -295,9 +297,9 @@ var dateEndBF = yearEndBF + `${tokenMonthEnd}` + monthEndBF + `${tokenDayEnd}` +
 
         </div>
       </DialogContent>
-      <DialogActions className="btn-dialog">
-        <Button variant="outlined" className="btn_add_cancel" onClick={handleClose}>Hủy</Button>
-        <Button variant="outlined" className="btn_add_cancel" color="primary" onClick={btnUpdate_SaleSP}>
+      <DialogActions className="btn-dialog-sale">
+        <Button variant="outlined" className="btn_add_cancel_sale" onClick={handleClose}>Hủy</Button>
+        <Button variant="outlined" className="btn_add_cancel_sale" color="primary" onClick={btnUpdate_SaleSP}>
           Sửa
         </Button>
       </DialogActions>

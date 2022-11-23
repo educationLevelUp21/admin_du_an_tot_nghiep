@@ -34,23 +34,23 @@ export default function AccountPopover() {
 
 
 
-  
+
   const anchorRef = useRef(null);
 
   const [open, setOpen] = useState(null);
 
   const handleOpen = (event) => {
     var getUser = localStorage.getItem("User")
-    if(getUser != null){
+    if (getUser != null) {
       setOpen(event.currentTarget);
-    }else {
+    } else {
       setOpen(null);
     }
 
-    
+
   };
 
-  const handleLogout = () =>{
+  const handleLogout = () => {
     localStorage.removeItem("User");
     window.location.href = "/dashboard/app";
   }

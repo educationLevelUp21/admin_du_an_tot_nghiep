@@ -210,13 +210,10 @@ export default function Products() {
       />
       <Page title="Dashboard: Products">
         <Container>
-
-
-
           <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
             <Typography variant="h4" gutterBottom>
               Tất cả sản phẩm
-              <button onClick={Loading}>loading</button>
+              {/* <button onClick={Loading}>loading</button> */}
             </Typography>
 
             <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}
@@ -226,14 +223,24 @@ export default function Products() {
           </Stack>
 
           <Card>
-          <div className="form_trangthai">
-                <select defaultValue={dsChx} onChange={(e) => setDsChx(e.target.value)}>
+
+
+            <div className='form_product_top'>
+              <div className="form_het_hang">
+                <select defaultValue={dsChx} onChange={(e) => setDsChx(e.target.value)} className="form_het_hang">
                   <option value="all">Tất cả</option>
                   <option value="end">Sắp hết hàng</option>
                   <option value="Hoạt động">Hoạt động</option>
                   <option value="Không hoạt động">Không hoạt động</option>
                 </select>
               </div>
+              <div className='form_loading'>
+                <Button className='btn_loading' variant="outlined" onClick={Loading}>Loading</Button>
+              </div>
+              <div>
+
+              </div>
+            </div>
             <ProductsListToolbar selected={selected} numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
             <Scrollbar>
               <TableContainer sx={{ minWidth: 800 }}>
@@ -252,7 +259,7 @@ export default function Products() {
                     {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((val) => {
                       const isItemSelected = selected.indexOf(val.idImg) !== -1;
 
-                      if(dsChx == "all"){
+                      if (dsChx == "all") {
                         return (
                           <ItemListSP
                             key={val._id}
@@ -277,10 +284,10 @@ export default function Products() {
                             dsSaleSP={dsSaleSP}
                             setDsSaleSP={setDsSaleSP}
                           />
-  
+
                         );
-                      }else if(dsChx == "end"){
-                        if(val.SoLuongSP < 30 ){
+                      } else if (dsChx == "end") {
+                        if (val.SoLuongSP < 30) {
                           return (
                             <ItemListSP
                               key={val._id}
@@ -305,69 +312,69 @@ export default function Products() {
                               dsSaleSP={dsSaleSP}
                               setDsSaleSP={setDsSaleSP}
                             />
-    
+
                           );
                         }
-                      }else if(dsChx == "Hoạt động"){
-                        if(val.TrangThaiSP  == "Hoạt động" ){
-                        return (
-                          <ItemListSP
-                            key={val._id}
-                            _id={val._id}
-                            idImg={val.idImg}
-                            NameSP={val.NameSP}
-                            GiaGocSP={val.GiaGocSP}
-                            GiaBanSP={val.GiaBanSP}
-                            SoLuongSP={val.SoLuongSP}
-                            DateNhapSP={val.DateNhapSP}
-                            SaleSP={val.SaleSP}
-                            TrangThaiSP={val.TrangThaiSP}
-                            LoaiSP={val.LoaiSP}
-                            ChiTietSP={val.ChiTietSP}
-                            danhsachSP={danhsachSP}
-                            setdanhsachSP={setdanhsachSP}
-                            isItemSelected={isItemSelected}
-                            selected={selected}
-                            setSelected={setSelected}
-                            dsLoaiSP={dsLoaiSP}
-                            setDsLoaiSP={setDsLoaiSP}
-                            dsSaleSP={dsSaleSP}
-                            setDsSaleSP={setDsSaleSP}
-                          />
-  
-                        );
+                      } else if (dsChx == "Hoạt động") {
+                        if (val.TrangThaiSP == "Hoạt động") {
+                          return (
+                            <ItemListSP
+                              key={val._id}
+                              _id={val._id}
+                              idImg={val.idImg}
+                              NameSP={val.NameSP}
+                              GiaGocSP={val.GiaGocSP}
+                              GiaBanSP={val.GiaBanSP}
+                              SoLuongSP={val.SoLuongSP}
+                              DateNhapSP={val.DateNhapSP}
+                              SaleSP={val.SaleSP}
+                              TrangThaiSP={val.TrangThaiSP}
+                              LoaiSP={val.LoaiSP}
+                              ChiTietSP={val.ChiTietSP}
+                              danhsachSP={danhsachSP}
+                              setdanhsachSP={setdanhsachSP}
+                              isItemSelected={isItemSelected}
+                              selected={selected}
+                              setSelected={setSelected}
+                              dsLoaiSP={dsLoaiSP}
+                              setDsLoaiSP={setDsLoaiSP}
+                              dsSaleSP={dsSaleSP}
+                              setDsSaleSP={setDsSaleSP}
+                            />
+
+                          );
                         }
-                      }else if(dsChx == "Không hoạt động"){
-                        if(val.TrangThaiSP  == "Không hoạt động" ){
-                        return (
-                          <ItemListSP
-                            key={val._id}
-                            _id={val._id}
-                            idImg={val.idImg}
-                            NameSP={val.NameSP}
-                            GiaGocSP={val.GiaGocSP}
-                            GiaBanSP={val.GiaBanSP}
-                            SoLuongSP={val.SoLuongSP}
-                            DateNhapSP={val.DateNhapSP}
-                            SaleSP={val.SaleSP}
-                            TrangThaiSP={val.TrangThaiSP}
-                            LoaiSP={val.LoaiSP}
-                            ChiTietSP={val.ChiTietSP}
-                            danhsachSP={danhsachSP}
-                            setdanhsachSP={setdanhsachSP}
-                            isItemSelected={isItemSelected}
-                            selected={selected}
-                            setSelected={setSelected}
-                            dsLoaiSP={dsLoaiSP}
-                            setDsLoaiSP={setDsLoaiSP}
-                            dsSaleSP={dsSaleSP}
-                            setDsSaleSP={setDsSaleSP}
-                          />
-  
-                        );
+                      } else if (dsChx == "Không hoạt động") {
+                        if (val.TrangThaiSP == "Không hoạt động") {
+                          return (
+                            <ItemListSP
+                              key={val._id}
+                              _id={val._id}
+                              idImg={val.idImg}
+                              NameSP={val.NameSP}
+                              GiaGocSP={val.GiaGocSP}
+                              GiaBanSP={val.GiaBanSP}
+                              SoLuongSP={val.SoLuongSP}
+                              DateNhapSP={val.DateNhapSP}
+                              SaleSP={val.SaleSP}
+                              TrangThaiSP={val.TrangThaiSP}
+                              LoaiSP={val.LoaiSP}
+                              ChiTietSP={val.ChiTietSP}
+                              danhsachSP={danhsachSP}
+                              setdanhsachSP={setdanhsachSP}
+                              isItemSelected={isItemSelected}
+                              selected={selected}
+                              setSelected={setSelected}
+                              dsLoaiSP={dsLoaiSP}
+                              setDsLoaiSP={setDsLoaiSP}
+                              dsSaleSP={dsSaleSP}
+                              setDsSaleSP={setDsSaleSP}
+                            />
+
+                          );
                         }
                       }
-                  
+
                     })}
                     {emptyRows > 0 && (
                       <TableRow style={{ height: 53 * emptyRows }}>

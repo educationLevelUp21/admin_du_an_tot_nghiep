@@ -38,8 +38,6 @@ import '../css/add_product.css';
 // ----------------------------------------------------------------------
 
 
-
-
 export default function SaleSP() {
 
   const TABLE_HEAD = [
@@ -169,6 +167,7 @@ export default function SaleSP() {
       />
       <Page title="Dashboard: SaleSP">
         <Container>
+
           <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
             <Typography variant="h4" gutterBottom>
               Mã Giảm Giá Sản Phẩm
@@ -246,6 +245,7 @@ export default function SaleSP() {
               onRowsPerPageChange={handleChangeRowsPerPage}
             />
           </Card>
+
         </Container>
       </Page >
     </>

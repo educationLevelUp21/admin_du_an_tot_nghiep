@@ -85,7 +85,6 @@ export default function Add_SaleSP(props) {
       setChxBtn(false)
       setErrorPercent("Phần trăm giảm giá không được để trống");
     }
-
     if (se == 0) {
       setPercentCheck(false);
       setColorPercent("red");
@@ -98,6 +97,8 @@ export default function Add_SaleSP(props) {
       setChxBtn(false)
       setErrorPercent("Phần trăm giảm giá không được để trống");
     }
+
+
   }
   function ErrorPercentSale(props) {
     if (props.isHidden) { return null; }
@@ -276,7 +277,7 @@ export default function Add_SaleSP(props) {
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       fullWidth
-      maxWidth="md"
+      maxWidth="sm"
     >
       <DialogContent>
         <div className="container-up" >
@@ -311,22 +312,7 @@ export default function Add_SaleSP(props) {
                   isHidden={percentCheck}
                   ErrorNameSale={errorPercent} />
               </div>
-            </div>
-            <div className="sale_right">
-              <div className="sale_right_top">
-                <div className="form_dateGG">
-                  <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
-                    style={{ borderColor: colorDateStart }}
-                    max={max}
-                    onChange={(e) => setNgayTaoSale(e.target.value)}
-                    onBlur={() => validateDateStart(dateStart)}
-                  />
-                  <label className="form__label">Ngày tạo</label>
-                </div>
-                <ErrorDateStart
-                  isHidden={dateStartCheck}
-                  ErrorDateStart={errorDateStart} />
-              </div>
+
               <div className="sale_right_top">
                 <div className="form_dateGG">
                   <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
@@ -341,6 +327,20 @@ export default function Add_SaleSP(props) {
                   isHidden={dateEndCheck}
                   ErrorDateEnd={errorDateEnd} />
               </div>
+              <div className="sale_right_top">
+                <div className="form_dateGG">
+                  <input type="date" className="form__input" placeholder=" " name="Ngày Nhập Update"
+                    style={{ borderColor: colorDateStart }}
+                    max={max}
+                    onChange={(e) => setNgayTaoSale(e.target.value)}
+                    onBlur={() => validateDateStart(dateStart)}
+                  />
+                  <label className="form__label">Ngày tạo</label>
+                </div>
+                <ErrorDateStart
+                  isHidden={dateStartCheck}
+                  ErrorDateStart={errorDateStart} />
+              </div>
 
               <div className="form_trangthai">
                 <select defaultValue={TrangThaiSale} onChange={(e) => setTrangThaiSale(e.target.value)}>
@@ -352,9 +352,10 @@ export default function Add_SaleSP(props) {
           </div>
         </div>
       </DialogContent >
-      <DialogActions className="btn-dialog">
-        <Button variant="outlined" className="btn_add_cancel" onClick={handleClose}>Hủy</Button>
-        <Button variant="outlined" className="btn_add_cancel" color="primary" onClick={btnAdd_SaleSP}>Thêm</Button>
+      <DialogActions className="btn-dialog-sale">
+        <Button variant="outlined" className="btn_add_cancel_sale" onClick={handleClose}>Hủy</Button>
+        <Button variant="outlined" className="btn_add_cancel_sale" color="primary" onClick={btnAdd_SaleSP}>Thêm</Button>
+
       </DialogActions>
     </Dialog >
   )

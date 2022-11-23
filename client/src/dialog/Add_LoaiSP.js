@@ -130,12 +130,15 @@ export default function Add_LoaiSP(props) {
             <div className="loaiSP_left">
               <div className="form_img_image">
                 {userInfo.filepreview !== null ?
-                  <img style={{ borderRadius: '5px' }} width="100%" height="248" src={userInfo.filepreview} alt="UploadImage" />
+                  <img style={{ borderRadius: '5px' }} width="100%" height="249" src={userInfo.filepreview} alt="UploadImage" />
                   : null}
               </div>
               <div className="form_img_click">
                 {/* <button type="file" onChange={(e) => handleInputChange(e)} multiple>fghrtyrtteryrtytry</button> */}
-                <input type="file" onChange={(e) => handleInputChange(e)} className="form-control" multiple />
+                {/* <input type="file" onChange={(e) => handleInputChange(e)} className="form-control" multiple /> */}
+
+                <input type="file" onChange={(e) => handleInputChange(e)} className="custom-file-input" multiple />
+
               </div>
             </div>
             <div className="loaiSP_right">

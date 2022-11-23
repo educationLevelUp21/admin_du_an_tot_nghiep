@@ -6,7 +6,7 @@ import {
   Button,
 } from '@mui/material';
 
-
+import imgnhap from '../dialog/avt.png';
 import axios from "axios";
 
 export default function Add_product(props) {
@@ -102,8 +102,8 @@ export default function Add_product(props) {
           <div className="frames_product">
             <div className="form_AddSP_Top_Left">
               <div className="form_img_product">
-                <label className="label_img">Nhiều ảnh: </label>
-                <input type="file" onChange={(e) => MultipleFileChange(e)} className="form_img_product" multiple />
+                {/* <img width='12px' height='12px' src={imgnhap} /> */}
+                <input type="file" onChange={(e) => MultipleFileChange(e)} className="custom-file-input" multiple />
               </div>
               <div className="form_Product">
                 <input type="text" className="form__input" placeholder=" "

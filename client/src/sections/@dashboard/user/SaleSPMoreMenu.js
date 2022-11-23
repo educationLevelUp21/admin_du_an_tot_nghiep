@@ -59,27 +59,27 @@ export default function SaleSPMoreMenu(props) {
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        <MenuItem sx={{ color: '#fc7e7ed3' }}>
+        <MenuItem onClick={() => {
+          const checkdelete = window.confirm(
+            "Bạn chắc chắn muốn xóa??? "
+          )
+          if (checkdelete == true) {
+            btnDeleteDS(props._id)
+          }
+        }} sx={{ color: '#fc7e7ed3' }}>
           <ListItemIcon>
             <Iconify sx={{ color: '#fc7e7ed3' }} icon="eva:trash-2-outline" width={24} height={24} />
           </ListItemIcon>
           <ListItemText
-            onClick={() => {
-              const checkdelete = window.confirm(
-                "Bạn chắc chắn muốn xóa??? "
-              )
-              if (checkdelete == true) {
-                btnDeleteDS(props._id)
-              }
-            }}
+
             primary="Xóa" primaryTypographyProps={{ variant: 'body2' }} />
         </MenuItem>
 
-        <MenuItem component={RouterLink} to="#" sx={{ color: '#2065d1' }}>
+        <MenuItem onClick={() => handleClickItemFix()} component={RouterLink} to="#" sx={{ color: '#2065d1' }}>
           <ListItemIcon>
             <Iconify sx={{ color: '#2065d1' }} icon="eva:edit-fill" width={24} height={24} />
           </ListItemIcon>
-          <ListItemText onClick={() => handleClickItemFix()} primary="Sửa" primaryTypographyProps={{ variant: 'body2' }} />
+          <ListItemText primary="Sửa" primaryTypographyProps={{ variant: 'body2' }} />
         </MenuItem>
       </Menu>
     </>
